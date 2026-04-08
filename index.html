@@ -60,10 +60,15 @@
             font-weight: 800;
             letter-spacing: -0.5px;
             white-space: nowrap; 
+            background: transparent;
+            border: none;
+            box-shadow: none;
         }
         
         nav h2 a {
-            color: var(--primary-dark); /* 음영 서식 삭제 후 단색으로 변경 */
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             text-decoration: none;
             display: block;
         }
@@ -311,7 +316,7 @@
         }
 
         /* Major Headings (대제목) Styling - 음영 및 구분선 명확화 */
-        h2 {
+        .page-section h2 {
             font-size: 1.5rem;
             color: #1e293b;
             background-color: #eef2ff; /* 옅은 파란색 음영박스 */
