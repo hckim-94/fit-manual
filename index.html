@@ -30,7 +30,7 @@
             padding: 0;
             color: var(--text-color);
             line-height: 1.6;
-            background-color: #fff; /* 전체 배경 흰색 원복 */
+            background-color: #fff;
             display: flex;
             font-size: 15px;
             scroll-behavior: smooth;
@@ -54,24 +54,23 @@
         }
 
         nav h2 {
-            font-size: 1.45rem; 
-            padding: 25px 25px 5px 25px;
+            font-size: 1.35rem; 
+            padding: 25px 20px 5px 20px;
             margin: 0;
             font-weight: 800;
             letter-spacing: -0.5px;
+            white-space: nowrap; 
         }
         
         nav h2 a {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--primary-dark); /* 음영 서식 삭제 후 단색으로 변경 */
             text-decoration: none;
             display: block;
         }
 
         /* Version Tag Style */
         .version-tag {
-            padding: 0 25px 15px 25px;
+            padding: 0 20px 15px 20px;
             font-size: 0.75rem;
             color: #94a3b8;
             border-bottom: 1px solid var(--border-color);
@@ -87,7 +86,7 @@
 
         nav ul li a {
             display: block;
-            padding: 10px 25px;
+            padding: 10px 20px;
             color: #475569;
             font-size: 0.95rem;
             font-weight: 500;
@@ -111,7 +110,7 @@
         }
 
         nav ul ul li a {
-            padding: 8px 25px 8px 40px;
+            padding: 8px 20px 8px 35px;
             font-size: 0.85rem;
             font-weight: 400;
             color: #64748b;
@@ -140,8 +139,8 @@
             color: #b91c1c !important;
             font-weight: 600 !important;
             border-radius: 4px;
-            margin: 2px 15px;
-            padding: 8px 10px 8px 25px !important;
+            margin: 2px 10px;
+            padding: 8px 10px 8px 20px !important;
         }
         .nav-item-highlight:hover, .nav-item-highlight.sub-active {
             background-color: #fee2e2 !important;
@@ -311,28 +310,21 @@
             border-bottom: 2px solid #e2e8f0;
         }
 
-        /* Major Headings (대제목) Styling */
+        /* Major Headings (대제목) Styling - 음영 및 구분선 명확화 */
         h2 {
-            font-size: 1.6rem;
-            color: #0f172a;
-            background-color: transparent;
-            padding: 0 0 15px 0;
+            font-size: 1.5rem;
+            color: #1e293b;
+            background-color: #eef2ff; /* 옅은 파란색 음영박스 */
+            padding: 14px 20px;
+            border-radius: 8px;
             margin-top: 0;
-            margin-bottom: 30px;
+            margin-bottom: 25px;
             font-weight: 800;
             display: flex;
             align-items: center;
-            border-bottom: 2px solid #e2e8f0;
+            border-left: 6px solid var(--primary-color);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.03);
             letter-spacing: -0.5px;
-        }
-        h2::before {
-            content: '';
-            display: inline-block;
-            width: 6px;
-            height: 24px;
-            background-color: var(--primary-color);
-            margin-right: 12px;
-            border-radius: 3px;
         }
 
         /* Sub Headings (중제목) Styling */
@@ -373,6 +365,70 @@
         
         ul, ol { margin-bottom: 15px; padding-left: 25px; }
         li { margin-bottom: 8px; }
+
+        /* Guide Box (본문 내용 가독성 박스) */
+        .guide-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            color: #334155;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
+
+        /* --- Text Formatting Classes --- */
+
+        /* 1. UI Button inline style (실제 클릭 버튼) */
+        .ui-btn {
+            display: inline-block;
+            padding: 2px 10px;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #1e293b;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0 3px;
+            vertical-align: middle;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        /* 2. Menu Text (메뉴 탭 및 팝업 타이틀) */
+        .menu-txt {
+            color: #2563eb;
+            font-weight: 700;
+            border-bottom: 2px solid #bfdbfe;
+            padding-bottom: 1px;
+            margin: 0 2px;
+        }
+
+        /* 3. Highlight Background (중요 문구 형광펜) 깨짐 현상 수정 */
+        .hl-bg {
+            background-color: #fef08a; /* 투명도 대신 솔리드 컬러로 안정화 */
+            font-weight: 700;
+            color: #1e293b;
+            padding: 2px 6px;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            /* 줄바꿈 시 레이아웃 보호 */
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            white-space: nowrap; /* 글씨가 쪼개지지 않도록 방지 */
+        }
+
+        /* 4. Status Badge (상태 표시) */
+        .status-badge {
+            background-color: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #475569;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            vertical-align: baseline;
+            margin: 0 2px;
+        }
 
         /* Description List Style */
         .desc-list {
@@ -492,20 +548,6 @@
             font-size: 1.2rem;
             margin-right: 8px;
         }
-
-        /* Custom Button Style */
-        .cmd-btn {
-            display: inline-block;
-            padding: 3px 8px;
-            background-color: #f1f5f9;
-            border: 1px solid #cbd5e1;
-            color: #334155;
-            border-radius: 4px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin: 0 2px;
-            vertical-align: middle;
-        }
         
         /* Real Image - 좌측 정렬 및 사이즈 유지 */
         img.manual-img {
@@ -515,14 +557,14 @@
             border: 1px solid #e2e8f0;
             border-radius: 8px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            margin: 30px 0; /* 좌측 정렬 */
+            margin: 30px 0; 
             display: block;
         }
 
         .img-large {
             width: 95% !important;
             max-width: 1100px !important;
-            margin: 40px 0 !important; /* 좌측 정렬 */
+            margin: 40px 0 !important; 
         }
 
         /* Q&A Accordion - Clean Style */
@@ -710,7 +752,7 @@
             .cover-title { font-size: 2.2rem; }
             .cover-footer { flex-direction: column; gap: 20px; align-items: center; justify-content: center; }
             .cover-contact-wrapper { flex-direction: column; gap: 15px; align-items: center; }
-            nav h2 { font-size: 1.3rem; padding-top: 15px; }
+            nav h2 { font-size: 1.2rem; padding-top: 15px; white-space: normal; }
         }
     </style>
 </head>
@@ -765,18 +807,21 @@
 
         <!-- 0. 검사 관리자 등록 -->
         <section id="register" class="page-section">
-            <h2>0. 검사 관리자 등록</h2>
-            <p>사람인 FIT 검사 이용 신청 시, <strong>담당자 이메일</strong>로 관리자 페이지 URL, 계정 ID, 초기 비밀번호가 발송됩니다.</p>
+            <h2>📋 0. 검사 관리자 등록</h2>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">사람인 FIT 검사 이용 신청 시, <strong>담당자 이메일</strong>로 관리자 페이지 URL, 계정 ID, 초기 비밀번호가 발송됩니다.</p>
+            </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/01_email.png" alt="서비스 이용 동의 화면 1" class="manual-img">
 
             <h3>1. 서비스 이용 동의</h3>
-            <ul class="desc-list">
-                <li>
-                    <span>최초 접속 시 <strong>[서비스 이용 동의]</strong> 및 <strong>[개인정보 위탁 동의]</strong>가 필요합니다.</span>
-                    <span>동의 후 탈퇴 전까지 해당 계약은 유효한 것으로 간주합니다.</span>
-                </li>
-            </ul>
+            <div class="info-box" style="border: 2px solid var(--primary-color); background-color: #eff6ff; padding: 20px;">
+                <strong style="font-size: 1.15rem; color: var(--primary-dark); margin-bottom: 10px;">✅ 서비스 이용 동의 필수</strong>
+                <p style="font-weight: 600; color: #1e293b; margin-top: 5px; font-size: 1.05rem; line-height: 1.8;">
+                    최초 접속 시 <span class="hl-bg">서비스 이용 동의</span> 및 <span class="hl-bg">개인정보 위탁 동의</span> 절차가 반드시 필요합니다.<br>
+                    <span style="font-size: 0.95rem; font-weight: 400; color: #475569;">동의를 완료하신 후, 서비스 탈퇴 전까지 해당 계약은 유효한 것으로 간주합니다.</span>
+                </p>
+            </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/02_agree.png" alt="서비스 이용 동의 화면 2" class="manual-img">
 
@@ -787,8 +832,10 @@
 
         <!-- 1. 로그인 및 접속 -->
         <section id="login" class="page-section">
-            <h2>1. 로그인 및 접속</h2>
-            <p>관리자 페이지에 접속하여 부여받은 ID와 PW를 입력해 주시기 바랍니다. 보안 강화를 위해 로그인은 <strong>2단계 인증</strong>을 거칩니다.</p>
+            <h2>🔐 1. 로그인 및 접속</h2>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">관리자 페이지에 접속하여 부여받은 ID와 PW를 입력해 주시기 바랍니다. 기업 보안 강화를 위해 로그인은 <span class="hl-bg">2단계 인증</span>을 거치게 됩니다.</p>
+            </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/03_login.png" alt="로그인 화면 이미지" class="manual-img">
 
@@ -799,12 +846,14 @@
             </ul>
 
             <h3>2단계 인증 가이드</h3>
-            <ol>
-                <li>아이디와 비밀번호를 입력한 후 <strong>[로그인]</strong> 버튼을 클릭합니다.</li>
-                <li>화면에 표시된 등록 이메일 주소를 확인하고 <strong>[인증번호 요청]</strong> 버튼을 클릭합니다.</li>
-                <li>담당자 이메일로 발송된 <strong>인증번호 6자리</strong>를 확인합니다.</li>
-                <li>인증번호를 입력창에 넣고 인증을 완료하면 메인 화면으로 이동합니다.</li>
-            </ol>
+            <div class="guide-box">
+                <ol style="margin-bottom: 0;">
+                    <li>아이디와 비밀번호를 입력한 후 <span class="ui-btn">로그인</span> 버튼을 클릭합니다.</li>
+                    <li>화면에 표시된 등록 이메일 주소를 확인하고 <span class="ui-btn">인증번호 요청</span> 버튼을 클릭합니다.</li>
+                    <li>담당자 이메일로 발송된 <strong>인증번호 6자리</strong>를 확인합니다.</li>
+                    <li>인증번호를 입력창에 넣고 인증을 완료하면 메인 화면으로 이동합니다.</li>
+                </ol>
+            </div>
 
             <img src="https://www.saraminimage.co.kr/fit/img/04_access.png" alt="2단계 인증 화면 이미지" class="manual-img">
 
@@ -816,8 +865,10 @@
 
         <!-- 2. 대시보드 -->
         <section id="dashboard" class="page-section">
-            <h2>2. 채용검사 관리 (홈 화면)</h2>
-            <p>로그인 직후 보이는 메인(홈) 화면입니다. 현재 진행 중이거나 종료된 모든 검사의 현황을 한눈에 확인할 수 있습니다.</p>
+            <h2>🏠 2. 채용검사 관리 (홈 화면)</h2>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">로그인 직후 보이는 메인(홈) 화면입니다. 현재 진행 중이거나 종료된 <span class="hl-bg">모든 검사의 현황</span>을 한눈에 파악할 수 있습니다.</p>
+            </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/05_dashboard.png" alt="대시보드 전체 화면 이미지" class="manual-img">
 
@@ -840,23 +891,23 @@
                     </tr>
                     <tr>
                         <td><strong>검색 기능</strong></td>
-                        <td>채용검사명, 상품명을 검색하여 등록된 채용검사를 빠르게 찾을 수 있습니다.</td>
+                        <td>채용검사명이나 상품명을 검색하여 등록된 채용검사를 빠르게 찾을 수 있습니다.</td>
                     </tr>
                     <tr>
                         <td><strong>검사 URL 확인</strong></td>
-                        <td>검사 페이지로 이동할 수 있는 URL을 확인 및 복사할 수 있습니다.</td>
+                        <td>검사 페이지로 이동할 수 있는 전용 URL을 확인 및 복사할 수 있습니다.</td>
                     </tr>
                     <tr>
                         <td><strong>응시 현황 확인</strong></td>
-                        <td>전체 인원과 응시 인원(검사 종료 인원)을 실시간으로 확인합니다.</td>
+                        <td>전체 지원 인원과 응시 완료 인원(검사 종료 인원)을 실시간으로 확인합니다.</td>
                     </tr>
                     <tr>
                         <td><strong>종합 리포트</strong></td>
-                        <td>해당 검사의 전체 결과를 엑셀 파일 형태로 다운로드합니다.</td>
+                        <td>해당 검사의 전체 종합 결과를 엑셀 파일 형태로 다운로드합니다.</td>
                     </tr>
                     <tr>
                         <td><strong>응시자 추가</strong></td>
-                        <td>진행 중인 검사에 새로운 응시자를 추가로 등록할 수 있습니다.</td>
+                        <td>진행 중인 검사에 새로운 응시자를 신속하게 추가 등록할 수 있습니다.</td>
                     </tr>
                 </tbody>
             </table>
@@ -864,8 +915,10 @@
 
         <!-- 3. 정보 수정 -->
         <section id="info-edit" class="page-section">
-            <h2>3. 관리자 정보 수정</h2>
-            <p>화면 상단의 기업명을 클릭하면 <strong>[내 기업 관리]</strong> 팝업으로 이동합니다.</p>
+            <h2>⚙️ 3. 관리자 정보 수정</h2>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">화면 상단의 기업명을 클릭하면 <span class="menu-txt">내 기업 관리</span> 팝업으로 즉시 이동하여 기본 정보를 수정할 수 있습니다.</p>
+            </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/06_account_1.png" alt="정보 수정 화면 1" class="manual-img">
             
@@ -880,12 +933,12 @@
                 <div style="display: flex; flex-direction: column; gap: 15px;">
                     <div>
                         <strong style="color: #333; font-size: 1rem;">🔐 계정 및 담당자 정보 관리</strong>
-                        <p style="color: #555; margin: 5px 0 0 0; font-size: 0.95rem;">주기적인 <strong>비밀번호 변경</strong>을 통해 보안을 유지하고, 안내 문자에 발송되는 <strong>담당자 정보(연락처 등)</strong>를 최신화할 수 있습니다.</p>
+                        <p style="color: #555; margin: 5px 0 0 0; font-size: 0.95rem;">주기적인 <strong>비밀번호 변경</strong>을 통해 보안을 튼튼히 유지하고, 안내 문자에 발송되는 <strong>담당자 정보(연락처 등)</strong>를 최신 상태로 관리할 수 있습니다.</p>
                     </div>
 
                     <div>
                         <strong style="color: #333; font-size: 1rem;">🖼️ 기업 로고 설정</strong>
-                        <p style="color: #555; margin: 5px 0 0 0; font-size: 0.95rem;">응시 화면과 최종 결과지에 노출될 <strong>공식 기업 로고</strong> 이미지를 등록 및 변경합니다.</p>
+                        <p style="color: #555; margin: 5px 0 0 0; font-size: 0.95rem;">응시 화면과 최종 결과지에 노출될 <strong>공식 기업 로고</strong> 이미지를 자유롭게 등록 및 변경할 수 있습니다.</p>
                     </div>
 
                     <div>
@@ -901,7 +954,7 @@
                         <strong style="color: #1e3a8a; font-size: 1rem;">👁️‍🗨️ 보안 모드(마스킹) 설정</strong>
                         <ul style="margin-top: 5px; margin-bottom: 0; color: #475569; padding-left: 20px; font-size: 0.95rem;">
                             <li>응시자 목록 진입 시 개인정보 유출 방지를 위해 <strong>이름, 연락처 등이 마스킹(***) 처리되는 보안 모드</strong>가 기본으로 적용됩니다.</li>
-                            <li>전체 정보를 확인하려면 우측 상단 계정 메뉴에서 <strong>[상세 보기 모드]</strong>로 전환할 수 있습니다. (전환 시 보안 경고 팝업이 노출됩니다.)</li>
+                            <li>전체 정보를 확인하시려면 우측 상단 계정 메뉴에서 <span class="menu-txt">상세 보기 모드</span> 옵션으로 전환할 수 있습니다. (전환 시 보안 경고 팝업이 노출됩니다.)</li>
                         </ul>
                     </div>
                 </div>
@@ -909,15 +962,17 @@
 
             <div class="warning-box">
                 <strong>🚨 주의사항</strong>
-                <p style="margin-top: 5px; margin-bottom: 0;">담당자 정보에 기재된 <strong>'회사 전화번호'</strong>가 응시자 안내 문자 내용 하단에 자동으로 기재됩니다. 개인 휴대전화번호 노출에 주의해 주시기 바랍니다.<br>
+                <p style="margin-top: 5px; margin-bottom: 0;">담당자 정보에 기재된 <strong>'회사 전화번호'</strong>가 응시자 안내 문자 내용 하단에 자동으로 기재됩니다. 담당자의 개인 휴대전화번호 노출에 주의해 주시기 바랍니다.<br>
                 <span style="font-size: 0.9rem; color: #475569;">📧 검사 응시 안내 메일은 <code>webmaster@mailinfo.saramin.co.kr</code> 계정으로 발송됩니다.</span></p>
             </div>
         </section>
 
         <!-- 4. 신규 검사 등록: Step 1 -->
         <section id="step1" class="page-section">
-            <h2>4. 신규 검사 등록</h2>
-            <p>우측 상단의 <strong>[채용검사 등록]</strong> 버튼을 클릭하여 새로운 검사 프로젝트를 생성합니다.</p>
+            <h2>📝 4. 신규 검사 등록</h2>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">화면 우측 상단의 <span class="ui-btn">채용검사 등록</span> 버튼을 클릭하여 새로운 검사 프로젝트를 생성할 수 있습니다.</p>
+            </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_1.png" alt="신규 검사 등록 메인 화면 이미지" class="manual-img">
 
@@ -926,21 +981,21 @@
             <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_02-1.png" alt="Step 1 상세 화면 이미지 1" class="manual-img">
 
             <ul class="desc-list">
-                <li><strong>채용검사명</strong><span>원하시는 채용검사명을 작성해 주시기 바랍니다. (최대 50자 제한)</span></li>
+                <li><strong>채용검사명</strong><span>기업 내부에서 관리하실 채용검사명을 작성해 주시기 바랍니다. (최대 50자 제한)</span></li>
                 <li><strong>기간 입력</strong>
-                    <span>검사 진행 일시(분 단위 설정 가능)를 선택합니다.</span>
-                    <span style="color:#d32f2f; font-weight:500; font-size: 0.85rem; margin-top: 4px;">※ 검사 종료일은 생성일로부터 최대 3년까지만 설정할 수 있습니다.</span>
+                    <span>실제 검사가 진행되는 일시(분 단위 설정 가능)를 선택합니다.</span>
+                    <span style="color:#d32f2f; font-weight:500; font-size: 0.85rem; margin-top: 4px;">※ 검사 종료일은 검사 생성일로부터 최대 3년까지만 설정할 수 있습니다.</span>
                 </li>
-                <li><strong>검사 상품</strong><span>응시하고자 하는 상품을 선택합니다. (기본 응시 가능 횟수와 검사 시간이 자동 설정되며, 가급적 기본값 유지를 권장합니다.)</span></li>
+                <li><strong>검사 상품</strong><span>지원자가 응시하고자 하는 상품을 선택합니다. (상품에 따른 기본 응시 가능 횟수와 검사 시간이 자동 설정되며, 가급적 기본값 유지를 권장합니다.)</span></li>
             </ul>
 
             <div class="info-box" style="margin-top: 10px; margin-bottom: 30px; background-color: #f0f9ff; border-color: #bae6fd;">
                 <strong style="color: #0369a1; font-size: 1.05rem; border-bottom: 1px solid #bae6fd; padding-bottom: 8px; margin-bottom: 12px;">🛡️ 2차 인증 설정 안내</strong>
-                <p style="color: #334155; margin-bottom: 12px;">더욱 안전하고 신뢰도 높은 검사 진행을 위해 <strong>본인 확인용 2차 인증 기능</strong>이 적용됩니다.</p>
+                <p style="color: #334155; margin-bottom: 12px;">더욱 안전하고 대리 응시를 방지하는 신뢰도 높은 검사 진행을 위해 <span class="hl-bg">본인 확인용 2차 인증 기능</span>이 기본 적용됩니다.</p>
                 <ul style="margin-bottom: 0;">
-                    <li><strong>인증 수단:</strong> <strong>'휴대폰 번호'</strong>, <strong>'이메일'</strong>, <strong>'휴대폰 번호/이메일(택 1)'</strong> 중 선택할 수 있으며, 선택한 옵션에 따라 응시자 등록 시 필수 입력 정보가 달라집니다.</li>
-                    <li><strong>온라인 검사:</strong> 기본값 <strong>'사용'</strong>으로 자동 설정됩니다.</li>
-                    <li><strong>오프라인 검사:</strong> 기본값 <strong>'미사용'</strong> (2차 인증 설정 불가 및 비활성화)</li>
+                    <li><strong>인증 수단:</strong> <strong>'휴대폰 번호'</strong>, <strong>'이메일'</strong>, <strong>'휴대폰 번호/이메일(택 1)'</strong> 중 선택할 수 있으며, 선택하신 옵션에 따라 향후 응시자 명단 등록 시 필수 입력 정보가 달라집니다.</li>
+                    <li><strong>온라인 검사:</strong> 기본값 <span class="status-badge">사용</span>으로 자동 설정됩니다.</li>
+                    <li><strong>오프라인 검사:</strong> 기본값 <span class="status-badge">미사용</span>으로 처리되며, 2차 인증 설정이 불가(비활성화)합니다.</li>
                 </ul>
             </div>
 
@@ -948,31 +1003,33 @@
 
             <ul class="desc-list">
                 <li><strong>응시 가능 횟수</strong>
-                    <span>인터넷(모바일) 등 환경 불안정으로 검사 응시가 중단되었을 때, 다시 접속할 수 있는 허용 횟수를 의미합니다.</span>
-                    <span>단, 검사 최종 제출 완료 이후에는 다시 응시할 수 없습니다.</span>
+                    <span>지원자의 인터넷(모바일) 등 환경 불안정으로 검사 응시가 비정상적으로 중단되었을 때, 다시 접속할 수 있도록 허용하는 횟수를 의미합니다.</span>
+                    <span>단, 검사를 완전히 종료하고 최종 제출을 완료한 이후에는 다시 응시할 수 없습니다.</span>
                 </li>
-                <li><strong>검사 타이틀 문구</strong><span>최대 30자까지 작성할 수 있습니다. 작성하신 타이틀 뒤에 '검사를 시작합니다.'라는 문구가 자동 표기됩니다.</span></li>
-                <li><strong>유의사항</strong><span>응시자가 검사 시작 전 확인하는 페이지입니다. 텍스트를 자유롭게 수정할 수 있으며(이미지 첨부 불가), 서류 마감일이나 면접 일정 등 추가 공지사항으로 활용하시기 좋습니다.</span></li>
-                <li><strong>문의처 노출</strong><span>담당자 정보에 기재된 연락처가 안내 문자 최하단에 노출됩니다. (단, 발신 번호는 <code>02-6377-2503</code>으로 고정됩니다.)</span></li>
+                <li><strong>검사 타이틀 문구</strong><span>최대 30자까지 작성할 수 있습니다. 작성하신 타이틀 문구 뒤에 '검사를 시작합니다.'라는 시스템 문구가 자동 표기됩니다.</span></li>
+                <li><strong>유의사항</strong><span>응시자가 검사 시작 전 가장 먼저 확인하게 되는 페이지입니다. 텍스트를 자유롭게 수정할 수 있으며(이미지 첨부 불가), 서류 마감일이나 향후 면접 일정 등 추가 공지사항으로 활용하시기 좋습니다.</span></li>
+                <li><strong>문의처 노출</strong><span>담당자 정보에 기재된 연락처가 안내 문자 최하단에 함께 노출됩니다. (단, 실제 문자 발신 번호는 <code>02-6377-2503</code>으로 고정되어 발송됩니다.)</span></li>
             </ul>
 
             <div class="warning-box">
                 <strong style="color: #e11d48;">🚨 응시자 등록 후 설정 변경 제한</strong>
-                <p>등록된 데이터 검증 및 개인정보 보안 강화를 위해 <strong>응시자가 1명이라도 등록된 이후에는 일부 설정 변경이 엄격히 제한</strong>됩니다.</p>
+                <p>등록된 데이터의 검증 및 개인정보 보안을 강화하기 위해 <strong>응시자가 1명이라도 시스템에 등록된 이후에는 일부 설정 변경이 엄격히 제한</strong>됩니다.</p>
                 <ul style="margin-top: 8px; margin-bottom: 0;">
-                    <li><strong>2차 인증 사용 여부:</strong> [사용] ➔ [미사용] 변경은 가능합니다. 단, <span style="font-weight: 600; text-decoration:underline;">[미사용] ➔ [사용]으로는 변경할 수 없습니다.</span></li>
-                    <li><strong>2차 인증 수단 변경:</strong> 최초 선택한 인증 수단(예: 휴대폰)을 다른 수단(예: 이메일)으로 <strong>변경할 수 없습니다.</strong></li>
+                    <li><strong>2차 인증 사용 여부:</strong> [사용] ➔ [미사용]으로의 변경은 가능합니다. 단, <span style="font-weight: 600; text-decoration:underline;">[미사용] ➔ [사용]으로는 변경할 수 없습니다.</span></li>
+                    <li><strong>2차 인증 수단 변경:</strong> 최초에 선택한 인증 수단(예: 휴대폰)을 도중에 다른 수단(예: 이메일)으로 <strong>변경할 수 없습니다.</strong></li>
                     <li><strong>Step 1 기본 정보 제한:</strong> Step 3(응시자 등록) 완료 후에는 <strong>검사 시간, 검사 기간(시작일), 검사 언어, 검사 구분(온/오프라인)의 수정이 원천 차단</strong>됩니다.</li>
                 </ul>
-                <span style="display:block; margin-top: 10px; font-size: 0.9rem; color:#64748b;">※ 설정을 부득이하게 변경하시려면, 등록된 전체 응시자를 삭제하시거나 신규 검사를 다시 생성해 주시기 바랍니다.</span>
+                <span style="display:block; margin-top: 10px; font-size: 0.9rem; color:#64748b;">※ 설정을 부득이하게 변경하셔야 할 경우, 등록된 전체 응시자를 삭제하시거나 신규 검사를 다시 생성해 주시기 바랍니다.</span>
             </div>
         </section>
 
         <!-- 4. 신규 검사 등록: Step 2 (데이터 관리 - 신설) -->
         <section id="step2" class="page-section">
-            <h2>4. 신규 검사 등록</h2>
+            <h2>📝 4. 신규 검사 등록</h2>
             <div class="step-header">Step 2. 데이터 관리 (개인정보 파기 정책)</div>
-            <p>데이터 보관 기간을 명확하게 설정할 수 있도록 <strong>데이터 관리 단계가 신설</strong>되었습니다. 기업에서 설정한 '개인정보 보관 기간'이 경과하면 해당 데이터는 시스템에 의해 <strong>영구 파기되거나 비식별화 처리</strong>됩니다.</p>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">데이터 보관 기간을 명확하게 설정하고 관리하실 수 있도록 <strong>데이터 관리 단계가 신설</strong>되었습니다. 기업에서 설정하신 '개인정보 보관 기간'이 경과하면 해당 데이터는 시스템에 의해 <span class="hl-bg">영구 파기되거나 비식별화 처리</span>됩니다.</p>
+            </div>
             
             <div class="info-box" style="background-color:#eff6ff; border-color:#bfdbfe; justify-content:center;">
                 <strong style="display:flex; justify-content:center;">💡 변경된 검사 생성 프로세스</strong>
@@ -980,27 +1037,29 @@
             </div>
 
             <h3 style="margin-top: 40px;">개인정보 보관 기간 자동 설정 안내</h3>
-            <p>기업의 편의와 개인정보 보호 규정 준수를 위해, 개인정보 보관 기간이 <strong>시스템 기본값으로 자동 설정</strong>됩니다.</p>
-            <ul>
-                <li><strong>기본 보관 기간 (자동 설정):</strong> 초기 검사 생성 시 <strong>이름/결과지는 3년</strong>, <strong>연락처는 180일</strong>로 자동 지정됩니다.</li>
-                <li><strong>설정 가능 기간 (사전 제공 옵션):</strong>
-                    <ul>
-                        <li><strong>연락처(휴대폰, 이메일):</strong> 60일, 90일, 120일, 150일, 180일</li>
-                        <li><strong>이름/결과지:</strong> 90일, 180일, 1년, 2년, 3년</li>
-                    </ul>
-                </li>
-            </ul>
+            <div class="guide-box">
+                <p>기업의 편의와 개인정보 보호 규정 준수를 위해, 개인정보 보관 기간이 <strong>시스템 기본값으로 자동 세팅</strong>됩니다.</p>
+                <ul style="margin-bottom: 0;">
+                    <li><strong>기본 보관 기간 (자동 설정):</strong> 초기 검사 생성 시 <strong>이름/결과지는 3년</strong>, <strong>연락처는 180일</strong>로 자동 지정됩니다.</li>
+                    <li><strong>설정 가능 기간 (사전 제공 옵션):</strong>
+                        <ul style="margin-bottom: 0;">
+                            <li><strong>연락처(휴대폰, 이메일):</strong> 60일, 90일, 120일, 150일, 180일 중 선택</li>
+                            <li><strong>이름/결과지:</strong> 90일, 180일, 1년, 2년, 3년 중 선택</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
 
             <img src="https://www.saraminimage.co.kr/fit/img/10_batch_01.png" alt="보관 기간 설정 화면 이미지" class="manual-img">
 
             <div class="warning-box">
                 <strong style="color: #e11d48;">⚠️ 보관 및 파기 관련 중요 주의사항</strong>
                 <ul style="margin-top: 5px; margin-bottom: 0;">
-                    <li><strong>응시자가 1명이라도 등록된 이후에는 설정된 '보관 기간'을 절대 수정할 수 없습니다.</strong></li>
-                    <li>필수 정책에 따라, <strong>연락처 보관 기간은 이름 및 결과지 보관 기간을 초과하여 설정할 수 없습니다.</strong></li>
-                    <li>설정된 보관 기간이 경과하여 파기된 데이터는 <strong>어떠한 경우에도 복구할 수 없습니다.</strong> (별도 보관이 필요하신 경우 기간 만료 전 직접 백업해 주시기 바랍니다.)</li>
+                    <li>응시자가 1명이라도 등록된 이후에는 <span class="hl-bg">설정된 '보관 기간'을 절대 수정할 수 없습니다.</span></li>
+                    <li>필수 정책에 따라, <strong>연락처 보관 기간은 이름 및 결과지 보관 기간을 초과하여 길게 설정할 수 없습니다.</strong></li>
+                    <li>설정된 보관 기간이 경과하여 완전히 파기된 데이터는 <strong>어떠한 경우에도 복구할 수 없습니다.</strong> (따라서 별도 보관이 필요하신 경우 반드시 기간 만료 전 직접 백업해 주시기 바랍니다.)</li>
                 </ul>
-                <span style="font-size: 0.9rem; color:#b45309; display:block; margin-top:12px;">※ 참고: 대행 서비스를 이용하시는 기업의 경우 기본값이 제공되지 않으므로, 검사 생성 시 직접 보관 기간을 지정하셔야 합니다.</span>
+                <span style="font-size: 0.9rem; color:#b45309; display:block; margin-top:12px;">※ 참고: 사람인 대행 서비스를 이용하시는 기업의 경우 시스템 기본값이 제공되지 않으므로, 검사 생성 시 관리자가 직접 보관 기간을 지정하셔야 합니다.</span>
             </div>
 
             <h3 style="margin-top: 40px;">데이터 파기 및 비식별화 기준</h3>
@@ -1020,20 +1079,20 @@
                         <td style="text-align: center; font-weight: 600;">연락처 보관 기간 만료 시</td>
                         <td>
                             <strong>[파기 대상]</strong> 연락처(휴대폰, 이메일), 면접번호, 지원분야, 비고 1/2<br>
-                            <span style="font-size:0.85rem; color:#64748b;">※ 관련 알림 발송 내역도 함께 파기됩니다.</span>
+                            <span style="font-size:0.85rem; color:#64748b;">※ 연락처 만료 시 관련 알림 발송 내역도 함께 파기됩니다.</span>
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: center; font-weight: 600;">이름/결과지<br>보관 기간 만료 시</td>
                         <td>
-                            <strong>[파기 대상]</strong> 이름, 결과지, 결과 데이터, 인증번호<br>
-                            <strong>[비식별 변환]</strong> 수험번호는 개인을 특정할 수 없는 <strong>'비식별 고유 번호'</strong>로 치환되어 보관됩니다.
+                            <strong>[파기 대상]</strong> 이름, 결과지, 결과 데이터, 2차 인증번호<br>
+                            <strong>[비식별 변환]</strong> 수험번호는 개인을 특정할 수 없는 <strong>'비식별 고유 번호'</strong>로 치환되어 영구 보관됩니다.
                         </td>
                     </tr>
                     <tr>
                         <td style="text-align: center; font-weight: 600; background-color: #f8fafc;">미응시자 데이터 파기</td>
                         <td style="background-color: #f8fafc;">
-                            기존 180일 일괄 파기에서 <strong>기업이 설정한 보관 기간에 맞추어 자동 파기</strong>되도록 변경되었습니다.
+                            기존 180일 일괄 파기 시스템에서 <strong>기업이 직접 설정한 보관 기간에 맞추어 자동 파기</strong>되도록 맞춤형으로 변경되었습니다.
                         </td>
                     </tr>
                 </tbody>
@@ -1042,17 +1101,21 @@
 
         <!-- 4. 신규 검사 등록: Step 3 (응시자 등록) -->
         <section id="step3" class="page-section">
-            <h2>4. 신규 검사 등록</h2>
+            <h2>📝 4. 신규 검사 등록</h2>
             <div class="step-header">Step 3. 응시자 등록</div>
-            <p>응시자 등록 단계에서는 <strong>[개별 등록]</strong>, <strong>[엑셀 파일 일괄 등록]</strong>, <strong>[면접번호 등록]</strong>을 진행할 수 있습니다. 검사 방식(온라인/오프라인)에 따라 화면이 다르게 제공됩니다.</p>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">응시자 등록 단계에서는 <span class="menu-txt">개별 등록</span>, <span class="menu-txt">응시자 엑셀 등록</span>, <span class="menu-txt">면접번호 등록</span> 모드를 진행할 수 있습니다. 설정하신 검사 방식(온라인/오프라인)에 따라 최적화된 화면이 제공됩니다.</p>
+            </div>
             
             <h4 style="margin-top: 40px;">일괄 등록 방법 (Excel)</h4>
-            <p>데이터의 정확도를 위해 <strong>'전체 성공 또는 전체 실패(All-or-Nothing)'</strong> 방식이 적용됩니다. 엑셀 파일 내 단 한 건이라도 필수값이 누락되거나 형식이 올바르지 않으면 <strong>전체 응시자 등록이 실패 처리</strong>됩니다.</p>
-            <ol>
-                <li>왼쪽 <strong>[양식 다운로드]</strong> 버튼을 클릭하여 최신 엑셀 파일을 받습니다.</li>
-                <li>양식에 맞춰 응시자 정보를 입력합니다. (선택하신 2차 인증 수단에 해당하는 정보가 필수로 요구됩니다.)</li>
-                <li><strong>[응시자 엑셀 등록]</strong> 버튼을 클릭하여 작성하신 파일을 업로드합니다.</li>
-            </ol>
+            <div class="guide-box">
+                <p>대량 데이터의 정확도를 보장하기 위해 <strong>'전체 성공 또는 전체 실패(All-or-Nothing)'</strong> 무결성 방식이 적용됩니다. 엑셀 파일 내 단 한 건이라도 필수값이 누락되거나 형식이 올바르지 않으면 <strong>전체 응시자 등록이 실패 처리</strong>됩니다.</p>
+                <ol style="margin-bottom: 0;">
+                    <li>왼쪽 <span class="ui-btn">양식 다운로드</span> 버튼을 클릭하여 최신 엑셀 템플릿 파일을 받습니다.</li>
+                    <li>양식에 맞추어 응시자 정보를 입력합니다. (이때, 선택하신 2차 인증 수단에 해당하는 정보가 필수로 기입되어야 합니다.)</li>
+                    <li><span class="ui-btn">응시자 엑셀 등록</span> 버튼을 클릭하여 작성하신 파일을 시스템에 업로드합니다.</li>
+                </ol>
+            </div>
 
             <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_03.png" alt="엑셀 등록 화면 1" class="manual-img">
             <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_4.png" alt="엑셀 등록 화면 2" class="manual-img">
@@ -1060,42 +1123,44 @@
             <div class="info-box">
                 <strong>📋 엑셀 등록 시 필수 유의사항</strong>
                 <ul style="margin-bottom: 0;">
-                    <li>반드시 업데이트된 양식을 다운로드하여 예시와 동일한 형식으로 작성해 주시기 바랍니다. (형식 불일치 시 등록 불가)</li>
+                    <li>반드시 시스템에서 제공하는 업데이트된 양식을 다운로드하여, 예시와 동일한 데이터 형식으로 작성해 주시기 바랍니다. (형식 불일치 시 등록이 불가합니다.)</li>
                     <li><strong>필수 항목:</strong> 수험번호, 이름</li>
-                    <li><strong>2차 인증 필수값:</strong> 이메일, 휴대폰 번호는 기본적으로 선택 항목이나, <strong>해당 수단으로 2차 인증을 사용할 경우 반드시 정보를 포함</strong>해야 합니다.</li>
-                    <li><strong>특수문자 원천 차단:</strong> 개인정보 오기입 방지를 위해 <strong>수험번호, 지원분야, 비고란에 <code>@</code> 와 <code>.</code> 입력이 원천 차단</strong>됩니다. 수험번호는 가급적 개인정보가 포함되지 않도록 설정해 주시기 바랍니다.</li>
-                    <li>1회 대량 등록은 <strong>500명 이내</strong>를 권장합니다.</li>
+                    <li><strong>2차 인증 필수값:</strong> 이메일, 휴대폰 번호는 기본적으로 선택 항목이나, <strong>해당 수단으로 2차 인증을 사용할 경우 반드시 그에 맞는 연락처 정보를 포함</strong>해야 합니다.</li>
+                    <li><strong>특수문자 원천 차단:</strong> 개인정보 오기입 방지 및 시스템 안정성을 위해 <strong>수험번호, 지원분야, 비고란에 <code>@</code> 와 <code>.</code> 기호 입력이 원천 차단</strong>됩니다. 수험번호는 가급적 개인정보가 노출되지 않는 고유 번호로 설정해 주시기 바랍니다.</li>
+                    <li>안정적인 업로드를 위해 1회 대량 등록 시 <strong>500명 이내</strong>로 분할하여 등록하시기를 권장합니다.</li>
                 </ul>
             </div>
 
             <h4 style="margin-top: 40px;">개별 등록 방법 (직접 입력)</h4>
-            <ol>
-                <li><strong>[응시자 행 추가+]</strong> 버튼을 클릭하여 응시자 정보를 한 명씩 입력합니다.</li>
-                <li>모든 입력이 끝나면 <strong>[저장]</strong>을 클릭합니다.</li>
-            </ol>
+            <div class="guide-box">
+                <ol style="margin-bottom: 0;">
+                    <li><span class="ui-btn">응시자 행 추가+</span> 버튼을 클릭하여 응시자 정보를 한 명씩 화면에 입력합니다.</li>
+                    <li>모든 입력이 끝난 후 <span class="ui-btn">저장</span> 버튼을 클릭하여 명단을 확정합니다.</li>
+                </ol>
+            </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_04.png" alt="개별 등록 화면 이미지" class="manual-img">
             
             <div class="warning-box">
                 <strong>🚨 응시자 목록 전체 노출 제한</strong>
-                <p style="margin-bottom: 0;">개인정보 보호를 위해 응시자 저장 후 해당 페이지에 재진입하실 경우, 기존 리스트는 노출되지 않으며 우측 상단에 <strong>'현재 등록 인원: 00명'</strong>으로만 간략히 표시됩니다. 등록된 응시자의 개별 수정 및 삭제는 <strong>[응시자 관리]</strong> 메뉴를 통해서만 진행하실 수 있습니다.</p>
+                <p style="margin-bottom: 0;">개인정보 보호 정책에 따라, 응시자 명단을 저장한 후 해당 페이지에 재진입하실 경우 기존 리스트는 화면에 노출되지 않으며 우측 상단에 <strong>'현재 등록 인원: 00명'</strong>으로만 간략히 요약 표시됩니다. 등록된 응시자의 개별 정보 수정 및 삭제는 상단 <span class="menu-txt">응시자 관리</span> 탭 메뉴를 통해서만 안전하게 진행하실 수 있습니다.</p>
             </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_05.png" alt="현재 등록 인원 노출 화면" class="manual-img">
 
             <div class="info-box" style="background-color: #f8fafc; border-color: #e2e8f0; margin-top: 40px;">
                 <strong style="color: #1e3a8a; font-size: 1.05rem;">🔒 응시자 접속 화면 및 2차 인증 유의사항</strong>
-                <p style="margin-top: 5px;">응시자가 검사 사이트에 접속할 때, 사전에 기업 관리자가 설정한 2차 인증 수단으로 본인 확인 절차가 진행됩니다.</p>
+                <p style="margin-top: 5px;">응시자가 제공받은 링크로 검사 사이트에 접속할 때, 사전에 기업 관리자가 설정한 2차 인증 수단으로 엄격한 본인 확인 절차가 진행됩니다.</p>
                 <ol style="margin-top: 10px; margin-bottom: 0;">
-                    <li><strong>재접속 시 재인증:</strong> 응시자가 검사 도중 응시를 중단하고 다시 접속하는 경우, 보안을 위해 선택된 인증 수단으로 2차 인증을 재진행해야 합니다.</li>
-                    <li><strong>인증 정보 변경 불가:</strong> 응시자 본인이 직접 2차 인증 정보(휴대폰 번호, 이메일 등)를 화면에서 수정할 수 없습니다. <strong>반드시 기업 담당자가 사전에 등록/설정한 정보로만 인증이 가능</strong>하므로, 최초 등록 전 정확한 정보 입력이 필수입니다.</li>
+                    <li><strong>재접속 시 재인증:</strong> 응시자가 검사 도중 응시를 일시 중단하고 다시 접속하는 경우, 보안을 유지하기 위해 선택된 인증 수단으로 2차 인증을 재진행해야 합니다.</li>
+                    <li><strong>인증 정보 변경 불가:</strong> 응시자 본인이 직접 2차 인증 정보(휴대폰 번호, 이메일 등)를 접속 화면에서 수정할 수 없습니다. <strong>반드시 기업 담당자가 사전에 등록 및 설정한 정보로만 인증이 매칭되어 가능</strong>하므로, 최초 등록 전 정확한 정보 입력이 필수입니다.</li>
                 </ol>
                 
                 <div style="margin-top: 15px; padding: 15px; background-color: #fff1f2; border-left: 4px solid #e11d48; border-radius: 6px;">
                     <strong style="color: #be123c; display: flex; align-items: center;"><span style="margin-right:8px; font-size: 1.1rem;">⚠️</span> [중요] 2차 인증 5회 오류 시 접근 제한</strong>
                     <p style="margin-top: 8px; margin-bottom: 0; font-size: 0.95rem; color: #475569;">
-                        응시자가 2차 인증 번호 입력을 <strong>5회 이상 실패할 경우, 해당 시점으로부터 30분간 검사 사이트 접근이 차단</strong>됩니다.<br>
-                        <span style="color: #e11d48; font-weight: 600;">※ 이 차단 조치는 관리자 권한으로도 임의 해제(초기화)가 불가능</span>하므로, 응시자에게 사전에 정확한 본인 정보 입력을 안내해 주시기 바랍니다.
+                        응시자가 본인 확인 2차 인증 번호 입력을 <strong>5회 이상 연속으로 실패할 경우, 해당 시점으로부터 30분간 검사 사이트 접근이 강제 차단</strong>됩니다.<br>
+                        <span style="color: #e11d48; font-weight: 600;">※ 이 차단 조치는 관리자 권한으로도 임의 해제(초기화)가 불가능</span>하므로, 응시자에게 사전에 정확한 본인 정보 입력을 각별히 안내해 주시기 바랍니다.
                     </p>
                 </div>
             </div>
@@ -1103,83 +1168,90 @@
 
         <!-- 4. 신규 검사 등록: Step 4 (안내 발송) -->
         <section id="step4" class="page-section">
-            <h2>4. 신규 검사 등록</h2>
+            <h2>📝 4. 신규 검사 등록</h2>
             <div class="step-header">Step 4. 안내 문자/메일 발송</div>
-            <p>안내 문자 및 메일 발송 단계에서는 앞서 등록한 응시자에게 문자메시지나 이메일을 직접 발송할 수 있습니다.</p>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">안내 문자 및 메일 발송 단계에서는 앞서 명단을 등록한 응시자들에게 검사 참여를 독려하는 문자메시지나 이메일을 직접 발송할 수 있습니다.</p>
+            </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_9.png" alt="안내 발송 메인 화면 이미지" class="manual-img">
 
-            <ol>
-                <li><strong>개인정보 수집 동의 안내:</strong> 내용을 확인하고 동의합니다. (동의하지 않으실 경우 발송이 제한됩니다.)</li>
-                <li><strong>이메일/문자메시지 선택:</strong> 발송하실 수단을 선택합니다.</li>
-                <li><strong>발송 유형 선택:</strong>
-                    <ul>
-                        <li><strong>즉시:</strong> 지금 바로 발송합니다.</li>
-                        <li><strong>예약:</strong> 설정하신 전송 날짜/시간에 맞추어 발송합니다.</li>
-                    </ul>
-                </li>
-                <li><strong>메일/메시지 발송 내역 확인:</strong> 발송 대상과 세부 내용을 최종적으로 확인합니다.</li>
-                <li><strong>[즉시/예약 발송] 클릭:</strong> 실제 발송 처리를 위해 반드시 클릭해 주시기 바랍니다.</li>
-                <li><strong>[저장 후 다음]</strong> 버튼을 클릭하여 다음 단계로 넘어갑니다.</li>
-            </ol>
+            <div class="guide-box">
+                <ul style="margin-bottom: 0; list-style-type: none; padding-left: 0;">
+                    <li style="margin-bottom: 15px;"><strong>✅ 개인정보 수집 동의 안내:</strong> 노출된 내용을 꼼꼼히 확인하고 동의를 체크합니다. (동의하지 않으실 경우 시스템을 통한 발송이 제한됩니다.)</li>
+                    <li style="margin-bottom: 15px;"><strong>✅ 이메일/문자메시지 선택:</strong> 발송하실 안내 수단을 선택합니다.</li>
+                    <li style="margin-bottom: 15px;"><strong>✅ 발송 유형 선택:</strong>
+                        <ul style="margin-top: 8px; list-style-type: disc;">
+                            <li><strong>즉시:</strong> 지금 바로 전체 대상자에게 발송합니다.</li>
+                            <li><strong>예약:</strong> 원하시는 전송 날짜와 시간을 지정하여 예약 발송합니다.</li>
+                        </ul>
+                    </li>
+                    <li style="margin-bottom: 15px;"><strong>✅ 메일/메시지 발송 내역 확인:</strong> <span class="ui-btn">미리보기</span> 클릭 시 발송 내역 미리보기 및 문자메시지 발송 내용 수정이 가능하며, <span class="ui-btn">발송내역 보기</span> 클릭 시 실제 발송 일시를 확인할 수 있습니다.</li>
+                    <li><strong>✅ 발송/예약 실행:</strong> <strong>[즉시]</strong> 또는 <strong>[예약]</strong> 체크박스 클릭 후 아래 파란색의 <span class="ui-btn">안내 발송 및 발송 예약(전체응시자 대상)</span> 버튼을 클릭하면 안내가 발송(혹은 예약) 됩니다.</li>
+                </ul>
+            </div>
 
             <div class="warning-box">
-                <strong>⚠️ 주의</strong>
-                <p style="margin-bottom: 0;">작성된 이메일 또는 휴대전화 번호 정보가 없는 대상자에게는 발송이 진행되지 않으니 사전에 정보를 확인해 주시기 바랍니다.</p>
+                <strong style="color: #e11d48;">⚠️ 예약 발송 주의사항</strong>
+                <p style="margin-bottom: 0; margin-top: 5px;">문자 발송 예약은 현재 <strong>설정 후에 예약 일시 수정 및 취소가 불가능</strong>하며, 예약된 자동 발송이 이루어지기 전에는 해당 팝업에서 <strong>즉시 발송 기능을 추가로 이용하실 수 없습니다.</strong> 예약의 변경이나 삭제 등을 희망하실 경우 시스템 문의처로 개별 문의하시기 바랍니다.</p>
             </div>
 
             <h4 style="margin-top: 40px;">문자/이메일 내용 수정 방법</h4>
             <ul class="desc-list">
-                <li><strong>수정 진입</strong><span>화면 하단에 있는 이메일/문자메시지 <strong>[미리보기]</strong> 버튼을 클릭합니다.</span></li>
-                <li><strong>이메일</strong><span>이메일은 '제목'만 수정하실 수 있습니다.</span></li>
-                <li><strong>문자</strong><span>문자메시지는 '제목' 및 '전체 내용' 수정이 가능합니다.</span></li>
+                <li><strong>수정 화면 진입</strong><span>화면 하단에 있는 이메일/문자메시지 영역의 <span class="ui-btn">미리보기</span> 버튼을 클릭합니다.</span></li>
+                <li><strong>이메일</strong><span>이메일은 템플릿 구조상 '제목'만 수정하실 수 있습니다.</span></li>
+                <li><strong>문자</strong><span>문자메시지는 '제목' 및 '전체 텍스트 내용' 모두 자유롭게 수정이 가능합니다.</span></li>
             </ul>
 
             <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_10.png" alt="안내 발송 상세 화면 1" class="manual-img">
             <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_11.png" alt="안내 발송 상세 화면 2" class="manual-img">
 
             <div class="info-box">
-                <strong>📝 치환코드 안내 (자동 변환)</strong>
-                <p>안내 문구 작성 시 아래의 코드를 삽입하시면 각 응시자 정보에 맞게 시스템이 텍스트를 자동 변환해 줍니다.</p>
+                <strong>📝 치환코드 안내 (자동 변환 기술)</strong>
+                <p>안내 문구를 작성하실 때 아래의 치환코드를 삽입하시면, 각 응시자의 개별 정보에 맞게 시스템이 텍스트를 똑똑하게 자동 변환하여 발송해 줍니다.</p>
                 <ul style="font-size: 0.95rem; margin-bottom: 0;">
                     <li><code>{[***]}</code>: 응시자 이름</li>
                     <li><code>{[company_nm]}</code>: 기업명</li>
                     <li><code>{[exam_open_dt]}</code>: 검사 시작일</li>
                     <li><code>{[exam_close_dt]}</code>: 검사 종료일</li>
-                    <li><code>{[auth_id]}</code>: 시스템 ID</li>
-                    <li><code>{[auth_pw]}</code>: 시스템 PW</li>
-                    <li><code>{[exam_name]}</code>: 채용검사명</li>
-                    <li><code>{[exam_time]}</code>: 검사 소요 시간</li>
-                    <li><code>{[exam_url]}</code>: 접속용 검사 사이트 URL</li>
+                    <li><code>{[auth_id]}</code>: 시스템 로그인용 ID</li>
+                    <li><code>{[auth_pw]}</code>: 시스템 로그인용 PW</li>
+                    <li><code>{[exam_name]}</code>: 채용검사 타이틀명</li>
+                    <li><code>{[exam_time]}</code>: 검사 소요 예상 시간</li>
+                    <li><code>{[exam_url]}</code>: 접속용 검사 사이트 URL 링크</li>
                 </ul>
             </div>
         </section>
 
         <!-- 4. 신규 검사 등록: Step 5 (현황 수신) -->
         <section id="step5" class="page-section">
-            <h2>4. 신규 검사 등록</h2>
+            <h2>📝 4. 신규 검사 등록</h2>
             <div class="step-header">Step 5. 응시 현황 수신 설정</div>
-            <p>관리자가 전체 검사 진행 상황(미응시, 응시 완료 등)을 매일 오전 9시와 검사 마감 직후에 메일이나 문자로 요약해 받아볼 수 있는 편의 기능입니다.</p>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">담당 관리자가 전체 검사의 진행 상황(미응시 인원, 응시 완료 인원 등)을 매일 오전 9시와 검사 마감 직후에 메일이나 문자로 요약해 정기적으로 받아볼 수 있는 똑똑한 편의 기능입니다.</p>
+            </div>
 
             <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_12.png" alt="응시 현황 수신 메일 예시 화면 1" class="manual-img">
             <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_14.png" alt="응시 현황 수신 메일 예시 화면 2" class="manual-img">
 
             <div class="warning-box">
-                <p style="margin-bottom: 0;">수신할 담당자의 이메일 주소와 전화번호를 정확히 기재하셨는지 한 번 더 확인해 주시기 바랍니다.</p>
+                <p style="margin-bottom: 0;">알림을 수신할 담당자의 이메일 주소와 전화번호를 정확히 기재하셨는지 완료 전 한 번 더 꼼꼼하게 확인해 주시기 바랍니다.</p>
             </div>
 
             <div style="text-align: center; margin-top: 50px; padding: 20px;">
                 <span style="font-weight: 700; color: var(--primary-color); font-size: 1.15rem; background-color: #f0f4ff; border: 2px solid var(--primary-color); padding: 15px 35px; border-radius: 30px; display: inline-block;">
-                    🎉 <strong>[완료]</strong> 버튼 클릭 시 모든 검사 등록 설정이 종료됩니다.
+                    🎉 <span class="ui-btn" style="background:transparent; border:none; padding:0; font-size:1.15rem; margin:0;">완료</span> 버튼을 클릭하시면 모든 신규 검사 등록 설정이 성공적으로 종료됩니다.
                 </span>
             </div>
         </section>
 
         <!-- 5. 결과 확인 및 응시자 관리: Step 1 (홈 화면) -->
         <section id="result-step1" class="page-section">
-            <h2>5. 결과 확인 및 응시자 관리</h2>
+            <h2>📊 5. 결과 확인 및 응시자 관리</h2>
             <div class="step-header">Step 1. 홈 화면</div>
-            <p>채용검사 관리(홈 화면)에서는 전체적인 현황을 한눈에 파악하고, 성적표 다운로드 및 미응시자 대상 안내 재발송 업무를 수행할 수 있습니다.</p>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">채용검사 관리(홈 화면)에서는 전체적인 현황을 한눈에 파악하고, 성적표 간편 다운로드 및 미응시자 대상 안내 재발송 업무를 신속하게 수행할 수 있습니다.</p>
+            </div>
 
             <h3 style="margin-top: 40px;">1) 응시 현황 확인 및 안내 재발송</h3>
             
@@ -1187,10 +1259,10 @@
 
             <div class="info-box">
                 <strong style="color: #1e3a8a; font-size: 1.05rem; margin-bottom: 10px;">📊 응시 현황 확인 및 안내 재발송</strong>
-                <p>홈 화면에 위치한 검사 리스트 우측의 <strong>[전체인원]</strong>을 클릭하면 해당 검사의 <strong>'응시자 리스트'</strong>가 팝업으로 노출되며 구체적인 현황 확인이 가능합니다.</p>
+                <p>홈 화면에 위치한 검사 리스트 우측의 <span class="menu-txt">전체인원</span> 텍스트를 클릭하면 해당 검사의 <strong>'응시자 리스트'</strong>가 팝업으로 노출되며 구체적인 현황 파악이 즉시 가능합니다.</p>
                 <ul class="desc-list" style="margin-bottom:0; margin-top:15px; padding: 20px;">
-                    <li><strong>현황 확인</strong><span><strong>[전체인원]</strong> 숫자를 클릭하여 노출된 팝업(최대 100명 노출)에서 상태별(대기 중, 응시 중, 검사 종료) 인원 규모를 파악할 수 있습니다.</span></li>
-                    <li><strong>안내 재발송</strong><span>응시자에게 문자/메일 재발송이 필요한 경우, 좌측 체크박스로 대상 인원만 선택하여 재발송 처리를 할 수 있습니다. (주로 미응시자 독려 시 유용하게 사용됩니다.)</span></li>
+                    <li><strong>현황 확인</strong><span><span class="menu-txt">전체인원</span> 숫자를 클릭하여 노출된 팝업(최대 100명 노출)에서 지원자 상태별(대기 중, 응시 중, 검사 종료) 인원 규모를 직관적으로 파악할 수 있습니다.</span></li>
+                    <li><strong>안내 재발송</strong><span>응시자에게 문자/메일 재발송이 필요한 경우, 좌측 체크박스로 대상 인원만 특정하여 선택한 후 재발송 처리를 진행할 수 있습니다. (주로 미응시자의 검사 독려 시 매우 유용하게 사용됩니다.)</span></li>
                 </ul>
             </div>
 
@@ -1199,16 +1271,18 @@
 
             <div class="info-box" style="margin-top: 30px; background-color: #f8fafc; border-color: #cbd5e1;">
                 <strong style="color: #334155; font-size: 1.05rem; margin-bottom: 10px;">✏️ 응시자 정보 수정 및 삭제</strong>
-                <p>응시자 리스트 팝업 내에서 개별 응시자의 정보를 수정하거나 불필요한 응시자 데이터를 삭제할 수 있습니다.</p>
+                <p>응시자 리스트 팝업 내에서 개별 응시자의 정보를 빠르게 수정하거나 불필요한 응시자 데이터를 삭제할 수 있습니다.</p>
                 <div class="warning-box" style="margin-top: 15px; margin-bottom: 0;">
                     <strong style="color: #d32f2f;">🚨 주의</strong>
-                    <p style="margin-bottom: 0;">응시자 등록 이후에는 기본적으로 <strong>수험번호와 성명 수정이 제한</strong>됩니다. '응시 중' 또는 '응시 완료' 상태로 넘어간 응시자는 휴대전화 번호 및 이메일 또한 수정이 불가하도록 잠금 처리됩니다.<br>
-                    마찬가지로 응시 중(검사 시작)이거나 응시 완료(검사 종료)된 대상자는 시스템 데이터 정합성을 위해 <strong>임의 삭제가 불가</strong>합니다.</p>
+                    <p style="margin-bottom: 0;">응시자 등록 이후에는 기본적으로 <span class="hl-bg">수험번호와 성명 수정이 엄격히 제한</span>됩니다. '응시 중' 또는 '응시 완료' 상태로 넘어간 응시자는 휴대전화 번호 및 이메일 또한 수정이 불가하도록 데이터 잠금 처리됩니다.<br>
+                    마찬가지로 검사를 시작하여 응시 중이거나 응시 완료(검사 종료)된 대상자는 시스템 데이터의 정합성을 위해 <span class="hl-bg">임의 삭제가 절대 불가</span>합니다.</p>
                 </div>
             </div>
 
             <h3 style="margin-top: 50px;">2) 결과표(PDF/Excel) 다운로드</h3>
-            <p>홈 화면 우측 '종합 리포트' 항목의 <strong>[다운로드]</strong> 버튼을 클릭하시면 <strong>[PDF 다운로드]</strong>, <strong>[Excel 다운로드]</strong>, <strong>[해석 가이드 다운로드]</strong> 메뉴 팝업이 노출됩니다. 이곳에서 원하시는 유형의 파일을 선택하여 결과를 내려받을 수 있습니다.</p>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">홈 화면 우측 '종합 리포트' 항목의 <span class="ui-btn">다운로드</span> 버튼을 클릭하시면 <span class="ui-btn">PDF 다운로드</span>, <span class="ui-btn">Excel 다운로드</span>, <span class="ui-btn">해석 가이드 다운로드</span> 메뉴 팝업이 노출됩니다. 이곳에서 원하시는 유형의 파일을 클릭하여 결과를 쉽게 내려받을 수 있습니다.</p>
+            </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/09_down_1.png" alt="다운로드 버튼 클릭" class="manual-img img-large">
 
@@ -1216,42 +1290,46 @@
             <img src="https://www.saraminimage.co.kr/fit/img/09_down_02-2.png" alt="다운로드 팝업 2" class="manual-img">
 
             <div class="info-box" style="background-color: #fff1f0; border-color: #ffa39e;">
-                <p style="margin-bottom:0; color: #cf1322;"><strong>* 다운로드 유의사항:</strong> 검사 완료자가 <strong>50명을 초과</strong>하는 대규모 전형의 경우, 홈 화면에서의 간편 PDF 다운로드 기능이 비활성화됩니다. 이 경우 상단 메뉴의 <strong>[응시자 관리]</strong> 탭으로 이동하시어 상세 다운로드를 진행해 주시기 바랍니다.</p>
+                <p style="margin-bottom:0; color: #cf1322;"><strong>* 대량 다운로드 유의사항:</strong> 검사 완료자가 <strong>50명을 초과</strong>하는 대규모 채용 전형의 경우, 홈 화면에서의 간편 PDF 다운로드 기능이 비활성화 처리됩니다. 이 경우에는 상단 메인 메뉴의 <span class="menu-txt">응시자 관리</span> 탭으로 이동하시어 상세 다운로드를 진행해 주시기 바랍니다.</p>
             </div>
         </section>
 
         <!-- 5. 결과 확인 및 응시자 관리: Step 2 (응시자 관리 화면) -->
         <section id="result-step2" class="page-section">
-            <h2>5. 결과 확인 및 응시자 관리</h2>
+            <h2>📊 5. 결과 확인 및 응시자 관리</h2>
             <div class="step-header">Step 2. 응시자 관리 화면</div>
             
-            <p><strong>접근 방법:</strong> 홈 화면 현황 내 <strong>[응시인원]</strong> 숫자를 클릭하시면 해당 검사의 상세 제어가 가능한 <strong>[응시자 관리]</strong> 탭으로 즉시 이동합니다.</p>
-            <p style="color: #64748b; font-size: 0.95rem; margin-top: 5px;">* 홈 화면 최상단의 <strong>[응시자 관리]</strong> 메인 탭을 직접 누르실 경우, 진행된 전체 검사에 속한 기업의 모든 응시자 목록이 통합 노출됩니다.</p>
+            <div class="guide-box">
+                <p><strong>접근 방법:</strong> 홈 화면 현황 내 <span class="menu-txt">응시인원</span> 숫자를 직접 클릭하시면 해당 검사의 상세 제어가 가능한 <span class="menu-txt">응시자 관리</span> 탭으로 즉시 이동합니다.</p>
+                <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 0; margin-top: 5px;">* 홈 화면 최상단의 <span class="menu-txt">응시자 관리</span> 메인 탭을 직접 누르실 경우, 진행된 모든 검사에 속한 기업의 전체 응시자 목록이 통합되어 노출됩니다.</p>
+            </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/09_down_3.png" alt="응시자 관리 탭 접근" class="manual-img img-large">
 
-            <h3 style="margin-top: 40px;">1) 부가 기능(필터) 및 안내 발송</h3>
+            <h3 style="margin-top: 40px;">1) 부가 기능(상세 필터) 및 안내 발송</h3>
             <img src="https://www.saraminimage.co.kr/fit/img/08_output_04.png" alt="부가기능(필터)" class="manual-img img-large">
             <div class="info-box">
                 <strong style="margin-bottom: 12px;">💡 부가 기능 상세 설명</strong>
                 <ul class="desc-list" style="margin-bottom: 0; padding: 20px;">
-                    <li><strong>대상 필터링</strong><span>응시 시작일, 응시 여부(완료/미응시 등), 이름 조건 등 세부적인 검색 기능을 지원합니다.</span></li>
-                    <li><strong>결과별 필터링</strong><span>'인성', '부적응', '직무능력', '신뢰도' 등 특정 점수나 성향 기반의 세밀한 결과 필터링을 제공합니다.</span></li>
-                    <li><strong>발송 관리</strong><span>원하는 조건으로 필터링된 대상자들만 골라 단체 안내 문자 및 메일 발송 처리가 가능합니다.</span></li>
+                    <li><strong>대상 필터링</strong><span>응시 시작일, 응시 여부(완료/미응시 등), 이름 조건 등 세부적인 맞춤형 검색 기능을 강력하게 지원합니다.</span></li>
+                    <li><strong>결과별 필터링</strong><span>'인성', '부적응', '직무능력', '신뢰도' 등 특정 점수 컷라인이나 성향을 기반으로 한 세밀한 심층 결과 필터링을 제공합니다.</span></li>
+                    <li><strong>발송 관리</strong><span>원하는 조건으로 정밀하게 필터링된 대상자들만 골라내어 단체 안내 문자 및 메일 발송 처리를 빠르고 정확하게 수행할 수 있습니다.</span></li>
                 </ul>
             </div>
 
             <h3 style="margin-top: 50px;">2) 상세 결과표(PDF/Excel) 다운로드</h3>
             <img src="https://www.saraminimage.co.kr/fit/img/09_down_4.png" alt="다운로드 버튼" class="manual-img">
             
-            <p><strong>[응시자 관리]</strong> 탭에서 결과표 다운로드를 진행하실 때는 시스템의 안정적인 처리를 위해 PDF와 Excel 파일 모두 <strong>50명 단위로 분할(끊어서) 다운로드</strong>됩니다.</p>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;"><span class="menu-txt">응시자 관리</span> 탭에서 결과표 다운로드를 진행하실 때는 시스템의 안정적이고 빠른 처리를 보장하기 위해 PDF와 Excel 파일 모두 <strong>최대 50명 단위로 분할(끊어서) 다운로드</strong>가 처리됩니다.</p>
+            </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/09_down_03.png" alt="PDF 다운로드" class="manual-img">
             <img src="https://www.saraminimage.co.kr/fit/img/09_down_04.png" alt="Excel 다운로드" class="manual-img">
 
             <div class="warning-box" style="margin-top: 20px;">
                 <strong style="color: #e11d48;">🚨 주의!</strong>
-                <p style="margin-bottom:0;">화면 상의 <strong>[개인결과표 메일발송]</strong> 및 <strong>[개인결과표 문자발송]</strong> 버튼은 검사 참여를 독려하는 '응시 안내' 버튼이 아니라, <strong>'최종 응시 결과(성적표)'를 해당 지원자에게 직접 발송</strong>해 버리는 기능입니다. 평가 결과가 지원자에게 오발송되지 않도록 <strong>가급적 사용을 자제</strong>하여 주시기 바랍니다.</p>
+                <p style="margin-bottom:0;">화면 상의 <span class="ui-btn">개인결과표 메일발송</span> 및 <span class="ui-btn">개인결과표 문자발송</span> 기능 버튼은 검사 참여를 독려하는 일반적인 '응시 안내' 버튼이 절대 아닙니다. <strong>'최종 응시 결과(심층 성적표)'를 해당 지원자 본인에게 직접 발송해버리는 기능</strong>이오니, 민감한 평가 결과가 지원자에게 오발송되지 않도록 <strong>가급적 사용을 자제</strong>하여 주시기 바랍니다.</p>
             </div>
 
             <h3 style="margin-top: 50px;">3) 결과지 내 블라인드 처리</h3>
@@ -1259,131 +1337,141 @@
                 <img src="https://www.saraminimage.co.kr/fit/img/08_output_05.png" alt="결과지 설정 콘솔 메뉴" style="max-width: 100%; height: auto; display: inline-block; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 4px;">
             </div>
             
-            <p>콘솔 메뉴의 <strong>[결과지 설정]</strong> 버튼을 클릭하시면 최종 결과지 문서에서 제외할 항목을 고를 수 있는 팝업이 노출됩니다. 해당 팝업에서 선택하신 개인 정보 항목은 최종 다운로드 결과지 문서 상에서 삭제(블라인드) 표기되어 인쇄됩니다.</p>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">콘솔 메뉴의 <span class="ui-btn">결과지 설정</span> 버튼을 클릭하시면 최종 결과지 문서에서 제외할 항목을 직접 고를 수 있는 옵션 팝업이 노출됩니다. 해당 팝업에서 체크하여 선택하신 개인 정보 항목은 최종 다운로드 결과지 문서 상에서 삭제(블라인드) 표기되어 안전하게 인쇄됩니다.</p>
+            </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/09_down_05.png" alt="블라인드 처리 팝업" class="manual-img">
             
-            <p style="background-color: #f8fafc; padding: 15px 20px; border-radius: 8px; color: #475569; border-left: 3px solid #94a3b8; font-size: 0.95rem;">* 응시자 정보에 수험번호와 면접번호를 둘 다 입력하신 경우, <strong>결과지에는 면접번호가 우선적으로 표기</strong>됩니다. (면접번호 대신 수험번호를 표기하고 싶으신 경우에는 이 기능을 활용하여 면접번호를 블라인드 처리해 주시면 됩니다.)</p>
+            <p style="background-color: #f8fafc; padding: 15px 20px; border-radius: 8px; color: #475569; border-left: 3px solid #94a3b8; font-size: 0.95rem;">* 응시자 정보에 수험번호와 면접번호를 둘 다 입력하신 경우, <span class="hl-bg">결과지에는 면접번호가 무조건 우선적으로 표기</span>됩니다. (면접번호 대신 수험번호를 표기하고 싶으신 경우에는 이 블라인드 기능을 활용하여 면접번호를 블라인드 처리해 주시면 수험번호가 정상 표기됩니다.)</p>
 
-            <h3 style="margin-top: 50px;">4) 부적격 판별 기준 설정</h3>
+            <h3 style="margin-top: 50px;">4) 부적격 판별 기준 커스텀 설정</h3>
             <div style="background-color: #f1f5f9; padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 20px; border: 1px solid #e2e8f0;">
                 <img src="https://www.saraminimage.co.kr/fit/img/08_output_05.png" alt="부적격 판별 기준 설정 콘솔 메뉴" style="max-width: 100%; height: auto; display: inline-block; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 4px;">
             </div>
             
-            <p>콘솔 메뉴의 <strong>[판별 기준 설정]</strong> 버튼을 클릭하시면 판별 기준 제어 팝업이 노출됩니다. 이 기능을 활용하면 각 기업의 내부 채용 기준에 맞게 부적격 점수 컷라인 기준을 유연하게 조정하실 수 있습니다.</p>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">콘솔 메뉴의 <span class="ui-btn">판별 기준 설정</span> 버튼을 누르면 판별 기준 제어 팝업이 뜹니다. 이 기능을 영리하게 활용하면 각 기업의 고유한 내부 채용 기준에 맞게 부적격 점수 컷라인 기준을 유연하고 섬세하게 조정하실 수 있습니다.</p>
+            </div>
             
             <img src="https://www.saraminimage.co.kr/fit/img/09_down_06.png" alt="부적격 판별 기준 설정" class="manual-img">
             
-            <ul style="margin-bottom: 10px;">
-                <li><strong>시스템 기본값:</strong> 종합점수/인성/직무 40점 미만, 신뢰도 80점 미만, 부적응성 1개 이상 항목 80점 이상 시 부적격 처리</li>
-                <li><strong>조정 예시:</strong> 인성검사 판별 기준을 60점으로 상향 조정하여 수정할 경우, 60점 미만을 득점한 인원은 자동으로 '부적격' 판정을 받게 됩니다.</li>
-            </ul>
-            <p style="color: #e11d48; font-weight: 600; font-size: 0.95rem; margin-top: 15px;">* 주의사항: 점수 기준은 가급적 응시자가 응시를 시작하기 전에 수정하셔야만 최종 결과표 도출 시 오류가 발생하지 않습니다. 응시가 진행된 이후 부득이하게 기준 수정이 필요하실 경우에는 시스템 문의처(02-6377-2306)로 개별 연락을 부탁드립니다.</p>
+            <div class="guide-box">
+                <ul style="margin-bottom: 10px;">
+                    <li><strong>시스템 기본값:</strong> 종합점수/인성/직무 40점 미만, 신뢰도 80점 미만, 부적응성 1개 이상 항목 80점 이상 시 자동으로 부적격 처리됩니다.</li>
+                    <li><strong>조정 예시:</strong> 우리 회사의 인성검사 판별 기준을 60점으로 상향 조정하여 세팅할 경우, 60점 미만을 득점한 지원자는 모두 '부적격' 판정으로 분류됩니다.</li>
+                </ul>
+                <p style="color: #e11d48; font-weight: 600; font-size: 0.95rem; margin-top: 15px; margin-bottom: 0;">* 주의사항: 점수 기준 설정은 가급적 지원자가 응시를 시작하기 전에 조정을 완료하셔야만 최종 결과표 도출 시 논리적인 오류가 발생하지 않습니다. 응시가 이미 진행된 이후 부득이하게 커트라인 수정이 필요하신 경우에는 시스템 관리자 문의처(02-6377-2306)로 즉각 연락을 부탁드립니다.</p>
+            </div>
 
-            <h3 style="margin-top: 50px;">5) 개별 인원 결과표(상세) 보기</h3>
-            <p>응시자 리스트 가장 우측의 <strong>[보기]</strong> 버튼을 클릭하시면, 파일 다운로드 없이 브라우저 상에서 해당 응시자의 개별 상세 검사 결과를 즉시 확인하실 수 있습니다.</p>
+            <h3 style="margin-top: 50px;">5) 개별 인원 결과표(상세) 브라우저 보기</h3>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">응시자 리스트 가장 우측에 위치한 <span class="ui-btn">보기</span> 버튼을 클릭하시면, 무거운 파일 다운로드 과정 없이 빠르고 가벼운 브라우저 팝업 상에서 해당 응시자의 개별 상세 검사 결과를 즉시 확인하실 수 있습니다.</p>
+            </div>
             <img src="https://www.saraminimage.co.kr/fit/img/09_down_07.png" alt="개별 인원의 개인결과표 보기" class="manual-img img-large">
 
-            <h3 style="margin-top: 50px;">6) 정보 보호 및 데이터 파기 관리 (신규 정책)</h3>
+            <h3 style="margin-top: 50px;">6) 정보 보호 및 데이터 파기 관리 (신규 보안 정책)</h3>
             
             <img src="https://www.saraminimage.co.kr/fit/img/09_down_6.png" alt="파기 임박 표시 및 개별 수정 화면" class="manual-img img-large">
 
             <div class="warning-box" style="margin-top: 20px;">
-                <strong style="color: #e11d48;">⚠️ 파기 임박 알림 및 데이터 수정/삭제 제한</strong>
+                <strong style="color: #e11d48;">⚠️ 파기 임박 스마트 알림 및 데이터 수정/삭제 권한 제한</strong>
                 <ul style="margin-top:8px; margin-bottom:0; font-size: 0.95rem;">
-                    <li><strong>파기 임박 시각화:</strong> 이름 및 결과지 등 주요 데이터 파기 기한이 30일 이내로 임박한 응시자는 리스트 상에 <strong>붉은색 배경</strong>으로 강렬하게 표시되어 담당자가 쉽게 인지할 수 있습니다. (리스트 내 응시 날짜를 클릭하시면 정확한 파기 예정일 확인이 가능합니다.)</li>
-                    <li><strong>수정 및 초기화 기능 비활성화:</strong> 사전에 설정된 최소 보관 기간(연락처 보관 기간)이 완전히 경과하여 개인정보 데이터 일부가 이미 파기된 응시자에 대해서는 개인정보 보호법 준수를 위해 <strong>[데이터 수정]</strong>, <strong>[응시자 삭제]</strong>, <strong>[응시 및 시험 초기화]</strong> 기능 접근이 완전히 차단됩니다.</li>
+                    <li><strong>파기 임박 시각화 알림:</strong> 이름 및 결과지 등 주요 데이터 파기 기한이 30일 이내로 임박하게 남은 응시자는 리스트 상에 <span class="hl-bg">붉은색 배경</span>으로 강렬하게 표시되어 채용 담당자가 시각적으로 쉽게 인지할 수 있도록 돕습니다. (리스트 내 응시 날짜를 클릭하시면 시스템이 계산한 정확한 파기 예정일 확인이 가능합니다.)</li>
+                    <li><strong>수정 및 초기화 기능 강제 비활성화:</strong> 사전에 설정된 최소 보관 기간(연락처 보관 기간)이 완전히 경과하여 개인정보 데이터의 일부가 이미 파기 처리된 응시자에 대해서는 개인정보 보호법 준수를 위해 <span class="ui-btn">데이터 수정</span>, <span class="ui-btn">응시자 삭제</span>, <span class="ui-btn">응시 및 시험 초기화</span> 기능에 대한 관리자 접근이 완전히 시스템적으로 차단됩니다.</li>
                 </ul>
             </div>
         </section>
 
         <!-- 6. FAQ -->
         <section id="qna" class="page-section">
-            <h2>6. FAQ</h2>
-            <p>FIT 관리자 시스템 사용 중 담당자분들께서 가장 자주 문의하시는 사항과 답변을 모아두었습니다. 문제 발생 시 우선적으로 확인해 주시기 바랍니다.</p>
+            <h2>❓ 6. FAQ</h2>
+            <div class="guide-box">
+                <p style="margin-bottom: 0;">FIT 관리자 시스템을 실무에서 사용 중이신 담당자분들께서 가장 자주 문의하시는 주요 사항과 명확한 답변을 모아두었습니다. 시스템 이용 중 문제가 발생하였을 시 가장 우선적으로 확인해 주시기 바랍니다.</p>
+            </div>
 
             <details>
-                <summary>Q. 아이디/비밀번호를 분실했습니다. 어떻게 찾아야 하나요?</summary>
+                <summary>Q. 관리자 계정 아이디와 비밀번호를 분실했습니다. 어떻게 찾아야 하나요?</summary>
                 <div class="qna-content">
-                    아이디 및 비밀번호 분실 시 보안상의 이유로 시스템 상에서 직접 찾기 기능은 제공되지 않습니다. 시스템 문의처(02-6377-2306, 2308) 또는 담당자 이메일(consulting_test@saramin.co.kr)로 연락해 주시면 본인 확인 후 초기화를 지원해 드립니다.
+                    아이디 및 비밀번호 분실 시 기업의 정보 보안상의 이유로 시스템 화면 상에서 직접 찾기/초기화 기능은 별도로 제공되지 않습니다. 사람인 시스템 문의처(02-6377-2306, 2308) 또는 담당자 이메일(consulting_test@saramin.co.kr)로 연락을 취해 주시면, 철저한 본인 확인 절차를 거친 후 안전하게 초기화를 지원해 드립니다.
                 </div>
             </details>
 
             <details>
-                <summary>Q. 응시자가 2차 인증을 계속 실패하여 사이트 접속이 차단되었다고 합니다. 관리자가 해제해 줄 수 있나요?</summary>
+                <summary>Q. 응시자가 2차 인증을 계속 실패하여 사이트 접속이 차단되었다고 연락이 왔습니다. 관리자가 즉시 해제해 줄 수 있나요?</summary>
                 <div class="qna-content">
-                    <strong>아니요, 시스템 정책상 임의 해제가 불가능합니다.</strong> 보안 정책에 따라 2차 인증 번호 입력을 5회 이상 연속 실패하실 경우 자동으로 30분간 검사 사이트 접근이 차단됩니다. 이는 관리자 권한으로도 초기화가 불가하므로, 30분이 완전히 경과한 뒤 등록된 정확한 본인 정보로 인증을 재시도하시도록 응시자에게 안내해 주시기 바랍니다.
+                    <strong>아니요, 시스템 보안 정책상 임의 해제가 불가능합니다.</strong> 강력한 대리 응시 방지 정책에 따라 2차 인증 번호 입력을 5회 이상 연속 실패하실 경우 자동으로 30분간 검사 사이트 접근이 강제 차단됩니다. 이는 기업 관리자 권한으로도 초기화가 불가하도록 시스템이 설계되어 있으므로, 30분이 완전히 경과한 뒤 등록된 정확한 본인 정보로 인증을 차분히 재시도하시도록 응시자에게 직접 안내해 주시기 바랍니다.
                 </div>
             </details>
 
             <details>
-                <summary>Q. 응시자 관리 목록에서 지원자들의 이름과 연락처가 *** 표시로 가려져서 보이지 않습니다.</summary>
+                <summary>Q. 응시자 관리 목록에서 지원자들의 이름과 연락처가 *** 표시로 가려져서 전혀 보이지 않습니다.</summary>
                 <div class="qna-content">
-                    민감한 개인정보 유출 방지를 위해 접속 시 기본적으로 <strong>'보안 모드(마스킹)'</strong>가 작동하기 때문입니다. 마스킹을 해제하고 전체 정보를 확인하시려면 화면 우측 상단의 <strong>[계정 정보]</strong> 메뉴를 열어 <strong>[상세 보기 모드]</strong> 옵션으로 전환해 주시기 바랍니다.
+                    민감한 개인정보 유출 사고를 방지하기 위해 관리자가 시스템에 접속 시 기본적으로 <strong>'보안 모드(데이터 마스킹)'</strong>가 자동으로 작동하기 때문입니다. 마스킹을 일시 해제하고 지원자의 전체 정보를 명확하게 확인하시려면 화면 우측 상단의 계정 메뉴 탭을 열어 <span class="menu-txt">상세 보기 모드</span> 옵션으로 전환해 주시기 바랍니다.
                 </div>
             </details>
 
             <details>
-                <summary>Q. 엑셀 일괄 등록 시 자꾸 업로드에 실패합니다. 오류가 없는 인원만 먼저 부분 등록할 수는 없나요?</summary>
+                <summary>Q. 엑셀 일괄 등록 시 자꾸 업로드에 실패합니다. 데이터 오류가 없는 인원만이라도 먼저 부분 등록할 수는 없나요?</summary>
                 <div class="qna-content">
-                    현재 시스템은 데이터 누락 및 꼬임 현상을 방지하기 위해 <strong>'전체 성공 또는 전체 실패(All-or-Nothing)'</strong> 무결성 방식을 적용하고 있습니다. 파일 내 단 한 명의 정보라도 필수값이 누락되거나 형식이 어긋날 경우 전체 명단 등록이 일괄 실패 처리됩니다. 번거로우시더라도 오류 내역을 확인하시어 엑셀 데이터를 완벽하게 보완하신 뒤 한 번에 업로드해 주시기 바랍니다.
+                    현재 시스템은 대규모 데이터의 누락 및 꼬임 현상을 원천 방지하기 위해 <strong>'전체 성공 또는 전체 실패(All-or-Nothing)'</strong> 데이터 무결성 방식을 엄격하게 적용하고 있습니다. 엑셀 파일 내 단 한 명의 정보라도 필수값이 누락되거나 시스템 형식이 어긋날 경우 전체 명단 등록이 일괄 실패 처리됩니다. 다소 번거로우시더라도 오류 내역을 확인하시어 엑셀 데이터를 완벽하게 보완하신 뒤 한 번에 업로드해 주시기 바랍니다.
                 </div>
             </details>
 
             <details>
-                <summary>Q. 응시자 연락처 등의 정보를 잘못 입력했습니다. 수정이 가능한가요?</summary>
+                <summary>Q. 응시자 연락처 등 개인 정보를 잘못 입력했습니다. 지금 수정이 가능한가요?</summary>
                 <div class="qna-content">
-                    해당 응시자가 아직 검사 접속 및 응시를 시작하지 않은 '대기' 상태라면 <strong>[응시자 관리]</strong> 메뉴에서 개별 정보 변경이 가능합니다. 단, 응시자가 이미 검사를 진행 중이거나 완료한 상태, 혹은 파기 기한이 도래하여 일부 데이터가 지워진 상태에서는 정보 수정이 엄격히 제한됩니다.<br>
-                    <span style="color: #e11d48; display: block; margin-top: 8px; font-weight: 500;">※ 주의: 신규 검사 생성 시 설정하신 '2차 인증 수단'과 '데이터 보관 기간'은 대상 응시자가 1명이라도 시스템에 등록되면 그 즉시 환경 설정 수정이 원천 차단됩니다.</span>
+                    해당 응시자가 아직 검사 접속 및 응시를 시작하지 않은 온전한 '대기' 상태라면 상단의 <span class="menu-txt">응시자 관리</span> 메뉴에서 개별 정보 변경이 즉시 가능합니다. 단, 응시자가 이미 검사 화면을 열어 진행 중이거나 완료한 상태, 혹은 파기 기한이 이미 도래하여 일부 데이터가 시스템에서 지워진 상태에서는 정보 수정 기능이 엄격히 제한됩니다.<br>
+                    <span style="color: #e11d48; display: block; margin-top: 8px; font-weight: 500;">※ 주의: 신규 검사 생성 시 설정하신 '2차 인증 수단'과 '데이터 보관 기간'은 대상 응시자가 1명이라도 시스템에 등록되면 그 즉시 환경 설정 수정 버튼이 원천 차단됩니다.</span>
                 </div>
             </details>
 
             <details>
-                <summary>Q. 개인정보 보관 기간(파기 기한)을 연장할 수 있나요?</summary>
+                <summary>Q. 개인정보 보관 기간(파기 기한)을 기업 사정에 맞춰 뒤늦게 연장할 수 있나요?</summary>
                 <div class="qna-content">
-                    <strong>불가능합니다.</strong> 응시자가 1명이라도 등록된 이후에는 처음에 설정된 데이터 보관 기간을 임의로 늘리거나 줄일 수 없습니다. 설정된 기간 만료 시 데이터가 영구히 파기되므로, 이력 보관이 필요하신 기업은 기한 만료 전에 미리 엑셀/PDF 형태로 로컬 백업을 진행해 주셔야 합니다.
+                    <strong>불가능합니다.</strong> 응시자가 1명이라도 시스템에 등록된 이후에는 처음에 설정된 데이터 보관 기간을 임의로 늘리거나 줄이는 조작을 할 수 없습니다. 설정된 기간 만료 시 데이터가 영구히 파기 복구 불가 처리되므로, 지원자 이력 보관이 필요하신 기업은 반드시 기한 만료 전에 미리 엑셀/PDF 형태로 로컬 PC에 백업을 진행해 주셔야 합니다.
                 </div>
             </details>
 
             <details>
-                <summary>Q. 성적 결과표(PDF) 다운로드 버튼을 눌러도 반응이 없고 다운로드가 되지 않습니다.</summary>
+                <summary>Q. 성적 결과표(PDF) 다운로드 버튼을 눌러도 화면 반응이 없고 파일이 다운로드되지 않습니다.</summary>
                 <div class="qna-content">
-                    이용 중이신 브라우저(크롬, 엣지 등)의 <strong>팝업 차단 기능</strong>이 켜져 있는지 확인해 주시기 바랍니다. 주소창 우측의 아이콘을 눌러 해당 사이트의 팝업을 항상 허용으로 변경하신 뒤 다시 시도해 보시기 바랍니다. (시스템 부하 방지를 위해 PDF 다운로드는 한 번에 최대 50명까지만 선택하여 진행하실 수 있습니다.)
+                    이용 중이신 브라우저(크롬, 엣지 등)의 <strong>팝업 차단 기능</strong>이 켜져 있어 다운로드 창을 가로막고 있는지 확인해 주시기 바랍니다. 주소창 우측의 경고 아이콘을 눌러 해당 사이트의 팝업을 '항상 허용'으로 변경하신 뒤 다시 시도해 보시기 바랍니다. (시스템 과부하 방지를 위해 PDF 상세 다운로드는 한 번에 최대 50명까지만 체크하여 진행하실 수 있습니다.)
                 </div>
             </details>
 
             <details>
-                <summary>Q. 부적격 판별 기준 점수 컷라인은 언제 설정/수정해야 하나요?</summary>
+                <summary>Q. 부적격 판별 기준 점수 컷라인은 언제 설정하거나 수정해야 안전한가요?</summary>
                 <div class="qna-content">
-                    결과표 점수 도출 및 판별 로직 오류를 방지하기 위해 <strong>반드시 지원자가 검사에 응시하기 전</strong>에 기준 세팅을 완료해 주셔야 합니다. 검사가 이미 진행된 이후 부득이하게 커트라인 수정이 필요하신 경우에는 번거로우시더라도 시스템 문의처로 즉각적인 지원을 요청해 주시기 바랍니다.
+                    결과표 점수 도출 및 부적격 판별 로직의 오류를 완전히 방지하기 위해 <strong>반드시 지원자가 검사에 응시하기 전</strong>에 기준 세팅을 모두 완료해 주셔야 합니다. 검사가 이미 진행된 이후 부득이하게 커트라인 수정이 필요하신 경우에는, 번거로우시더라도 시스템 관리자 문의처로 즉각적인 기술 지원을 요청해 주시기 바랍니다.
                 </div>
             </details>
 
             <details>
-                <summary>Q. 회사 내부 자체 테스트 진행 시 유의해야 할 사항이 있나요?</summary>
+                <summary>Q. 회사 내부에서 자체적으로 시스템 테스트를 진행할 때 유의해야 할 사항이 있나요?</summary>
                 <div class="qna-content">
-                    실제 채용 지원자와 데이터가 섞이지 않도록 내부 테스트용 검사 생성 시 검사명 혹은 응시자(테스터) 이름에 <strong>'TEST'</strong> 또는 <strong>'테스트'</strong>라는 단어를 명확하게 포함하여 기재해 주시기를 권장해 드립니다.
+                    실제 채용 지원자와 테스트 데이터가 섞여 통계에 혼선을 주지 않도록, 내부 테스트용 검사 생성 시 검사명 혹은 응시자(테스터) 이름에 <strong>'TEST'</strong> 또는 <strong>'테스트'</strong>라는 단어를 명확하게 포함하여 기재해 주시기를 강력히 권장해 드립니다.
                 </div>
             </details>
 
             <details>
-                <summary>Q. 특정 검사를 완전히 삭제하거나, 응시 진행 중인 인원을 강제 채점/초기화 하려면 어떻게 하나요?</summary>
+                <summary>Q. 특정 검사를 완전히 삭제해버리거나, 응시 진행 도중 멈춘 인원을 강제로 채점/초기화 하려면 어떻게 하나요?</summary>
                 <div class="qna-content">
-                    응시 횟수 초과 해제와 같은 기본적인 관리 권한은 페이지 내에서 버튼 클릭으로 제어하실 수 있습니다. 그러나 <strong>데이터 보관 기간이 경과하여 파기가 진행된 응시자에 대해서는 시험 초기화 기능이 차단</strong>됩니다. 이 외의 전체 검사 그룹 삭제나 도중 하차 인원에 대한 강제 채점 등의 고급 권한 기능은 시스템 문의처(02-6377-2306)로 유선 요청해 주시면 신속하게 조치해 드리겠습니다.
+                    응시 횟수 초과 해제와 같은 기본적인 인원 관리 권한은 페이지 내비게이션에서 버튼 클릭만으로 쉽게 제어하실 수 있습니다. 그러나 <strong>데이터 보관 기간이 경과하여 파기가 이미 진행된 응시자에 대해서는 데이터 정합성을 위해 시험 초기화 기능이 완전 차단</strong>됩니다. 이 외의 전체 검사 그룹의 통째 삭제나 도중 하차 인원에 대한 강제 채점 등의 고급 권한 기능은 시스템 문의처(02-6377-2306)로 유선 요청해 주시면 상황 파악 후 신속하게 조치해 드리겠습니다.
                 </div>
             </details>
 
             <details>
-                <summary>Q. 대금 청구와 세금계산서 발행 절차가 궁금합니다.</summary>
+                <summary>Q. 대금 청구와 세금계산서 발행 절차가 어떻게 이루어지는지 궁금합니다.</summary>
                 <div class="qna-content">
-                    기업의 월별 시스템 이용 내역을 집계하여, 다음 달 첫 영업일에 정산 내역서와 함께 담당자 메일로 안내해 드립니다. 수신하신 내역에 이상이 없음을 확인해 주시면 세금계산서를 즉시 발행해 드리며, 이후 안내된 지정 계좌로 이용 대금을 입금해 주시면 됩니다. (월 결제가 아닌 특정 건별 개별 정산이 필요하신 경우에는 별도 문의를 부탁드립니다.)
+                    기업의 월별 시스템 총 이용 내역을 안전하게 집계하여, 다음 달 첫 영업일에 상세 정산 내역서와 함께 담당자 메일로 안내해 드리고 있습니다. 수신하신 내역에 이상이 없음을 확인 회신해 주시면 세금계산서를 즉시 발행해 드리며, 이후 안내된 지정 계좌로 이용 대금을 입금해 주시면 모든 절차가 완료됩니다. (월 결제가 아닌 특정 건별 개별 정산이 필요하신 경우에는 별도 문의를 부탁드립니다.)
                 </div>
             </details>
 
             <details>
                 <summary>Q. 검사 비용에 대한 과금 청구 기준은 정확히 무엇인가요?</summary>
                 <div class="qna-content">
-                    채용 검사가 최종 종료되어 <strong>정상적으로 결과지가 도출(생성)된 응시자</strong>의 수에 한하여 비용이 청구(과금)됩니다. 등록만 해두고 응시하지 않은 인원(대기 중)이나, 검사 진행 도중 포기하여 최종 결과지가 나오지 않은 불완전 인원에 대해서는 비용이 전혀 발생하지 않습니다.
+                    채용 검사가 최종 종료되어 <strong>정상적으로 결과지가 시스템에 도출(생성)된 응시자</strong>의 수에 한하여 비용이 청구(과금)됩니다. 명단에 등록만 해두고 응시하지 않은 인원(대기 중)이나, 검사 진행 도중 중도 포기하여 최종 결과지가 나오지 않은 불완전 인원에 대해서는 검사 비용이 전혀 발생하지 않으니 안심하셔도 됩니다.
                 </div>
             </details>
         </section>
