@@ -3,867 +3,888 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>사람인 F.I.T 검사 관리자 AI 매뉴얼</title>
-    <meta name="description" content="사람인 F.I.T 검사 관리자 AI 매뉴얼">
+    <title>사람인 F.I.T검사 관리자 AI매뉴얼</title>
+    <!-- Google Fonts: Noto Sans KR & Dancing Script -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
     <style>
+        /* --- Reset & Base Styles --- */
+        :root {
+            --primary-color: #4a6ee0;
+            --primary-dark: #3a5bb5;
+            --text-color: #334155;
+            --text-light: #64748b;
+            --border-color: #e2e8f0;
+            --sidebar-width: 260px;
+            --bot-color: #4a6ee0;
+            --bot-bg: #f0f4ff;
+        }
 
-:root {
-    --primary: #3158d6;
-    --primary-dark: #2746aa;
-    --primary-soft: #eef3ff;
-    --surface: #ffffff;
-    --surface-soft: #f8fafc;
-    --surface-soft-2: #f1f5f9;
-    --text: #243244;
-    --text-muted: #5e7187;
-    --border: #dbe4f0;
-    --danger: #dc2626;
-    --danger-soft: #fff1f2;
-    --info-soft: #eef7ff;
-    --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.06);
-    --shadow-md: 0 8px 28px rgba(15, 23, 42, 0.08);
-    --radius: 14px;
-    --sidebar-width: 296px;
-    --content-max: 1180px;
-}
+        * { box-sizing: border-box; }
 
-*,
-*::before,
-*::after { box-sizing: border-box; }
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text-color);
+            line-height: 1.6;
+            background-color: #fff;
+            display: flex;
+            font-size: 15px;
+            scroll-behavior: smooth;
+        }
 
-html:focus-within { scroll-behavior: smooth; }
+        a { text-decoration: none; color: var(--primary-color); transition: 0.2s; }
+        a:hover { color: var(--primary-dark); text-decoration: underline; }
 
-body {
-    margin: 0;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 15px;
-    line-height: 1.65;
-    color: var(--text);
-    background: #fff;
-    display: flex;
-}
+        /* --- Sidebar Navigation --- */
+        nav {
+            width: var(--sidebar-width);
+            background-color: #ffffff;
+            height: 100vh;
+            position: fixed;
+            top: 0;
+            left: 0;
+            overflow-y: auto;
+            border-right: 1px solid var(--border-color);
+            box-shadow: 2px 0 10px rgba(0,0,0,0.03);
+            z-index: 100;
+        }
 
-body.nav-open { overflow: hidden; }
+        nav h2 {
+            font-size: 1.35rem; 
+            padding: 25px 20px 5px 20px;
+            margin: 0;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            white-space: nowrap; 
+            background: transparent;
+            border: none;
+            box-shadow: none;
+        }
+        
+        nav h2 a {
+            color: var(--primary-dark);
+            text-decoration: none;
+            display: block;
+        }
 
-img { max-width: 100%; }
-a {
-    color: var(--primary);
-    text-decoration: none;
-}
-a:hover { color: var(--primary-dark); }
+        /* Version Tag Style */
+        .version-tag {
+            padding: 0 20px 15px 20px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            border-bottom: 1px solid var(--border-color);
+            margin-bottom: 10px;
+            font-family: 'Consolas', monospace;
+        }
 
-button,
-input {
-    font: inherit;
-}
+        /* --- Sidebar Search Style --- */
+        .search-container {
+            padding: 0 20px 15px 20px;
+            position: relative;
+        }
+        #menu-search-input {
+            width: 100%;
+            padding: 10px 15px 10px 35px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            outline: none;
+            transition: all 0.2s;
+            background: #f8fafc url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="%2394a3b8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>') no-repeat 12px center;
+            color: #334155;
+        }
+        #menu-search-input::placeholder {
+            color: #94a3b8;
+        }
+        #menu-search-input:focus {
+            border-color: var(--primary-color);
+            background-color: #fff;
+            box-shadow: 0 0 0 3px rgba(74, 110, 224, 0.1);
+        }
+        .search-results-dropdown {
+            position: absolute;
+            top: 100%;
+            left: 20px;
+            right: 20px;
+            background: white;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            max-height: 350px;
+            overflow-y: auto;
+            z-index: 1000;
+            margin-top: 5px;
+        }
+        .search-result-item {
+            padding: 12px 15px;
+            border-bottom: 1px solid #f1f5f9;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        .search-result-item:last-child {
+            border-bottom: none;
+        }
+        .search-result-item:hover {
+            background-color: #f0f4ff;
+        }
+        .search-result-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 4px;
+        }
+        .search-result-snippet {
+            font-size: 0.75rem;
+            color: #64748b;
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
 
-button {
-    cursor: pointer;
-}
+        nav ul {
+            list-style: none;
+            padding: 10px 0;
+            margin: 0;
+        }
 
-:focus-visible {
-    outline: 3px solid rgba(49, 88, 214, 0.25);
-    outline-offset: 2px;
-}
+        nav ul li a {
+            display: block;
+            padding: 10px 20px;
+            color: #475569;
+            font-size: 0.95rem;
+            font-weight: 500;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+        }
 
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    overflow: hidden;
-    clip-path: inset(50%);
-    border: 0;
-    white-space: nowrap;
-}
+        nav ul li a:hover, nav ul li a.active {
+            background-color: #f0f4ff;
+            color: var(--primary-color);
+            border-left-color: var(--primary-color);
+            font-weight: 600;
+        }
 
-.sidebar {
-    width: var(--sidebar-width);
-    min-width: var(--sidebar-width);
-    height: 100vh;
-    position: fixed;
-    inset: 0 auto 0 0;
-    background: var(--surface);
-    border-right: 1px solid var(--border);
-    box-shadow: 2px 0 12px rgba(15, 23, 42, 0.04);
-    display: flex;
-    flex-direction: column;
-    z-index: 100;
-}
+        /* Sub-menu Styles */
+        nav ul ul {
+            padding: 0;
+            background-color: #f8fafc;
+            border-top: 1px solid #f1f5f9;
+            border-bottom: 1px solid #f1f5f9;
+        }
 
-.nav-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 12px;
-    padding: 22px 18px 8px;
-}
-.brand-link {
-    display: block;
-    font-weight: 800;
-    font-size: 1.3rem;
-    letter-spacing: -0.02em;
-    color: var(--primary-dark);
-}
-.nav-toggle {
-    display: none;
-    border: 1px solid var(--border);
-    background: #fff;
-    width: 40px;
-    height: 40px;
-    border-radius: 10px;
-}
+        nav ul ul li a {
+            padding: 8px 20px 8px 35px;
+            font-size: 0.85rem;
+            font-weight: 400;
+            color: #64748b;
+            border-left: none;
+        }
 
-.version-tag {
-    padding: 0 20px 16px;
-    font-size: 0.76rem;
-    color: #8a98ac;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 10px;
-    font-family: Consolas, monospace;
-}
+        nav ul ul li a:hover, nav ul li a.sub-active {
+            color: var(--primary-color);
+            background-color: #eff6ff;
+            font-weight: 600;
+        }
 
-.nav-scroll {
-    overflow-y: auto;
-    padding-bottom: 20px;
-}
+        /* --- Navigation New Badge & Highlight --- */
+        .nav-badge-new {
+            background-color: #ef4444;
+            color: white;
+            font-size: 0.65rem;
+            padding: 2px 5px;
+            border-radius: 10px;
+            margin-left: 5px;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+        .nav-item-highlight {
+            background-color: #fef2f2 !important;
+            color: #b91c1c !important;
+            font-weight: 600 !important;
+            border-radius: 4px;
+            margin: 2px 10px;
+            padding: 8px 10px 8px 20px !important;
+        }
+        .nav-item-highlight:hover, .nav-item-highlight.sub-active {
+            background-color: #fee2e2 !important;
+        }
 
-.sidebar ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+        /* --- Main Content --- */
+        main {
+            margin-left: var(--sidebar-width);
+            padding: 40px 50px 100px 50px;
+            width: calc(100% - var(--sidebar-width));
+            max-width: 1200px;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* Cover Page Active State */
+        main.cover-active {
+            padding: 0 !important;
+            max-width: 100% !important;
+        }
 
-.sidebar li > a {
-    display: block;
-    padding: 10px 20px;
-    color: #46576c;
-    font-size: 0.96rem;
-    font-weight: 500;
-    border-left: 3px solid transparent;
-    transition: background-color .2s, color .2s, border-color .2s;
-}
+        /* Page Display Logic */
+        section.page-section {
+            display: none; 
+            animation: fadeIn 0.4s ease;
+        }
 
-.sidebar li > a:hover,
-.sidebar li > a.active {
-    background: var(--primary-soft);
-    color: var(--primary);
-    border-left-color: var(--primary);
-}
+        section.page-section.active {
+            display: block; 
+        }
 
-.sidebar ul ul {
-    background: var(--surface-soft);
-    border-top: 1px solid #edf2f7;
-    border-bottom: 1px solid #edf2f7;
-}
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-.sidebar ul ul a {
-    padding: 8px 20px 8px 36px;
-    font-size: 0.86rem;
-    color: #617286;
-    border-left: 0;
-}
+        /* Cover Page Styling */
+        .cover-page {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: flex-start;
+            text-align: left;
+            min-height: 100vh;
+            background: radial-gradient(circle at 85% 30%, #1e3a8a 0%, #0f172a 50%, #050b14 100%);
+            border-radius: 0;
+            padding: 80px 100px;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cover-page::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: -10%;
+            width: 80vw;
+            height: 80vw;
+            max-width: 800px;
+            max-height: 800px;
+            background: radial-gradient(circle, rgba(74,110,224,0.12) 0%, transparent 60%);
+            pointer-events: none;
+            transform: translateY(-50%);
+        }
 
-.sidebar ul ul a:hover,
-.sidebar ul ul a.sub-active {
-    background: #eff6ff;
-    color: var(--primary);
-    font-weight: 600;
-}
+        .cover-badge {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #94a3b8;
+            letter-spacing: 2px;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            z-index: 1;
+        }
 
-.nav-badge-new {
-    display: inline-block;
-    margin-left: 6px;
-    padding: 2px 6px;
-    border-radius: 999px;
-    background: #ef4444;
-    color: #fff;
-    font-size: 0.65rem;
-    font-weight: 800;
-    vertical-align: middle;
-}
+        .cover-title {
+            font-size: 3.2rem;
+            margin-bottom: 25px;
+            line-height: 1.3;
+            letter-spacing: -1.5px;
+            font-weight: 800;
+            color: #ffffff;
+            z-index: 1;
+        }
 
-.nav-item-highlight {
-    margin: 2px 10px;
-    border-radius: 8px;
-    background: #fff1f2;
-    color: #b91c1c !important;
-    font-weight: 700 !important;
-    padding-left: 12px !important;
-}
-.nav-item-highlight:hover,
-.nav-item-highlight.sub-active {
-    background: #ffe4e6 !important;
-}
+        .cover-title .highlight {
+            color: #60a5fa;
+        }
 
-.main {
-    margin-left: var(--sidebar-width);
-    width: calc(100% - var(--sidebar-width));
-    max-width: calc(var(--content-max) + var(--sidebar-width));
-    padding: 40px 44px 100px;
-}
+        .cover-subtitle {
+            font-size: 1.1rem;
+            color: #cbd5e1;
+            margin-bottom: 40px;
+            font-weight: 400;
+            line-height: 1.6;
+            max-width: 650px;
+            z-index: 1;
+            word-break: keep-all;
+        }
 
-.main-inner {
-    max-width: var(--content-max);
-    margin: 0 auto;
-}
+        .cover-start-btn {
+            background-color: #3b82f6;
+            color: white;
+            border: none;
+            padding: 16px 45px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 15px rgba(59, 130, 246, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1;
+        }
+        .cover-start-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(59, 130, 246, 0.5);
+            background-color: #2563eb;
+        }
 
-.main.cover-active {
-    padding: 0;
-    max-width: none;
-}
-.main.cover-active .main-inner {
-    max-width: none;
-}
+        .cover-footer {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            width: 100%;
+            justify-content: flex-start;
+            align-items: center;
+            color: #94a3b8;
+            z-index: 1;
+        }
+        .cover-contact-wrapper {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+        .cover-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+        }
+        .cover-contact-item strong {
+            color: #e2e8f0;
+        }
 
-.page-section[hidden] { display: none !important; }
-.page-section {
-    animation: fadeIn .28s ease;
-}
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        /* Typography */
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+        }
+        
+        .subtitle {
+            font-size: 1rem;
+            color: #64748b;
+            margin-bottom: 30px;
+            font-weight: 400;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e2e8f0;
+        }
 
-.cover-page {
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 80px 96px;
-    background: radial-gradient(circle at 85% 30%, #1e3a8a 0%, #0f172a 52%, #060b14 100%);
-    position: relative;
-    overflow: hidden;
-}
-.cover-page::before {
-    content: '';
-    position: absolute;
-    left: -10%;
-    top: 50%;
-    transform: translateY(-50%);
-    width: min(80vw, 800px);
-    height: min(80vw, 800px);
-    background: radial-gradient(circle, rgba(96,165,250,0.14) 0%, transparent 60%);
-    pointer-events: none;
-}
-.cover-badge,
-.cover-title,
-.cover-subtitle,
-.cover-start-btn,
-.cover-footer { position: relative; z-index: 1; }
+        /* Major Headings (대제목) Styling - 음영, 상단 고정(Sticky) 및 그림자 효과 */
+        .page-section h2 {
+            font-size: 1.5rem;
+            color: #1e293b;
+            background-color: #eef2ff;
+            padding: 14px 20px;
+            border-radius: 8px;
+            margin-top: 0;
+            margin-bottom: 25px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            border-left: 6px solid var(--primary-color);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* 스크롤 시 위로 뜨는 느낌을 주기 위해 그림자 적용 */
+            letter-spacing: -0.5px;
+            position: sticky;
+            top: 20px; /* 스크롤 시 화면 상단에서 20px 위치에 고정 */
+            z-index: 50; /* 다른 요소들 위로 노출되도록 z-index 설정 */
+        }
 
-.cover-badge {
-    margin-bottom: 14px;
-    color: #8da4c4;
-    font-size: 0.84rem;
-    font-weight: 700;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-}
-.cover-title {
-    margin: 0 0 24px;
-    font-size: clamp(2.2rem, 3vw, 3.3rem);
-    line-height: 1.25;
-    letter-spacing: -0.04em;
-    color: #fff;
-    font-weight: 800;
-}
-.cover-title .highlight { color: #60a5fa; }
-.cover-subtitle {
-    margin: 0 0 38px;
-    max-width: 660px;
-    color: #d0dae8;
-    font-size: 1.08rem;
-    word-break: keep-all;
-}
-.cover-start-btn {
-    border: 0;
-    border-radius: 999px;
-    padding: 16px 28px;
-    background: #3b82f6;
-    color: #fff;
-    font-weight: 800;
-    box-shadow: 0 10px 24px rgba(59,130,246,0.28);
-    transition: transform .2s ease, box-shadow .2s ease, background-color .2s ease;
-}
-.cover-start-btn:hover {
-    background: #2563eb;
-    transform: translateY(-2px);
-    box-shadow: 0 14px 28px rgba(37,99,235,0.34);
-}
-.cover-footer {
-    width: 100%;
-    margin-top: 56px;
-    padding-top: 28px;
-    border-top: 1px solid rgba(255,255,255,0.12);
-}
-.cover-contact-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px 30px;
-}
-.cover-contact-item {
-    color: #94a3b8;
-    display: flex;
-    gap: 8px;
-    align-items: center;
-}
-.cover-contact-item strong { color: #e2e8f0; }
+        /* Sub Headings (중제목) Styling */
+        h3 {
+            font-size: 1.25rem;
+            color: #1e293b;
+            margin-top: 45px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #cbd5e1;
+        }
 
-h1:not(.cover-title) {
-    margin: 0 0 8px;
-    font-size: 2rem;
-    line-height: 1.3;
-    letter-spacing: -0.03em;
-    color: #1f2d3d;
-}
-.subtitle {
-    margin: 0 0 30px;
-    padding-bottom: 20px;
-    font-size: 1rem;
-    color: var(--text-muted);
-    border-bottom: 2px solid var(--border);
-}
-.page-section h2 {
-    position: sticky;
-    top: 18px;
-    z-index: 20;
-    margin: 0 0 24px;
-    padding: 14px 20px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 1.48rem;
-    letter-spacing: -0.03em;
-    color: #1f2d3d;
-    background: #eef2ff;
-    border-left: 6px solid var(--primary);
-    border-radius: 12px;
-    box-shadow: var(--shadow-sm);
-}
-h3 {
-    margin: 42px 0 18px;
-    padding-bottom: 10px;
-    font-size: 1.22rem;
-    letter-spacing: -0.02em;
-    color: #1f2d3d;
-    border-bottom: 1px dashed #c6d2df;
-}
-h4 {
-    margin: 28px 0 12px;
-    font-size: 1.04rem;
-    color: #1f2d3d;
-}
-p, li {
-    color: #334155;
-    word-break: keep-all;
-}
-ul, ol { padding-left: 24px; }
+        /* Step Header (부제목) Styling */
+        .step-header {
+            font-size: 1.15rem;
+            color: var(--primary-dark);
+            background-color: #f4f7fc;
+            padding: 10px 18px;
+            border-radius: 6px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            border-left: 4px solid var(--primary-color);
+        }
+        
+        h4 {
+            font-size: 1.05rem;
+            color: #1e293b;
+            margin-top: 30px;
+            margin-bottom: 12px;
+            font-weight: 700;
+        }
 
-.guide-box,
-.desc-list,
-.info-box,
-.warning-box,
-.cost-box,
-table,
-details {
-    box-shadow: var(--shadow-sm);
-}
+        p, li { color: #334155; word-break: keep-all; margin-bottom: 8px; }
+        
+        ul, ol { margin-bottom: 15px; padding-left: 25px; }
+        li { margin-bottom: 8px; }
 
-.guide-box {
-    padding: 20px 24px;
-    margin-bottom: 24px;
-    background: var(--surface-soft);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-}
-.ui-btn {
-    display: inline-block;
-    margin: 0 3px;
-    padding: 2px 10px;
-    border: 1px solid #cbd5e1;
-    border-radius: 8px;
-    background: #fff;
-    color: #1f2d3d;
-    font-size: .9rem;
-    font-weight: 700;
-    vertical-align: middle;
-}
-.ui-btn-primary {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: #fff;
-}
-.ui-btn-outline {
-    border-color: var(--primary);
-    color: var(--primary);
-}
-.menu-txt {
-    margin: 0 2px;
-    padding-bottom: 1px;
-    color: #2563eb;
-    font-weight: 700;
-    border-bottom: 2px solid #bfdbfe;
-}
-.hl-bg {
-    display: inline;
-    padding: 2px 6px;
-    border-radius: 6px;
-    background: #fef08a;
-    color: #1f2d3d;
-    font-weight: 800;
-    box-decoration-break: clone;
-    -webkit-box-decoration-break: clone;
-}
-.status-badge {
-    display: inline-block;
-    padding: 2px 6px;
-    margin: 0 2px;
-    border: 1px solid #cbd5e1;
-    border-radius: 6px;
-    background: #f1f5f9;
-    color: #475569;
-    font-size: .84rem;
-    font-weight: 700;
-}
+        /* Guide Box (본문 내용 가독성 박스) */
+        .guide-box {
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 20px 25px;
+            margin-bottom: 25px;
+            color: #334155;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+        }
 
-.desc-list {
-    list-style: none;
-    padding: 24px 28px;
-    margin-bottom: 24px;
-    border: 1px solid var(--border);
-    border-radius: 14px;
-    background: var(--surface-soft);
-}
-.desc-list li {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    margin-bottom: 18px;
-}
-.desc-list li:last-child { margin-bottom: 0; }
-.desc-list li > strong {
-    display: flex;
-    align-items: center;
-    margin-bottom: 2px;
-    color: #1f2d3d;
-}
-.desc-list li > strong::before {
-    content: '•';
-    margin-right: 8px;
-    color: var(--primary);
-    font-size: 1.1rem;
-}
-.desc-list li span {
-    padding-left: 16px;
-    color: #475569;
-}
+        /* --- Text Formatting Classes --- */
 
-.table-wrap {
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-}
-table {
-    width: 100%;
-    min-width: 620px;
-    border-collapse: collapse;
-    margin: 16px 0 24px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    overflow: hidden;
-}
-th, td {
-    padding: 14px 18px;
-    border-bottom: 1px solid var(--border);
-    text-align: left;
-    vertical-align: top;
-}
-th {
-    background: var(--surface-soft);
-    white-space: nowrap;
-    font-weight: 700;
-    color: #1f2d3d;
-}
-tr:hover td { background: var(--surface-soft-2); }
+        /* 1. UI Button inline style (실제 클릭 버튼) */
+        .ui-btn {
+            display: inline-block;
+            padding: 2px 10px;
+            background-color: #ffffff;
+            border: 1px solid #cbd5e1;
+            color: #1e293b;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin: 0 3px;
+            vertical-align: middle;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
 
-.info-box,
-.warning-box,
-.cost-box {
-    margin: 24px 0;
-    padding: 18px 24px;
-    border-radius: 14px;
-    font-size: .95rem;
-}
-.info-box {
-    background: var(--info-soft);
-    border: 1px solid #b8defe;
-}
-.info-box > strong:first-child {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    color: #0369a1;
-    font-size: 1.04rem;
-}
-.warning-box {
-    background: var(--danger-soft);
-    border: 1px solid #fecdd3;
-}
-.warning-box > strong:first-child {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-    color: #e11d48;
-    font-size: 1.04rem;
-}
-.cost-box {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    width: fit-content;
-    border-radius: 999px;
-    border: 1px solid #fde68a;
-    background: #fffbeb;
-    color: #854d0e;
-    font-weight: 700;
-}
-.cost-box::before { content: '🪙'; }
+        .ui-btn-primary {
+            background-color: var(--primary-color);
+            color: #ffffff;
+            border-color: var(--primary-color);
+        }
 
-.manual-img {
-    display: block;
-    width: min(100%, 900px);
-    height: auto;
-    margin: 28px 0;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    box-shadow: var(--shadow-md);
-}
-.img-large {
-    width: min(100%, 1100px) !important;
-}
+        .ui-btn-outline {
+            background-color: #ffffff;
+            color: var(--primary-color);
+            border-color: var(--primary-color);
+        }
 
-details {
-    margin-bottom: 14px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: #fff;
-    overflow: hidden;
-}
-summary {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    padding: 18px 24px;
-    list-style: none;
-    background: var(--surface-soft);
-    color: #1f2d3d;
-    font-size: 1.03rem;
-    font-weight: 700;
-}
-summary::-webkit-details-marker { display: none; }
-summary::after {
-    content: '+';
-    color: #94a3b8;
-    font-size: 1.2rem;
-}
-details[open] summary {
-    background: #fff;
-    color: var(--primary);
-    border-bottom: 1px solid var(--border);
-}
-details[open] summary::after { content: '−'; }
-.qna-content {
-    padding: 20px 24px;
-    color: #475569;
-    background: #fff;
-}
+        /* 2. Menu Text (메뉴 탭 및 팝업 타이틀) */
+        .menu-txt {
+            color: #2563eb;
+            font-weight: 700;
+            border-bottom: 2px solid #bfdbfe;
+            padding-bottom: 1px;
+            margin: 0 2px;
+        }
 
-.pagination-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-    margin-top: 24px;
-    padding-top: 30px;
-    border-top: 2px solid var(--border);
-}
-.nav-btn {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 48px;
-    height: 48px;
-    border: 2px solid var(--primary);
-    border-radius: 999px;
-    background: #fff;
-    color: var(--primary);
-    font-size: 1.35rem;
-    font-weight: 800;
-    transition: transform .2s ease, background-color .2s ease, color .2s ease;
-}
-.nav-btn:hover {
-    background: var(--primary);
-    color: #fff;
-    transform: translateY(-2px);
-}
-.nav-btn[disabled] {
-    opacity: .35;
-    cursor: default;
-    transform: none;
-}
+        /* 3. Highlight Background (중요 문구 형광펜) 깨짐 현상 수정 */
+        .hl-bg {
+            background-color: #fef08a;
+            font-weight: 700;
+            color: #1e293b;
+            padding: 2px 6px;
+            border-radius: 4px;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+            box-decoration-break: clone;
+            -webkit-box-decoration-break: clone;
+            white-space: nowrap;
+        }
 
-.chatbot-fab {
-    position: fixed;
-    right: 28px;
-    bottom: 28px;
-    width: 60px;
-    height: 60px;
-    border: 0;
-    border-radius: 999px;
-    background: var(--primary);
-    color: #fff;
-    display: grid;
-    place-items: center;
-    box-shadow: 0 12px 30px rgba(49,88,214,0.3);
-    z-index: 110;
-}
-.chatbot-fab span { font-size: 30px; }
+        /* 4. Status Badge (상태 표시) */
+        .status-badge {
+            background-color: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            color: #475569;
+            font-size: 0.85rem;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 4px;
+            vertical-align: baseline;
+            margin: 0 2px;
+        }
 
-.chatbot-window {
-    position: fixed;
-    right: 28px;
-    bottom: 100px;
-    width: min(500px, calc(100vw - 32px));
-    height: min(700px, 80vh);
-    display: flex;
-    flex-direction: column;
-    background: #fff;
-    border: 1px solid var(--border);
-    border-radius: 18px;
-    box-shadow: 0 20px 50px rgba(15,23,42,0.16);
-    overflow: hidden;
-    z-index: 110;
-}
-.chatbot-window[hidden] {
-    display: none !important;
-}
-.chatbot-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 20px;
-    background: var(--primary);
-    color: #fff;
-    font-size: 1.06rem;
-    font-weight: 700;
-}
-.chatbot-close {
-    border: 0;
-    background: transparent;
-    color: inherit;
-    font-size: 1.35rem;
-}
-.chat-quick-actions {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-    padding: 14px 18px 0;
-    background: var(--surface-soft);
-    border-bottom: 1px solid var(--border);
-}
-.chat-chip {
-    padding: 8px 14px;
-    border: 1px solid #cbd5e1;
-    border-radius: 999px;
-    background: #fff;
-    color: #475569;
-    font-size: .84rem;
-    font-weight: 700;
-}
-.chat-chip:hover {
-    background: var(--primary);
-    border-color: var(--primary);
-    color: #fff;
-}
-.chatbot-messages {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    padding: 18px;
-    background: var(--surface-soft);
-    overflow-y: auto;
-}
-.message {
-    max-width: 86%;
-    padding: 14px 16px;
-    border-radius: 16px;
-    box-shadow: var(--shadow-sm);
-    line-height: 1.55;
-    word-break: break-word;
-}
-.message.user {
-    align-self: flex-end;
-    background: var(--primary);
-    color: #fff;
-    border-top-right-radius: 4px;
-}
-.message.bot {
-    align-self: flex-start;
-    background: #fff;
-    color: #334155;
-    border: 1px solid var(--border);
-    border-top-left-radius: 4px;
-}
-.chat-link-btn {
-    width: 100%;
-    margin-top: 12px;
-    padding: 12px 14px;
-    border: 1px solid #bfdbfe;
-    border-radius: 10px;
-    background: #eff6ff;
-    color: var(--primary-dark);
-    text-align: left;
-    font-weight: 700;
-}
-.chatbot-input-area {
-    display: flex;
-    gap: 10px;
-    padding: 14px 18px;
-    border-top: 1px solid var(--border);
-    background: #fff;
-}
-.chatbot-input {
-    flex: 1;
-    padding: 14px 18px;
-    border: 1px solid #cbd5e1;
-    border-radius: 999px;
-}
-.chatbot-send {
-    width: 48px;
-    height: 48px;
-    border: 0;
-    border-radius: 999px;
-    background: var(--primary);
-    color: #fff;
-    font-size: 1.1rem;
-}
-.chatbot-send:hover { background: var(--primary-dark); }
+        /* Description List Style */
+        .desc-list {
+            list-style: none;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            padding: 25px 30px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+        }
+        .desc-list li {
+            margin-bottom: 18px;
+            display: flex;
+            flex-direction: column;
+        }
+        .desc-list li:last-child {
+            margin-bottom: 0;
+        }
+        .desc-list li > strong {
+            color: #1e293b;
+            font-size: 1rem;
+            margin-bottom: 4px;
+            display: flex;
+            align-items: center;
+        }
+        .desc-list li > strong::before {
+            content: '•';
+            color: var(--primary-color);
+            margin-right: 8px;
+            font-size: 1.2rem;
+            line-height: 1;
+        }
+        .desc-list li span {
+            color: #475569;
+            font-size: 0.95rem;
+            padding-left: 16px;
+            margin-bottom: 2px;
+        }
 
-@media (max-width: 960px) {
-    body { display: block; }
-    .sidebar {
-        width: 100%;
-        min-width: 0;
-        height: auto;
-        position: sticky;
-        inset: 0 0 auto 0;
-    }
-    .nav-toggle { display: inline-grid; place-items: center; }
-    .nav-scroll {
-        display: none;
-        max-height: calc(100vh - 110px);
-        border-top: 1px solid var(--border);
-    }
-    .sidebar.is-open .nav-scroll { display: block; }
-    .main {
-        margin-left: 0;
-        width: 100%;
-        max-width: none;
-        padding: 24px 18px 96px;
-    }
-    .cover-page {
-        align-items: center;
-        text-align: center;
-        padding: 56px 24px;
-    }
-    .cover-footer,
-    .cover-contact-wrapper {
-        justify-content: center;
-        align-items: center;
-    }
-    .cover-contact-wrapper {
-        flex-direction: column;
-        gap: 14px;
-    }
-    .page-section h2 {
-        position: static;
-    }
-    .chatbot-window {
-        right: 16px;
-        bottom: 88px;
-        width: calc(100vw - 32px);
-        height: 72vh;
-    }
-    .manual-img,
-    .img-large { width: 100% !important; }
-}
+        /* --- Components --- */
 
-@media (prefers-reduced-motion: reduce) {
-    html:focus-within { scroll-behavior: auto; }
-    *,
-    *::before,
-    *::after {
-        animation: none !important;
-        transition: none !important;
-    }
-}
+        /* Tables */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0 25px 0;
+            font-size: 0.95rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        th, td {
+            border-bottom: 1px solid #e2e8f0;
+            padding: 14px 18px;
+            text-align: left;
+        }
+        th {
+            background-color: #f8fafc;
+            font-weight: 600;
+            color: #1e293b;
+            width: 20%; 
+            white-space: nowrap; 
+        }
+        tr:hover td { background-color: #f1f5f9; }
 
+        /* Simplified Info & Warning Boxes */
+        .info-box, .warning-box, .cost-box {
+            padding: 18px 25px;
+            margin: 25px 0;
+            border-radius: 10px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .info-box {
+            background-color: #f0f9ff;
+            border: 1px solid #bae6fd;
+            color: #334155;
+        }
+        .info-box > strong:first-child { 
+            color: #0284c7; 
+            font-weight: 700; 
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; 
+            font-size: 1.05rem;
+        }
+
+        .warning-box {
+            background-color: #fff1f2;
+            border: 1px solid #fecaca;
+            color: #334155;
+        }
+        .warning-box > strong:first-child { 
+            color: #e11d48; 
+            font-weight: 700; 
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px; 
+            font-size: 1.05rem;
+        }
+
+        /* Cost Box Style */
+        .cost-box {
+            background-color: #fefce8;
+            border: 1px solid #fef08a;
+            color: #854d0e;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            border-radius: 30px;
+            padding: 12px 25px;
+            width: fit-content;
+        }
+        .cost-box::before {
+            content: '🪙';
+            font-size: 1.2rem;
+            margin-right: 8px;
+        }
+        
+        /* Real Image - 좌측 정렬 및 사이즈 유지 */
+        img.manual-img {
+            width: 75%;
+            max-width: 900px;
+            height: auto;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            margin: 30px 0; 
+            display: block;
+        }
+
+        .img-large {
+            width: 95% !important;
+            max-width: 1100px !important;
+            margin: 40px 0 !important; 
+        }
+
+        /* Q&A Accordion - Clean Style */
+        details {
+            margin-bottom: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            background-color: #fff;
+            overflow: hidden;
+        }
+        
+        summary {
+            padding: 18px 25px;
+            cursor: pointer;
+            font-weight: 600;
+            list-style: none;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: #1e293b;
+            background-color: #f8fafc;
+            font-size: 1.05rem;
+        }
+
+        summary:hover { background-color: #f1f5f9; }
+        summary::-webkit-details-marker { display: none; }
+
+        summary::after {
+            content: '+'; 
+            font-size: 1.2rem;
+            color: #94a3b8;
+        }
+
+        details[open] summary {
+            border-bottom: 1px solid #e2e8f0;
+            color: var(--primary-color);
+            background-color: #fff;
+        }
+
+        details[open] summary::after { content: '-'; }
+
+        .qna-content {
+            padding: 20px 25px;
+            background-color: #fff;
+            font-size: 0.95rem;
+            color: #475569;
+            line-height: 1.7;
+        }
+
+        /* --- Pagination Bottom Bar (Simple Icons) --- */
+        .pagination-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            margin-top: 20px;
+            border-top: 2px solid #e2e8f0;
+        }
+        
+        .nav-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            background-color: #fff;
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 50%;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(74, 110, 224, 0.2);
+        }
+        
+        .nav-btn.hidden { visibility: hidden; }
+
+        /* --- Chatbot Widget --- */
+        .chatbot-fab { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: var(--bot-color); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0,0,0,0.2); cursor: pointer; z-index: 1000; transition: transform 0.2s; }
+        .chatbot-fab span { font-size: 30px; }
+        .chatbot-fab:hover { transform: scale(1.1); }
+        
+        .chatbot-window { 
+            position: fixed; 
+            bottom: 100px; 
+            right: 30px; 
+            width: 500px; 
+            height: 700px;
+            max-height: 80vh; 
+            background-color: white; 
+            border-radius: 16px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15); 
+            display: none; 
+            flex-direction: column; 
+            z-index: 1000; 
+            overflow: hidden; 
+            border: 1px solid #e2e8f0; 
+        }
+
+        .chatbot-header { background-color: var(--bot-color); color: white; padding: 18px 20px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; font-size: 1.1rem; }
+        .chatbot-close { cursor: pointer; font-size: 1.4rem; color: white; background: none; border: none; }
+        
+        .chatbot-messages { flex: 1; padding: 20px; overflow-y: auto; background-color: #f8fafc; display: flex; flex-direction: column; gap: 15px; }
+        
+        .message { max-width: 85%; padding: 14px 18px; border-radius: 14px; font-size: 0.95rem; box-shadow: 0 1px 3px rgba(0,0,0,0.05); word-break: break-word; line-height: 1.5; }
+        .message.bot { background-color: #fff; border: 1px solid #e2e8f0; align-self: flex-start; border-top-left-radius: 4px; color: #334155; }
+        .message.user { background-color: var(--bot-color); color: white; align-self: flex-end; border-top-right-radius: 4px; }
+        
+        /* Chatbot Button Style */
+        .chat-link-btn {
+            display: inline-block;
+            width: 100%;
+            padding: 12px 16px;
+            margin-top: 12px;
+            margin-bottom: 5px;
+            background-color: #eff6ff;
+            color: var(--primary-dark);
+            text-align: left;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            border: 1px solid #bfdbfe;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .chat-link-btn:hover { background-color: #dbeafe; transform: translateY(-1px); }
+        .chat-link-btn::before { content: '👉 '; }
+
+        .chatbot-input-area { padding: 15px 20px; border-top: 1px solid #e2e8f0; display: flex; gap: 10px; background-color: white; }
+        .chatbot-input { flex: 1; padding: 14px 20px; border: 1px solid #cbd5e1; border-radius: 30px; outline: none; font-family: inherit; font-size: 0.95rem; transition: border-color 0.2s; }
+        .chatbot-input:focus { border-color: var(--primary-color); }
+        .chatbot-send { background-color: var(--bot-color); color: white; border: none; width: 48px; height: 48px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: background-color 0.2s; }
+        .chatbot-send:hover { background-color: var(--primary-dark); }
+
+        /* Quick Actions (Chips) */
+        .chat-quick-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            padding: 15px 20px 0 20px;
+            background-color: #f8fafc;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .chat-chip {
+            background-color: #fff;
+            border: 1px solid #cbd5e1;
+            color: #475569;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .chat-chip:hover {
+            background-color: var(--bot-color);
+            color: white;
+            border-color: var(--bot-color);
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            body { flex-direction: column; }
+            nav { width: 100%; height: auto; position: relative; border-right: none; border-bottom: 1px solid #e2e8f0; box-shadow: none; }
+            main { margin-left: 0; width: 100%; padding: 25px 20px; }
+            .chatbot-window { width: 90%; right: 5%; bottom: 90px; height: 70vh; }
+            
+            /* Responsive Cover overrides */
+            .cover-page {
+                padding: 50px 30px;
+                align-items: center;
+                text-align: center;
+            }
+            .cover-title { font-size: 2.2rem; }
+            .cover-footer { flex-direction: column; gap: 20px; align-items: center; justify-content: center; }
+            .cover-contact-wrapper { flex-direction: column; gap: 15px; align-items: center; }
+            nav h2 { font-size: 1.2rem; padding-top: 15px; white-space: normal; }
+        }
     </style>
 </head>
 <body>
-    <nav class="sidebar" aria-label="매뉴얼 탐색">
 
-<div class="nav-header">
-    <a href="#cover" class="brand-link">FIT 관리자 AI매뉴얼</a>
-    <button type="button" class="nav-toggle" id="nav-toggle" aria-expanded="false" aria-controls="nav-menu" aria-label="메뉴 열기">☰</button>
-</div>
-<div class="version-tag">ver 2.4</div>
-<div class="nav-scroll" id="nav-menu">
-    <ul>
-        <li><a href="#register">0. 검사 관리자 등록</a></li>
-        <li><a href="#login">1. 로그인 및 접속</a></li>
-        <li><a href="#dashboard">2. 채용검사 관리 (홈)</a></li>
-        <li><a href="#info-edit">3. 관리자 정보 수정</a></li>
-        <li>
-            <a href="#step1">4. 신규 검사 등록</a>
-            <ul>
-                <li><a href="#step1">Step 1. 검사 관리명 &amp; 2차 인증</a></li>
-                <li><a href="#step2" class="nav-item-highlight">Step 2. 데이터 관리 <span class="nav-badge-new">N</span></a></li>
-                <li><a href="#step3">Step 3. 응시자 등록</a></li>
-                <li><a href="#step4">Step 4. 안내 발송</a></li>
-                <li><a href="#step5">Step 5. 현황 수신</a></li>
-            </ul>
-        </li>
-        <li>
-            <a href="#result-step1">5. 결과 확인 및 응시자 관리</a>
-            <ul>
-                <li><a href="#result-step1">Step 1. 홈 화면</a></li>
-                <li><a href="#result-step2">Step 2. 응시자 관리 화면</a></li>
-            </ul>
-        </li>
-        <li><a href="#qna">6. FAQ</a></li>
-    </ul>
-</div>
+    <nav>
+        <h2><a href="#cover" onclick="showPage('cover')">FIT 관리자 AI매뉴얼</a></h2>
+        <div class="version-tag">ver 2.4</div>
 
+        <!-- 검색 컨테이너 추가 -->
+        <div class="search-container">
+            <input type="text" id="menu-search-input" placeholder="매뉴얼 내용 검색..." onkeyup="handleMenuSearch(event)" autocomplete="off">
+            <div id="search-results" class="search-results-dropdown" style="display:none;"></div>
+        </div>
+
+        <ul>
+            <li><a href="#register">0. 검사 관리자 등록</a></li>
+            <li><a href="#login">1. 로그인 및 접속</a></li>
+            <li><a href="#dashboard">2. 채용검사 관리 (홈)</a></li>
+            <li><a href="#info-edit">3. 관리자 정보 수정</a></li>
+            <li>
+                <a href="#step1">4. 신규 검사 등록</a>
+                <ul>
+                    <li><a href="#step1">Step 1. 검사 관리명 & 2차 인증</a></li>
+                    <li><a href="#step2" class="nav-item-highlight">Step 2. 데이터 관리 <span class="nav-badge-new">N</span></a></li>
+                    <li><a href="#step3">Step 3. 응시자 등록</a></li>
+                    <li><a href="#step4">Step 4. 안내 발송</a></li>
+                    <li><a href="#step5">Step 5. 현황 수신</a></li>
+                </ul>
+            </li>
+            <li>
+                <a href="#result-step1">5. 결과 확인 및 응시자 관리</a>
+                <ul>
+                    <li><a href="#result-step1">Step 1. 홈 화면</a></li>
+                    <li><a href="#result-step2">Step 2. 응시자 관리 화면</a></li>
+                </ul>
+            </li>
+            <li><a href="#qna">6. FAQ</a></li>
+        </ul>
     </nav>
 
-    <main class="main" id="main-content">
-        <div class="main-inner">
-
+    <main id="main-content">
         <!-- Cover Page -->
-        <section id="cover" class="page-section cover-page">
+        <section id="cover" class="page-section active cover-page">
             <div class="cover-badge">FIT ADMINISTRATOR GUIDE</div>
             <h1 class="cover-title">사람인 F.I.T 검사<br><span class="highlight">관리자 AI매뉴얼</span></h1>
             <p class="cover-subtitle">효율적인 인재 채용을 위한 최적의 온라인 검사 시스템 활용 가이드</p>
             
-            <button type="button" class="cover-start-btn" data-target="register">매뉴얼 시작하기 <span>→</span></button>
+            <button class="cover-start-btn" onclick="navigateTo('#register')">매뉴얼 시작하기 <span>→</span></button>
 
             <div class="cover-footer">
                 <div class="cover-contact-wrapper">
@@ -880,7 +901,7 @@ details[open] summary::after { content: '−'; }
                 <p style="margin-bottom: 0;">사람인 FIT 검사 이용 신청 시, <strong>담당자 이메일</strong>로 관리자 페이지 URL, 계정 ID, 초기 비밀번호가 발송됩니다.</p>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/01_email.png" alt="서비스 이용 동의 화면 1" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/01_email.png" alt="서비스 이용 동의 화면 1" class="manual-img">
 
             <h3>1. 서비스 이용 동의</h3>
             <div class="info-box" style="border: 2px solid var(--primary-color); background-color: #eff6ff; padding: 20px;">
@@ -891,7 +912,7 @@ details[open] summary::after { content: '−'; }
                 </p>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/02_agree.png" alt="서비스 이용 동의 화면 2" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/02_agree.png" alt="서비스 이용 동의 화면 2" class="manual-img">
 
             <div class="cost-box">
                 최초 1회에 한하여 신규 계정 등록 비용 300,000원(VAT 별도)이 청구됩니다.
@@ -905,11 +926,11 @@ details[open] summary::after { content: '−'; }
                 <p style="margin-bottom: 0;">관리자 페이지에 접속하여 부여받은 ID와 PW를 입력해 주시기 바랍니다. 기업 보안 강화를 위해 로그인은 <span class="hl-bg">2단계 인증</span>을 거치게 됩니다.</p>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/03_login.png" alt="로그인 화면 이미지" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/03_login.png" alt="로그인 화면 이미지" class="manual-img">
 
             <h3>접속 정보</h3>
             <ul class="desc-list">
-                <li><strong>관리자 페이지 URL</strong><span><a href="https://v2.testfit.co.kr/company" target="_blank" rel="noopener noreferrer">https://v2.testfit.co.kr/company</a></span></li>
+                <li><strong>관리자 페이지 URL</strong><span><a href="https://v2.testfit.co.kr/company" target="_blank">https://v2.testfit.co.kr/company</a></span></li>
                 <li><strong>시스템 문의</strong><span>02-6377-2306, 2308</span></li>
             </ul>
 
@@ -923,7 +944,7 @@ details[open] summary::after { content: '−'; }
                 </ol>
             </div>
 
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/04_access.png" alt="2단계 인증 화면 이미지" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/04_access.png" alt="2단계 인증 화면 이미지" class="manual-img">
 
             <div class="info-box">
                 <strong>💡 Tip</strong>
@@ -938,7 +959,7 @@ details[open] summary::after { content: '−'; }
                 <p style="margin-bottom: 0;">로그인 직후 보이는 메인(홈) 화면입니다. 현재 진행 중이거나 종료된 <span class="hl-bg">모든 검사의 현황</span>을 한눈에 파악할 수 있습니다.</p>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/05_dashboard.png" alt="대시보드 전체 화면 이미지" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/05_dashboard.png" alt="대시보드 전체 화면 이미지" class="manual-img">
 
             <h3>주요 기능 설명</h3>
             <table>
@@ -988,10 +1009,10 @@ details[open] summary::after { content: '−'; }
                 <p style="margin-bottom: 0;">화면 상단의 기업명을 클릭하면 <span class="menu-txt">내 기업 관리</span> 팝업으로 즉시 이동하여 기본 정보를 수정할 수 있습니다.</p>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/06_account_1.png" alt="정보 수정 화면 1" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/06_account_1.png" alt="정보 수정 화면 1" class="manual-img">
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/06_account_02.png" alt="정보 수정 화면 2" class="manual-img">
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/06_account_03.png" alt="정보 수정 화면 3" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/06_account_02.png" alt="정보 수정 화면 2" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/06_account_03.png" alt="정보 수정 화면 3" class="manual-img">
 
             <div class="info-box" style="margin-top: 30px;">
                 <strong style="color: var(--primary-color); font-size: 1.1rem; margin-bottom: 15px; display: block; border-bottom: 2px solid #e0e9f8; padding-bottom: 10px;">
@@ -1042,11 +1063,11 @@ details[open] summary::after { content: '−'; }
                 <p style="margin-bottom: 0;">화면 우측 상단의 <span class="ui-btn ui-btn-primary">채용검사 등록</span> 버튼을 클릭하여 새로운 검사 프로젝트를 생성할 수 있습니다.</p>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/07_newtest_1.png" alt="신규 검사 등록 메인 화면 이미지" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_1.png" alt="신규 검사 등록 메인 화면 이미지" class="manual-img">
 
             <div class="step-header">Step 1. 검사 관리명 & 2차 인증 설정</div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/07_newtest_02-1.png" alt="Step 1 상세 화면 이미지 1" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_02-1.png" alt="Step 1 상세 화면 이미지 1" class="manual-img">
 
             <ul class="desc-list">
                 <li><strong>채용검사명</strong><span>기업 내부에서 관리하실 채용검사명을 작성해 주시기 바랍니다. (최대 50자 제한)</span></li>
@@ -1067,7 +1088,7 @@ details[open] summary::after { content: '−'; }
                 </ul>
             </div>
 
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/07_newtest_02-2.png" alt="Step 1 상세 화면 이미지 2" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_02-2.png" alt="Step 1 상세 화면 이미지 2" class="manual-img">
 
             <ul class="desc-list">
                 <li><strong>응시 가능 횟수</strong>
@@ -1118,7 +1139,7 @@ details[open] summary::after { content: '−'; }
                 </ul>
             </div>
 
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/10_batch_01.png" alt="보관 기간 설정 화면 이미지" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/10_batch_01.png" alt="보관 기간 설정 화면 이미지" class="manual-img">
 
             <div class="warning-box">
                 <strong style="color: #e11d48;">⚠️ 보관 및 파기 관련 중요 주의사항</strong>
@@ -1185,8 +1206,8 @@ details[open] summary::after { content: '−'; }
                 </ol>
             </div>
 
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/07_newtest_03.png" alt="엑셀 등록 화면 1" class="manual-img">
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/07_newtest_4.png" alt="엑셀 등록 화면 2" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_03.png" alt="엑셀 등록 화면 1" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_4.png" alt="엑셀 등록 화면 2" class="manual-img">
             
             <div class="info-box">
                 <strong>📋 엑셀 등록 시 필수 유의사항</strong>
@@ -1207,14 +1228,14 @@ details[open] summary::after { content: '−'; }
                 </ol>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/07_newtest_04.png" alt="개별 등록 화면 이미지" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_04.png" alt="개별 등록 화면 이미지" class="manual-img">
             
             <div class="warning-box">
                 <strong>🚨 응시자 목록 전체 노출 제한</strong>
                 <p style="margin-bottom: 0;">개인정보 보호 정책에 따라, 응시자 명단을 저장한 후 해당 페이지에 재진입하실 경우 기존 리스트는 화면에 노출되지 않으며 우측 상단에 <strong>'현재 등록 인원: 00명'</strong>으로만 간략히 요약 표시됩니다. 등록된 응시자의 개별 정보 수정 및 삭제는 상단 <span class="menu-txt">응시자 관리</span> 탭 메뉴를 통해서만 안전하게 진행하실 수 있습니다.</p>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/07_newtest_05.png" alt="현재 등록 인원 노출 화면" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_05.png" alt="현재 등록 인원 노출 화면" class="manual-img">
 
             <div class="info-box" style="background-color: #f8fafc; border-color: #e2e8f0; margin-top: 40px;">
                 <strong style="color: #1e3a8a; font-size: 1.05rem;">🔒 응시자 접속 화면 및 2차 인증 유의사항</strong>
@@ -1242,7 +1263,7 @@ details[open] summary::after { content: '−'; }
                 <p style="margin-bottom: 0;">안내 문자 및 메일 발송 단계에서는 앞서 명단을 등록한 응시자들에게 검사 참여를 독려하는 문자메시지나 이메일을 직접 발송할 수 있습니다.</p>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/07_newtest_9.png" alt="안내 발송 메인 화면 이미지" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_9.png" alt="안내 발송 메인 화면 이미지" class="manual-img">
 
             <div class="guide-box">
                 <ul style="margin-bottom: 0; list-style-type: none; padding-left: 0;">
@@ -1271,8 +1292,8 @@ details[open] summary::after { content: '−'; }
                 <li><strong>문자</strong><span>문자메시지는 '제목' 및 '전체 텍스트 내용' 모두 자유롭게 수정이 가능합니다.</span></li>
             </ul>
 
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/07_newtest_10.png" alt="안내 발송 상세 화면 1" class="manual-img">
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/07_newtest_11.png" alt="안내 발송 상세 화면 2" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_10.png" alt="안내 발송 상세 화면 1" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_11.png" alt="안내 발송 상세 화면 2" class="manual-img">
 
             <div class="info-box">
                 <strong>📝 치환코드 안내 (자동 변환 기술)</strong>
@@ -1299,8 +1320,8 @@ details[open] summary::after { content: '−'; }
                 <p style="margin-bottom: 0;">담당 관리자가 전체 검사의 진행 상황(미응시 인원, 응시 완료 인원 등)을 매일 오전 9시와 검사 마감 직후에 메일이나 문자로 요약해 정기적으로 받아볼 수 있는 똑똑한 편의 기능입니다.</p>
             </div>
 
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/07_newtest_12.png" alt="응시 현황 수신 메일 예시 화면 1" class="manual-img">
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/07_newtest_14.png" alt="응시 현황 수신 메일 예시 화면 2" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_12.png" alt="응시 현황 수신 메일 예시 화면 1" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/07_newtest_14.png" alt="응시 현황 수신 메일 예시 화면 2" class="manual-img">
 
             <div class="warning-box">
                 <p style="margin-bottom: 0;">알림을 수신할 담당자의 이메일 주소와 전화번호를 정확히 기재하셨는지 완료 전 한 번 더 꼼꼼하게 확인해 주시기 바랍니다.</p>
@@ -1323,7 +1344,7 @@ details[open] summary::after { content: '−'; }
 
             <h3 style="margin-top: 40px;">1) 응시 현황 확인 및 안내 재발송</h3>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/08_output_1.png" alt="홈 화면 전체인원 클릭" class="manual-img img-large">
+            <img src="https://www.saraminimage.co.kr/fit/img/08_output_1.png" alt="홈 화면 전체인원 클릭" class="manual-img img-large">
 
             <div class="info-box">
                 <strong style="color: #1e3a8a; font-size: 1.05rem; margin-bottom: 10px;">📊 응시 현황 확인 및 안내 재발송</strong>
@@ -1334,8 +1355,8 @@ details[open] summary::after { content: '−'; }
                 </ul>
             </div>
 
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/08_output_02.png" alt="홈 화면 리스트 팝업" class="manual-img" style="margin-bottom: 10px;">
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/08_output_03.png" alt="응시자 정보 수정 팝업" class="manual-img" style="margin-top: 0;">
+            <img src="https://www.saraminimage.co.kr/fit/img/08_output_02.png" alt="홈 화면 리스트 팝업" class="manual-img" style="margin-bottom: 10px;">
+            <img src="https://www.saraminimage.co.kr/fit/img/08_output_03.png" alt="응시자 정보 수정 팝업" class="manual-img" style="margin-top: 0;">
 
             <div class="info-box" style="margin-top: 30px; background-color: #f8fafc; border-color: #cbd5e1;">
                 <strong style="color: #334155; font-size: 1.05rem; margin-bottom: 10px;">✏️ 응시자 정보 수정 및 삭제</strong>
@@ -1352,10 +1373,10 @@ details[open] summary::after { content: '−'; }
                 <p style="margin-bottom: 0;">홈 화면 우측 '종합 리포트' 항목의 <span class="ui-btn">다운로드</span> 버튼을 클릭하시면 <span class="ui-btn">PDF 다운로드</span>, <span class="ui-btn">Excel 다운로드</span>, <span class="ui-btn">해석 가이드 다운로드</span> 메뉴 팝업이 노출됩니다. 이곳에서 원하시는 유형의 파일을 클릭하여 결과를 쉽게 내려받을 수 있습니다.</p>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/09_down_1.png" alt="다운로드 버튼 클릭" class="manual-img img-large">
+            <img src="https://www.saraminimage.co.kr/fit/img/09_down_1.png" alt="다운로드 버튼 클릭" class="manual-img img-large">
 
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/09_down_02-1.png" alt="다운로드 팝업 1" class="manual-img">
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/09_down_02-2.png" alt="다운로드 팝업 2" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/09_down_02-1.png" alt="다운로드 팝업 1" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/09_down_02-2.png" alt="다운로드 팝업 2" class="manual-img">
 
             <div class="info-box" style="background-color: #fff1f0; border-color: #ffa39e;">
                 <p style="margin-bottom:0; color: #cf1322;"><strong>* 대량 다운로드 유의사항:</strong> 검사 완료자가 <strong>50명을 초과</strong>하는 대규모 채용 전형의 경우, 홈 화면에서의 간편 PDF 다운로드 기능이 비활성화 처리됩니다. 이 경우에는 상단 메인 메뉴의 <span class="menu-txt">응시자 관리</span> 탭으로 이동하시어 상세 다운로드를 진행해 주시기 바랍니다.</p>
@@ -1372,10 +1393,10 @@ details[open] summary::after { content: '−'; }
                 <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 0; margin-top: 5px;">* 홈 화면 최상단의 <span class="menu-txt">응시자 관리</span> 메인 탭을 직접 누르실 경우, 진행된 모든 검사에 속한 기업의 전체 응시자 목록이 통합되어 노출됩니다.</p>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/09_down_3.png" alt="응시자 관리 탭 접근" class="manual-img img-large">
+            <img src="https://www.saraminimage.co.kr/fit/img/09_down_3.png" alt="응시자 관리 탭 접근" class="manual-img img-large">
 
             <h3 style="margin-top: 40px;">1) 부가 기능(상세 필터) 및 안내 발송</h3>
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/08_output_04.png" alt="부가기능(필터)" class="manual-img img-large">
+            <img src="https://www.saraminimage.co.kr/fit/img/08_output_04.png" alt="부가기능(필터)" class="manual-img img-large">
             <div class="info-box">
                 <strong style="margin-bottom: 12px;">💡 부가 기능 상세 설명</strong>
                 <ul class="desc-list" style="margin-bottom: 0; padding: 20px;">
@@ -1386,14 +1407,14 @@ details[open] summary::after { content: '−'; }
             </div>
 
             <h3 style="margin-top: 50px;">2) 상세 결과표(PDF/Excel) 다운로드</h3>
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/09_down_4.png" alt="다운로드 버튼" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/09_down_4.png" alt="다운로드 버튼" class="manual-img">
             
             <div class="guide-box">
                 <p style="margin-bottom: 0;"><span class="menu-txt">응시자 관리</span> 탭에서 결과표 다운로드를 진행하실 때는 시스템의 안정적이고 빠른 처리를 보장하기 위해 PDF와 Excel 파일 모두 <strong>최대 50명 단위로 분할(끊어서) 다운로드</strong>가 처리됩니다.</p>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/09_down_03.png" alt="PDF 다운로드" class="manual-img">
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/09_down_04.png" alt="Excel 다운로드" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/09_down_03.png" alt="PDF 다운로드" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/09_down_04.png" alt="Excel 다운로드" class="manual-img">
 
             <div class="warning-box" style="margin-top: 20px;">
                 <strong style="color: #e11d48;">🚨 주의!</strong>
@@ -1402,27 +1423,27 @@ details[open] summary::after { content: '−'; }
 
             <h3 style="margin-top: 50px;">3) 결과지 내 블라인드 처리</h3>
             <div style="background-color: #f1f5f9; padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 20px; border: 1px solid #e2e8f0;">
-                <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/08_output_05.png" alt="결과지 설정 콘솔 메뉴" style="max-width: 100%; height: auto; display: inline-block; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 4px;">
+                <img src="https://www.saraminimage.co.kr/fit/img/08_output_05.png" alt="결과지 설정 콘솔 메뉴" style="max-width: 100%; height: auto; display: inline-block; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 4px;">
             </div>
             
             <div class="guide-box">
                 <p style="margin-bottom: 0;">콘솔 메뉴의 <span class="ui-btn">결과지 설정</span> 버튼을 클릭하시면 최종 결과지 문서에서 제외할 항목을 직접 고를 수 있는 옵션 팝업이 노출됩니다. 해당 팝업에서 체크하여 선택하신 개인 정보 항목은 최종 다운로드 결과지 문서 상에서 삭제(블라인드) 표기되어 안전하게 인쇄됩니다.</p>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/09_down_05.png" alt="블라인드 처리 팝업" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/09_down_05.png" alt="블라인드 처리 팝업" class="manual-img">
             
             <p style="background-color: #f8fafc; padding: 15px 20px; border-radius: 8px; color: #475569; border-left: 3px solid #94a3b8; font-size: 0.95rem;">* 응시자 정보에 수험번호와 면접번호를 둘 다 입력하신 경우, <span class="hl-bg">결과지에는 면접번호가 무조건 우선적으로 표기</span>됩니다. (면접번호 대신 수험번호를 표기하고 싶으신 경우에는 이 블라인드 기능을 활용하여 면접번호를 블라인드 처리해 주시면 수험번호가 정상 표기됩니다.)</p>
 
             <h3 style="margin-top: 50px;">4) 부적격 판별 기준 커스텀 설정</h3>
             <div style="background-color: #f1f5f9; padding: 15px; border-radius: 12px; text-align: center; margin-bottom: 20px; border: 1px solid #e2e8f0;">
-                <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/08_output_05.png" alt="부적격 판별 기준 설정 콘솔 메뉴" style="max-width: 100%; height: auto; display: inline-block; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 4px;">
+                <img src="https://www.saraminimage.co.kr/fit/img/08_output_05.png" alt="부적격 판별 기준 설정 콘솔 메뉴" style="max-width: 100%; height: auto; display: inline-block; box-shadow: 0 2px 5px rgba(0,0,0,0.1); border-radius: 4px;">
             </div>
             
             <div class="guide-box">
                 <p style="margin-bottom: 0;">콘솔 메뉴의 <span class="ui-btn">판별 기준 설정</span> 버튼을 누르면 판별 기준 제어 팝업이 뜹니다. 이 기능을 영리하게 활용하면 각 기업의 고유한 내부 채용 기준에 맞게 부적격 점수 컷라인 기준을 유연하고 섬세하게 조정하실 수 있습니다.</p>
             </div>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/09_down_06.png" alt="부적격 판별 기준 설정" class="manual-img">
+            <img src="https://www.saraminimage.co.kr/fit/img/09_down_06.png" alt="부적격 판별 기준 설정" class="manual-img">
             
             <div class="guide-box">
                 <ul style="margin-bottom: 10px;">
@@ -1436,11 +1457,11 @@ details[open] summary::after { content: '−'; }
             <div class="guide-box">
                 <p style="margin-bottom: 0;">응시자 리스트 가장 우측에 위치한 <span class="ui-btn">보기</span> 버튼을 클릭하시면, 무거운 파일 다운로드 과정 없이 빠르고 가벼운 브라우저 팝업 상에서 해당 응시자의 개별 상세 검사 결과를 즉시 확인하실 수 있습니다.</p>
             </div>
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/09_down_07.png" alt="개별 인원의 개인결과표 보기" class="manual-img img-large">
+            <img src="https://www.saraminimage.co.kr/fit/img/09_down_07.png" alt="개별 인원의 개인결과표 보기" class="manual-img img-large">
 
             <h3 style="margin-top: 50px;">6) 정보 보호 및 데이터 파기 관리 (신규 보안 정책)</h3>
             
-            <img loading="lazy" decoding="async" src="https://www.saraminimage.co.kr/fit/img/09_down_6.png" alt="파기 임박 표시 및 개별 수정 화면" class="manual-img img-large">
+            <img src="https://www.saraminimage.co.kr/fit/img/09_down_6.png" alt="파기 임박 표시 및 개별 수정 화면" class="manual-img img-large">
 
             <div class="warning-box" style="margin-top: 20px;">
                 <strong style="color: #e11d48;">⚠️ 파기 임박 스마트 알림 및 데이터 수정/삭제 권한 제한</strong>
@@ -1544,431 +1565,356 @@ details[open] summary::after { content: '−'; }
             </details>
         </section>
 
-        
-            
-<div class="pagination-bar" id="pagination-bar" hidden>
-    <button type="button" class="nav-btn prev-btn" id="btn-prev" title="이전 페이지" aria-label="이전 페이지">‹</button>
-    <button type="button" class="nav-btn next-btn" id="btn-next" title="다음 페이지" aria-label="다음 페이지">›</button>
-</div>
-
+        <!-- Pagination Bar -->
+        <div class="pagination-bar" id="pagination-bar" style="display: none;">
+            <a href="#" class="nav-btn prev-btn" id="btn-prev" onclick="goPrev(event)" title="이전 페이지">&#10094;</a>
+            <a href="#" class="nav-btn next-btn" id="btn-next" onclick="goNext(event)" title="다음 페이지">&#10095;</a>
         </div>
+
     </main>
 
-    
-<button type="button" class="chatbot-fab" id="chatbot-fab" title="AI 매뉴얼 도우미" aria-label="AI 매뉴얼 도우미 열기" aria-controls="chatbot-window" aria-expanded="false">
-    <span aria-hidden="true">🤖</span>
-</button>
-
-<aside class="chatbot-window" id="chatbot-window" aria-labelledby="chatbot-title" hidden>
-    <div class="chatbot-header">
-        <span id="chatbot-title">FIT AI 매뉴얼 도우미</span>
-        <button type="button" class="chatbot-close" id="chatbot-close" aria-label="도우미 닫기">✕</button>
+    <!-- Chatbot Floating Action Button -->
+    <div class="chatbot-fab" id="chatbot-fab" title="AI 매뉴얼 도우미">
+        <span>🤖</span>
     </div>
 
-    <div class="chat-quick-actions">
-        <button type="button" class="chat-chip" data-target="step1">검사 생성</button>
-        <button type="button" class="chat-chip" data-target="step2">데이터 보관 정책</button>
-        <button type="button" class="chat-chip" data-target="info-edit">보안 모드 설정</button>
-        <button type="button" class="chat-chip" data-target="qna">2차 인증 잠금</button>
+    <!-- Chatbot Window -->
+    <div class="chatbot-window" id="chatbot-window">
+        <div class="chatbot-header">
+            <span>FIT AI 매뉴얼 도우미</span>
+            <button class="chatbot-close" id="chatbot-close">✕</button>
+        </div>
+        
+        <!-- Quick Action Buttons -->
+        <div class="chat-quick-actions">
+            <button class="chat-chip" onclick="navigateTo('#step1')">검사 생성</button>
+            <button class="chat-chip" onclick="navigateTo('#step2')">데이터 보관 정책</button>
+            <button class="chat-chip" onclick="navigateTo('#info-edit')">보안 모드 설정</button>
+            <button class="chat-chip" onclick="navigateTo('#qna')">2차 인증 잠금</button>
+        </div>
+
+        <div class="chatbot-messages" id="chatbot-messages">
+            <div class="message bot">
+                안녕하세요! 👋<br>새로워진 사람인 FIT 검사 관리자 시스템(Ver 2.4)에 대해 궁금한 점이 있으신가요? 매뉴얼 내용을 바탕으로 스마트하게 답변해 드립니다.
+            </div>
+        </div>
+        <div class="chatbot-input-area">
+            <input type="text" class="chatbot-input" id="chatbot-input" placeholder="질문을 입력하세요..." onkeypress="handleEnter(event)">
+            <button class="chatbot-send" id="chatbot-send" onclick="sendMessage()">➤</button>
+        </div>
     </div>
 
-    <div class="chatbot-messages" id="chatbot-messages" aria-live="polite" aria-label="대화 내용"></div>
-
-    <div class="chatbot-input-area">
-        <label class="sr-only" for="chatbot-input">질문 입력</label>
-        <input type="text" class="chatbot-input" id="chatbot-input" placeholder="질문을 입력하세요..." autocomplete="off">
-        <button type="button" class="chatbot-send" id="chatbot-send" aria-label="질문 전송">➤</button>
-    </div>
-</aside>
-
-
+    <!-- Script for SPA Logic and Chatbot -->
     <script>
+        // 1. Pagination & Navigation Logic (SPA)
+        const pages = ['cover', 'register', 'login', 'dashboard', 'info-edit', 'step1', 'step2', 'step3', 'step4', 'step5', 'result-step1', 'result-step2', 'qna'];
+        let currentIndex = 0;
 
-(() => {
-    'use strict';
+        window.addEventListener('DOMContentLoaded', () => {
+            buildManualIndex(); 
+            handleHashChange(); 
+            window.addEventListener('hashchange', handleHashChange);
+        });
 
-    const state = {
-        pages: ['cover', 'register', 'login', 'dashboard', 'info-edit', 'step1', 'step2', 'step3', 'step4', 'step5', 'result-step1', 'result-step2', 'qna'],
-        currentIndex: 0,
-        manualIndex: []
-    };
+        function handleHashChange() {
+            let hash = window.location.hash.substring(1);
+            
+            if (hash === 'create-test') hash = 'step1';
+            if (hash === 'results') hash = 'result-step1';
 
-    const els = {};
+            if (!pages.includes(hash)) {
+                hash = 'cover'; // Default page
+            }
 
-    document.addEventListener('DOMContentLoaded', init);
+            showPage(hash);
+            window.scrollTo({ top: 0 }); 
+        }
 
-    function init() {
-        cacheElements();
-        wrapTables();
-        seedWelcomeMessage();
-        buildManualIndex();
-        bindEvents();
-        syncPageFromHash();
-    }
+        function showPage(pageId) {
+            currentIndex = pages.indexOf(pageId);
+            
+            // Toggle Section Visibility
+            document.querySelectorAll('section.page-section').forEach(sec => {
+                sec.classList.remove('active');
+            });
+            const targetSection = document.getElementById(pageId);
+            if(targetSection) targetSection.classList.add('active');
 
-    function cacheElements() {
-        els.body = document.body;
-        els.sidebar = document.querySelector('.sidebar');
-        els.navToggle = document.getElementById('nav-toggle');
-        els.navMenu = document.getElementById('nav-menu');
-        els.main = document.getElementById('main-content');
-        els.sections = Array.from(document.querySelectorAll('section.page-section'));
-        els.pagination = document.getElementById('pagination-bar');
-        els.prevBtn = document.getElementById('btn-prev');
-        els.nextBtn = document.getElementById('btn-next');
-        els.fab = document.getElementById('chatbot-fab');
-        els.chatWindow = document.getElementById('chatbot-window');
-        els.chatClose = document.getElementById('chatbot-close');
-        els.chatMessages = document.getElementById('chatbot-messages');
-        els.chatInput = document.getElementById('chatbot-input');
-        els.chatSend = document.getElementById('chatbot-send');
-    }
+            // Hide/Show Header based on cover page
+            const mainContent = document.getElementById('main-content');
+            
+            if(pageId === 'cover') {
+                if(mainContent) mainContent.classList.add('cover-active');
+            } else {
+                if(mainContent) mainContent.classList.remove('cover-active');
+            }
 
-    function bindEvents() {
-        window.addEventListener('hashchange', syncPageFromHash);
-
-        document.addEventListener('click', (event) => {
-            const anchor = event.target.closest('a[href^="#"]');
-            const quickButton = event.target.closest('[data-target]');
-
-            if (anchor) {
-                const targetId = anchor.getAttribute('href').slice(1);
-                if (targetId) {
-                    event.preventDefault();
-                    navigateTo(targetId);
+            // Update Sidebar Active State
+            document.querySelectorAll('nav ul li a').forEach(a => {
+                a.classList.remove('active');
+                a.classList.remove('sub-active');
+            });
+            
+            if (pageId !== 'cover') {
+                if (pageId.startsWith('step')) {
+                    const mainLink = document.querySelector(`nav > ul > li > a[href="#step1"]`);
+                    if(mainLink) mainLink.classList.add('active');
+                    const subLink = document.querySelector(`nav ul ul li a[href="#${pageId}"]`);
+                    if(subLink) subLink.classList.add('sub-active');
+                } else if (pageId.startsWith('result-step')) {
+                    const mainLink = document.querySelector(`nav > ul > li > a[href="#result-step1"]`);
+                    if(mainLink) mainLink.classList.add('active');
+                    const subLink = document.querySelector(`nav ul ul li a[href="#${pageId}"]`);
+                    if(subLink) subLink.classList.add('sub-active');
+                } else {
+                    const activeMainLink = document.querySelector(`nav > ul > li > a[href="#${pageId}"]`);
+                    if(activeMainLink) activeMainLink.classList.add('active');
                 }
             }
 
-            if (quickButton) {
-                const targetId = quickButton.dataset.target;
-                if (targetId) {
-                    navigateTo(targetId);
-                    closeChatbot();
+            updatePagination(pageId);
+        }
+
+        function updatePagination(pageId) {
+            const paginationBar = document.getElementById('pagination-bar');
+            const btnPrev = document.getElementById('btn-prev');
+            const btnNext = document.getElementById('btn-next');
+
+            if(pageId === 'cover') {
+                paginationBar.style.display = 'none';
+                return;
+            } else {
+                paginationBar.style.display = 'flex';
+            }
+
+            if (currentIndex > 1) { // 1 is register (skip cover)
+                btnPrev.classList.remove('hidden');
+            } else {
+                btnPrev.classList.add('hidden');
+            }
+
+            if (currentIndex < pages.length - 1) {
+                btnNext.classList.remove('hidden');
+            } else {
+                btnNext.classList.add('hidden');
+            }
+        }
+
+        function goPrev(e) {
+            e.preventDefault();
+            if(currentIndex > 1) window.location.hash = pages[currentIndex - 1];
+        }
+
+        function goNext(e) {
+            e.preventDefault();
+            if(currentIndex < pages.length - 1) window.location.hash = pages[currentIndex + 1];
+        }
+
+        function navigateTo(selector) {
+            window.location.hash = selector.substring(1);
+        }
+
+        // 2. Upgraded Chatbot Logic (Fuzzy & Keyword-based)
+        let manualIndex = [];
+
+        function buildManualIndex() {
+            const sections = document.querySelectorAll('main section.page-section:not(#cover)');
+            sections.forEach(section => {
+                const titleEl = section.querySelector('h2');
+                if (titleEl) {
+                    let title = titleEl.textContent;
+                    if(section.id.startsWith('step') || section.id.startsWith('result-step')) {
+                        const stepHeader = section.querySelector('.step-header');
+                        if(stepHeader) title += " - " + stepHeader.textContent;
+                    }
+                    
+                    const id = section.id;
+                    const content = section.textContent.replace(/\s+/g, ' ').trim(); 
+                    
+                    const keywords = title.split(' ').concat(content.split(' ')).filter(w => w.length > 1);
+                    
+                    manualIndex.push({
+                        id: id,
+                        title: title,
+                        content: content,
+                        keywords: [...new Set(keywords)]
+                    });
                 }
-            }
-        });
-
-        els.prevBtn?.addEventListener('click', () => {
-            const targetIndex = state.currentIndex - 1;
-            if (targetIndex >= 1) navigateTo(state.pages[targetIndex]);
-        });
-
-        els.nextBtn?.addEventListener('click', () => {
-            const targetIndex = state.currentIndex + 1;
-            if (targetIndex < state.pages.length) navigateTo(state.pages[targetIndex]);
-        });
-
-        els.navToggle?.addEventListener('click', () => {
-            const expanded = els.sidebar.classList.toggle('is-open');
-            els.navToggle.setAttribute('aria-expanded', String(expanded));
-            els.body.classList.toggle('nav-open', expanded);
-        });
-
-        els.fab?.addEventListener('click', toggleChatbot);
-        els.chatClose?.addEventListener('click', closeChatbot);
-        els.chatSend?.addEventListener('click', handleSendMessage);
-        els.chatInput?.addEventListener('keydown', (event) => {
-            if (event.key === 'Enter') {
-                event.preventDefault();
-                handleSendMessage();
-            }
-        });
-
-        document.addEventListener('keydown', (event) => {
-            if (event.key === 'Escape') {
-                closeChatbot();
-                if (els.sidebar?.classList.contains('is-open')) {
-                    els.sidebar.classList.remove('is-open');
-                    els.navToggle?.setAttribute('aria-expanded', 'false');
-                    els.body.classList.remove('nav-open');
-                }
-            }
-        });
-    }
-
-    function wrapTables() {
-        document.querySelectorAll('table').forEach((table) => {
-            if (table.parentElement?.classList.contains('table-wrap')) return;
-            const wrapper = document.createElement('div');
-            wrapper.className = 'table-wrap';
-            table.parentNode.insertBefore(wrapper, table);
-            wrapper.appendChild(table);
-        });
-    }
-
-    function seedWelcomeMessage() {
-        appendBotMessage({
-            title: '안녕하세요! 👋',
-            summary: '새로워진 사람인 FIT 검사 관리자 시스템(Ver 2.4)에 대해 궁금한 점이 있으신가요? 매뉴얼 내용을 바탕으로 빠르게 안내해 드립니다.'
-        });
-    }
-
-    function syncPageFromHash() {
-        let pageId = window.location.hash.replace('#', '').trim();
-
-        if (pageId === 'create-test') pageId = 'step1';
-        if (pageId === 'results') pageId = 'result-step1';
-        if (!state.pages.includes(pageId)) pageId = 'cover';
-
-        showPage(pageId);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        if (window.innerWidth <= 960) {
-            els.sidebar?.classList.remove('is-open');
-            els.navToggle?.setAttribute('aria-expanded', 'false');
-            els.body.classList.remove('nav-open');
-        }
-    }
-
-    function navigateTo(pageId) {
-        if (!state.pages.includes(pageId)) return;
-        if (window.location.hash === `#${pageId}`) {
-            showPage(pageId);
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            return;
-        }
-        window.location.hash = pageId;
-    }
-
-    function showPage(pageId) {
-        state.currentIndex = state.pages.indexOf(pageId);
-
-        els.sections.forEach((section) => {
-            const isActive = section.id === pageId;
-            section.hidden = !isActive;
-            section.classList.toggle('active', isActive);
-        });
-
-        els.main?.classList.toggle('cover-active', pageId === 'cover');
-        updateNavState(pageId);
-        updatePagination(pageId);
-    }
-
-    function updateNavState(pageId) {
-        document.querySelectorAll('.sidebar a[href^="#"]').forEach((link) => {
-            link.classList.remove('active', 'sub-active');
-        });
-
-        if (pageId === 'cover') return;
-
-        if (pageId.startsWith('step')) {
-            document.querySelector('.sidebar > .nav-scroll > ul > li > a[href="#step1"]')?.classList.add('active');
-            document.querySelector(`.sidebar ul ul a[href="#${pageId}"]`)?.classList.add('sub-active');
-            return;
-        }
-
-        if (pageId.startsWith('result-step')) {
-            document.querySelector('.sidebar > .nav-scroll > ul > li > a[href="#result-step1"]')?.classList.add('active');
-            document.querySelector(`.sidebar ul ul a[href="#${pageId}"]`)?.classList.add('sub-active');
-            return;
-        }
-
-        document.querySelector(`.sidebar > .nav-scroll > ul > li > a[href="#${pageId}"]`)?.classList.add('active');
-    }
-
-    function updatePagination(pageId) {
-        if (!els.pagination || !els.prevBtn || !els.nextBtn) return;
-
-        if (pageId === 'cover') {
-            els.pagination.hidden = true;
-            return;
-        }
-
-        els.pagination.hidden = false;
-
-        const prevDisabled = state.currentIndex <= 1;
-        const nextDisabled = state.currentIndex >= state.pages.length - 1;
-
-        els.prevBtn.disabled = prevDisabled;
-        els.nextBtn.disabled = nextDisabled;
-    }
-
-    function buildManualIndex() {
-        const sections = document.querySelectorAll('main section.page-section:not(#cover)');
-        const sectionIndex = [];
-
-        sections.forEach((section) => {
-            const titleElement = section.querySelector('h2');
-            if (!titleElement) return;
-
-            let title = titleElement.textContent.trim();
-            const stepHeader = section.querySelector('.step-header');
-            if (stepHeader) title += ` - ${stepHeader.textContent.trim()}`;
-
-            const content = normalizeSpace(section.textContent);
-            sectionIndex.push({
-                id: section.id,
-                title,
-                content
             });
-        });
-
-        document.querySelectorAll('#qna details').forEach((detail) => {
-            const summary = detail.querySelector('summary')?.textContent.trim() || '';
-            const answer = normalizeSpace(detail.querySelector('.qna-content')?.textContent || '');
-            sectionIndex.push({
-                id: 'qna',
-                title: `FAQ: ${summary.replace(/^Q\.\s*/, '')}`,
-                content: answer
-            });
-        });
-
-        state.manualIndex = sectionIndex;
-    }
-
-    function normalizeSpace(value) {
-        return String(value || '').replace(/\s+/g, ' ').trim();
-    }
-
-    function tokenizeKorean(text) {
-        return normalizeSpace(text.toLowerCase())
-            .split(/\s+/)
-            .map((token) => token.trim())
-            .filter((token) => token.length > 1);
-    }
-
-    function findBestMatch(query) {
-        const normalizedQuery = normalizeSpace(query.toLowerCase());
-        if (!normalizedQuery) return null;
-
-        const tokens = [...new Set(tokenizeKorean(normalizedQuery))];
-        let bestMatch = null;
-        let bestScore = 0;
-
-        state.manualIndex.forEach((item) => {
-            const title = item.title.toLowerCase();
-            const content = item.content.toLowerCase();
-            let score = 0;
-
-            if (title.includes(normalizedQuery)) score += 18;
-            if (content.includes(normalizedQuery)) score += 8;
-
-            tokens.forEach((token) => {
-                if (title.includes(token)) score += 4;
-                if (content.includes(token)) score += 1.5;
-            });
-
-            if (score > bestScore) {
-                bestScore = score;
-                bestMatch = item;
-            }
-        });
-
-        if (bestScore < 3) return null;
-        return bestMatch;
-    }
-
-    function handleSendMessage() {
-        const userText = normalizeSpace(els.chatInput?.value);
-        if (!userText) return;
-
-        appendUserMessage(userText);
-        els.chatInput.value = '';
-
-        window.setTimeout(() => {
-            const match = findBestMatch(userText);
-            if (!match) {
-                appendBotMessage({
-                    title: '관련 내용을 찾지 못했습니다.',
-                    summary: '단어를 조금 다르게 입력하시거나, 좌측 메뉴에서 해당 항목을 직접 확인해 주세요.'
+            
+            const qnaDetails = document.querySelectorAll('#qna details');
+            qnaDetails.forEach(detail => {
+                const question = detail.querySelector('summary').textContent;
+                const answer = detail.querySelector('.qna-content').textContent.replace(/\s+/g, ' ').trim();
+                
+                manualIndex.push({
+                    id: 'qna',
+                    title: 'FAQ: ' + question.replace('Q. ', ''),
+                    content: answer,
+                    keywords: (question + ' ' + answer).split(' ').filter(w => w.length > 1)
                 });
+            });
+        }
+
+        const fab = document.getElementById('chatbot-fab');
+        const windowEl = document.getElementById('chatbot-window');
+        const closeBtn = document.getElementById('chatbot-close');
+
+        fab.addEventListener('click', () => {
+            windowEl.style.display = windowEl.style.display === 'flex' ? 'none' : 'flex';
+            if (windowEl.style.display === 'flex') {
+                document.getElementById('chatbot-input').focus();
+            }
+        });
+
+        closeBtn.addEventListener('click', () => {
+            windowEl.style.display = 'none';
+        });
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function sendMessage() {
+            const inputEl = document.getElementById('chatbot-input');
+            const userText = inputEl.value.trim();
+
+            if (!userText) return;
+
+            appendMessage(userText, 'user');
+            inputEl.value = '';
+
+            setTimeout(() => {
+                const response = findAnswer(userText);
+                appendMessage(response, 'bot');
+            }, 500);
+        }
+
+        function findAnswer(query) {
+            if (!query) return "질문을 입력해주세요.";
+
+            const queryWords = query.toLowerCase().split(/\s+/).filter(w => w.length > 1);
+            let bestMatch = null;
+            let maxScore = 0;
+
+            manualIndex.forEach(item => {
+                let score = 0;
+                const contentLower = item.content.toLowerCase();
+                const titleLower = item.title.toLowerCase();
+
+                // Exact match checking
+                if(titleLower.includes(query.toLowerCase())) score += 15;
+                if(contentLower.includes(query.toLowerCase())) score += 5;
+
+                // Keyword match checking
+                queryWords.forEach(q => {
+                    if (titleLower.includes(q)) score += 3;
+                    if (contentLower.includes(q)) score += 1;
+                });
+
+                if (score > maxScore) {
+                    maxScore = score;
+                    bestMatch = item;
+                }
+            });
+
+            if (bestMatch && maxScore > 1) { // Minimum threshold
+                let linkBtn = '';
+                if (bestMatch.id && bestMatch.id !== 'qna') {
+                    linkBtn = `<button class="chat-link-btn" onclick="navigateTo('#${bestMatch.id}')">🚀 '${bestMatch.title}' 내용 확인하기</button>`;
+                }
+                
+                let summary = bestMatch.content.substring(0, 160) + "...";
+                if(bestMatch.id === 'qna') summary = bestMatch.content; 
+
+                return `${linkBtn}
+                        <strong style="color:var(--primary-color);">💡 관련 매뉴얼 정보를 찾았습니다.</strong><br>
+                        <div style="margin-top:8px; padding:10px; background:#f8fafc; border-radius:6px; font-size:0.9rem;">
+                            <strong>[${bestMatch.title}]</strong><br>
+                            ${summary}
+                        </div>`;
+            } else {
+                return "관련 내용을 찾지 못했습니다. 😢<br>단어를 다르게 하여 다시 질문하시거나 좌측 메뉴를 확인해 주세요.";
+            }
+        }
+
+        function appendMessage(html, sender) {
+            const messagesEl = document.getElementById('chatbot-messages');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${sender}`;
+            msgDiv.innerHTML = html;
+            messagesEl.appendChild(msgDiv);
+            messagesEl.scrollTop = messagesEl.scrollHeight;
+        }
+
+        // --- Sidebar Search Logic ---
+        const menuSearchInput = document.getElementById('menu-search-input');
+        const searchResultsDropdown = document.getElementById('search-results');
+
+        function handleMenuSearch(e) {
+            const query = e.target.value.trim().toLowerCase();
+            if (query.length < 2) {
+                searchResultsDropdown.style.display = 'none';
                 return;
             }
 
-            appendBotMessage({
-                title: '관련 매뉴얼 정보를 찾았습니다.',
-                summary: truncate(match.content, match.id === 'qna' ? 260 : 180),
-                targetId: match.id,
-                targetLabel: `[${match.title}] 내용 확인하기`,
-                metaTitle: `[${match.title}]`
+            const queryWords = query.split(/\s+/).filter(w => w.length > 0);
+            let matches = [];
+
+            manualIndex.forEach(item => {
+                let score = 0;
+                const contentLower = item.content.toLowerCase();
+                const titleLower = item.title.toLowerCase();
+
+                // 제목 일치 가중치 부여
+                if(titleLower.includes(query)) score += 20;
+                // 본문 일치
+                if(contentLower.includes(query)) score += 5;
+
+                // 단어별 추가 매칭
+                queryWords.forEach(q => {
+                    if (titleLower.includes(q)) score += 5;
+                    if (contentLower.includes(q)) score += 2;
+                });
+
+                if (score > 0) {
+                    matches.push({ item, score });
+                }
             });
-        }, 250);
-    }
 
-    function truncate(text, maxLength) {
-        if (text.length <= maxLength) return text;
-        return `${text.slice(0, maxLength).trim()}...`;
-    }
+            matches.sort((a, b) => b.score - a.score);
+            matches = matches.slice(0, 5); // 상위 5개 결과만 노출
 
-    function appendUserMessage(text) {
-        const message = document.createElement('div');
-        message.className = 'message user';
-        message.textContent = text;
-        els.chatMessages.appendChild(message);
-        scrollMessagesToBottom();
-    }
-
-    function appendBotMessage({ title, summary, targetId, targetLabel, metaTitle }) {
-        const message = document.createElement('div');
-        message.className = 'message bot';
-
-        if (title) {
-            const strong = document.createElement('strong');
-            strong.style.color = 'var(--primary)';
-            strong.textContent = `💡 ${title}`;
-            message.appendChild(strong);
+            if (matches.length > 0) {
+                searchResultsDropdown.innerHTML = matches.map(m => `
+                    <div class="search-result-item" onclick="navigateFromSearch('${m.item.id}')">
+                        <div class="search-result-title">${m.item.title}</div>
+                        <div class="search-result-snippet">${m.item.content.substring(0, 60)}...</div>
+                    </div>
+                `).join('');
+                searchResultsDropdown.style.display = 'block';
+            } else {
+                searchResultsDropdown.innerHTML = `<div class="search-result-item" style="color:#94a3b8; text-align:center; padding: 20px 10px;">'${query}'에 대한 검색 결과가 없습니다.</div>`;
+                searchResultsDropdown.style.display = 'block';
+            }
         }
 
-        if (metaTitle) {
-            const info = document.createElement('div');
-            info.style.marginTop = '10px';
-            info.style.padding = '10px';
-            info.style.background = '#f8fafc';
-            info.style.borderRadius = '8px';
-            info.style.fontSize = '0.9rem';
-
-            const titleEl = document.createElement('strong');
-            titleEl.textContent = metaTitle;
-            info.appendChild(titleEl);
-
-            const br = document.createElement('br');
-            info.appendChild(br);
-
-            const summaryNode = document.createTextNode(summary);
-            info.appendChild(summaryNode);
-
-            message.appendChild(info);
-        } else if (summary) {
-            const p = document.createElement('p');
-            p.style.margin = title ? '10px 0 0' : '0';
-            p.textContent = summary;
-            message.appendChild(p);
+        function navigateFromSearch(id) {
+            if(id === 'qna') {
+                navigateTo('#qna');
+            } else {
+                navigateTo('#' + id);
+            }
+            searchResultsDropdown.style.display = 'none';
+            menuSearchInput.value = ''; // 검색창 초기화
         }
 
-        if (targetId && targetId !== 'cover') {
-            const button = document.createElement('button');
-            button.type = 'button';
-            button.className = 'chat-link-btn';
-            button.dataset.target = targetId;
-            button.textContent = `👉 ${targetLabel}`;
-            message.appendChild(button);
-        }
-
-        els.chatMessages.appendChild(message);
-        scrollMessagesToBottom();
-    }
-
-    function scrollMessagesToBottom() {
-        els.chatMessages.scrollTop = els.chatMessages.scrollHeight;
-    }
-
-    function toggleChatbot() {
-        const isHidden = els.chatWindow.hasAttribute('hidden');
-        if (isHidden) {
-            els.chatWindow.removeAttribute('hidden');
-            els.fab?.setAttribute('aria-expanded', 'true');
-            els.chatInput?.focus();
-        } else {
-            closeChatbot();
-        }
-    }
-
-    function closeChatbot() {
-        els.chatWindow?.setAttribute('hidden', '');
-        els.fab?.setAttribute('aria-expanded', 'false');
-    }
-})();
-
+        // 검색창 외부 영역 클릭 시 드롭다운 닫기
+        document.addEventListener('click', function(event) {
+            if (!event.target.closest('.search-container')) {
+                searchResultsDropdown.style.display = 'none';
+            }
+        });
     </script>
 </body>
 </html>
