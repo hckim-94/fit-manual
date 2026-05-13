@@ -236,6 +236,29 @@
             transform: translateY(-50%) scale(1.5); 
         }
 
+        /* --- Navigation New Badge & Highlight --- */
+        .nav-badge-new {
+            background-color: #ef4444;
+            color: white;
+            font-size: 0.65rem;
+            padding: 2px 5px;
+            border-radius: 10px;
+            margin-left: 5px;
+            font-weight: bold;
+            vertical-align: middle;
+        }
+        .nav-item-highlight {
+            background-color: #fef2f2 !important;
+            color: #b91c1c !important;
+            font-weight: 600 !important;
+            border-radius: 4px;
+            margin: 2px 10px;
+            padding: 8px 10px 8px 20px !important;
+        }
+        .nav-item-highlight:hover, .nav-item-highlight.sub-active {
+            background-color: #fee2e2 !important;
+        }
+
         /* --- Main Content --- */
         main {
             margin-left: var(--sidebar-width);
@@ -865,7 +888,7 @@
 
     <nav>
         <h2><a href="#cover">FIT 관리자 AI매뉴얼</a></h2>
-        <div class="version-tag">Final update 2026-05-14(KST)</div>
+        <div class="version-tag">Final update 2026-05-08(KST)</div>
 
         <!-- 검색 컨테이너 -->
         <div class="search-container">
@@ -956,6 +979,11 @@
                     <li><strong>이용 동의:</strong> <span class="hl-bg">서비스 이용 동의</span> 및 <span class="hl-bg">개인정보 위탁 동의</span> 약관을 꼼꼼히 확인하고 필수 항목에 체크한 뒤 가입을 완료합니다.</li>
                 </ol>
             </div>
+
+            <div class="warning-box">
+                <strong>🚨 Master 인증 시 주의사항</strong>
+                <p>가입 본인 인증 시, <strong>신청자의 '이름' 및 '이메일'과 가입을 진행하는 사용자의 인증 정보가 정확히 일치</strong>해야만 인증 및 가입이 가능합니다. (불일치 시 가입이 차단됩니다.)</p>
+            </div>
             
             <div class="img-row">
                 <div class="img-col">
@@ -987,7 +1015,7 @@
             
             <div class="warning-box">
                 <strong>🚨 Member 인증 시 주의사항</strong>
-                <p>가입 본인 인증 시, <strong>Master가 초대를 보낼 때 입력한 '이름'과 가입을 진행하는 사용자의 인증 '이름'이 정확히 일치</strong>해야만 인증 및 가입이 가능합니다. (다른 이름으로 인증 시도 시 가입이 차단됩니다.)</p>
+                <p>가입 본인 인증 시, <strong>Master가 초대를 보낼 때 지정한 '이름' 및 '이메일'과 가입을 진행하는 사용자의 인증 정보가 정확히 일치</strong>해야만 인증 및 가입이 가능합니다. (불일치 시 가입이 차단됩니다.)</p>
             </div>
             
             <div class="img-row">
@@ -1127,7 +1155,7 @@
                 <p>상단 영역에 노출된 <strong>기업명을 클릭</strong>하면 전체적인 시스템 옵션을 조율할 수 있는 기업관리 페이지 창으로 이동됩니다.</p>
             </div>
             
-            <img src="https://www.saraminimage.co.kr/fit/img/03_home_2.png" alt="기업명 클릭 기업관리 이동" class="manual-img img-60" loading="lazy" decoding="async">
+            <img src="https://www.saraminimage.co.kr/fit/img/03_home_02.png" alt="기업명 클릭 기업관리 이동" class="manual-img img-60" loading="lazy" decoding="async">
 
             <h4 class="list-title">⚙️ 기업 관리 탭 주요 설정</h4>
             <ul class="desc-list">
@@ -1680,7 +1708,7 @@
 
             <div class="warning-box">
                 <strong>데이터 파기 임박 시각화 및 시스템 편집 제어</strong>
-                <p style="margin-top: 5px; font-size: 0.95rem; color: #475569;">신규 검사 등록 시 설정해 두었던 '보관 기간' 정책에 따라 파기 로직이 엄격하게 가동됩니다.</p>
+                <p>신규 검사 등록 시 설정해 두었던 '보관 기간' 정책에 따라 파기 로직이 엄격하게 가동됩니다.</p>
                 <ul>
                     <li><strong>붉은색 경고 알림:</strong> 검사 결과 데이터의 완전 파기 예정일이 <strong>30일 이내로 다가온 응시자 행</strong>은 리스트 상에서 눈에 띄게 <span class="hl-bg">붉은색 배경</span>으로 물들어 표시됩니다. 관리자는 해당 행을 클릭하여 정확한 소멸 기한을 점검하고 백업 여부를 결정할 수 있습니다.</li>
                     <li><strong>편집 기능 전면 블락:</strong> 설정한 최소 보관 기간(연락처 보관 기간 등)이 만료되어 데이터 비식별화 및 파기 프로세스가 이미 가동된 지원자 행에 대해서는 <b class="ui-btn">데이터 수정</b>, <b class="ui-btn">응시자 삭제</b> 기능 등의 <strong>물리적 개입 버튼 접근이 원천 차단</strong>됩니다.</li>
