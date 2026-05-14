@@ -235,7 +235,6 @@
             transform: translateY(-50%) scale(1.5); 
         }
 
-
         /* --- Main Content --- */
         main {
             margin-left: var(--sidebar-width);
@@ -526,8 +525,7 @@
             line-height: 1;
             margin-top: -2px;
         }
-        .desc-list li > span,
-        .desc-list li > .desc-detail { 
+        .desc-list li > span, .desc-list li > .desc-detail { 
             color: #475569;
             padding-left: 22px;
             display: block; 
@@ -871,8 +869,8 @@
         <!-- 검색 컨테이너 -->
         <div class="search-container">
             <label for="menu-search-input" class="sr-only">매뉴얼 내용 검색</label>
-            <input type="text" id="menu-search-input" placeholder="매뉴얼 내용 검색..." autocomplete="off" role="combobox" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false">
-            <div id="search-results" class="search-results-dropdown" role="listbox" aria-label="검색 결과" style="display:none;"></div>
+            <input type="text" id="menu-search-input" placeholder="매뉴얼 내용 검색..." autocomplete="off" role="combobox" aria-controls="search-results" aria-expanded="false">
+            <div id="search-results" class="search-results-dropdown" style="display:none;" role="listbox"></div>
         </div>
 
         <ul>
@@ -1133,7 +1131,7 @@
                 <p>상단 영역에 노출된 <strong>기업명을 클릭</strong>하면 전체적인 시스템 옵션을 조율할 수 있는 기업관리 페이지 창으로 이동됩니다.</p>
             </div>
             
-            <img src="https://www.saraminimage.co.kr/fit/img/03_home_02.png" alt="기업명 클릭 기업관리 이동" class="manual-img img-60" loading="lazy" decoding="async">
+            <img src="https://www.saraminimage.co.kr/fit/img/03_home_2.png" alt="기업명 클릭 기업관리 이동" class="manual-img img-60" loading="lazy" decoding="async">
 
             <h4 class="list-title">⚙️ 기업 관리 탭 주요 설정</h4>
             <ul class="desc-list">
@@ -1262,9 +1260,9 @@
                 <p style="text-align: center; font-weight: 500;">검사명 ➔ <span style="color:#e11d48; font-weight:700;">데이터 관리</span> ➔ 응시자 등록 ➔ 안내 및 현황</p>
             </div>
 
-            <h4 class="list-title">개인정보 보관 기간 자동 설정 안내</h4>
+            <h4 class="list-title">1. 개인정보 보관 기간 자동 설정 안내 (SaaS형)</h4>
             <div class="guide-box">
-                <p>개인정보 보호 규정 준수를 위해, 데이터 보관 기간이 <strong>시스템 기본값으로 안전하게 세팅</strong>되어 있습니다.</p>
+                <p>SaaS형 서비스를 이용하시는 기업의 경우, 데이터 보관 기간 옵션이 <strong>시스템 기본값으로 안전하게 세팅</strong>되어 제공됩니다.</p>
                 <ul>
                     <li><strong>기본 보관 기간:</strong> 초기 검사 생성 시 <strong>이름/결과지는 3년</strong>, <strong>연락처는 180일</strong>로 자동 지정됩니다.</li>
                     <li><strong>설정 가능 옵션:</strong>
@@ -1276,10 +1274,23 @@
                 </ul>
             </div>
 
-            <img src="https://www.saraminimage.co.kr/fit/img/04_test_4.png" alt="보관 기간 설정 화면 이미지" class="manual-img" loading="lazy" decoding="async">
+            <img src="https://www.saraminimage.co.kr/fit/img/04_test_4.png" alt="SaaS형 보관 기간 설정 화면 이미지" class="manual-img" loading="lazy" decoding="async">
+
+            <h4 class="list-title">2. 개인정보 보관 기간 직접 작성 (대행형)</h4>
+            <div class="guide-box">
+                <p>대행형 서비스를 이용하시는 기업의 경우, 정해진 옵션 선택이 아닌 <strong>직접 원하는 보관 일수(숫자)를 수기로 작성</strong>하여 설정할 수 있습니다.</p>
+            </div>
+
+            <img src="https://www.saraminimage.co.kr/fit/img/04_test_04.png" alt="대행형 보관 기간 설정 화면 이미지" class="manual-img" loading="lazy" decoding="async">
 
             <div class="warning-box">
-                <strong>⚠️ 보관 및 파기 관련 중요 주의사항</strong>
+                <strong>🚨 [매우 중요] 대행형 데이터 기간 설정 유의사항</strong>
+                <p>검사 진행 기간에 비해 데이터 보관 기간을 <strong>너무 짧게 직접 설정할 경우, 관리자가 결과를 확인 및 다운로드하기도 전에 데이터가 먼저 파기되는 치명적인 상황이 발생</strong>할 수 있습니다.<br>
+                보관 기간은 검사 종료일 이후의 채용 전형 일정까지 충분히 고려하여 매우 여유 있게 지정해 주시기 바랍니다.</p>
+            </div>
+
+            <div class="warning-box">
+                <strong>⚠️ 보관 및 파기 관련 공통 주의사항</strong>
                 <ul>
                     <li>응시자가 1명이라도 등록된 이후에는 <span class="hl-bg">설정된 '보관 기간'을 절대 수정할 수 없습니다.</span></li>
                     <li>데이터 보안 원칙에 따라, <strong>연락처 보관 기간은 이름 및 결과지 보관 기간보다 길게 설정할 수 없습니다.</strong></li>
@@ -1567,9 +1578,9 @@
                 <p style="color: #64748b; font-size: 0.95rem; margin-bottom: 0; margin-top: 5px;">* (참고) 홈 화면 최상단의 공통 메뉴인 [응시자 관리] 탭을 누르시면, 프로젝트 구분 없이 우리 기업이 진행한 전체 누적 응시자 리스트가 통합으로 펼쳐집니다.</p>
             </div>
             
-            <img src="https://www.saraminimage.co.kr/fit/img/05_output_7.png" alt="응시자 관리 탭 접근" class="manual-img img-100" loading="lazy" decoding="async">
+            <img src="https://www.saraminimage.co.kr/fit/img/05_output_7.png" alt="응시자 관리 탭 접근" class="manual-img img-95" loading="lazy" decoding="async">
 
-            <img src="https://www.saraminimage.co.kr/fit/img/05_output_8.png" alt="부가기능(필터)" class="manual-img img-100" loading="lazy" decoding="async">
+            <img src="https://www.saraminimage.co.kr/fit/img/05_output_8.png" alt="부가기능(필터)" class="manual-img img-95" loading="lazy" decoding="async">
             
             <h4 class="list-title">💡 부가기능의 상세 필터 및 발송 활용법</h4>
             <ul class="desc-list">
@@ -1824,24 +1835,32 @@
             const menuSearchInput = document.getElementById('menu-search-input');
             if(menuSearchInput) {
                 menuSearchInput.addEventListener('input', handleMenuSearch);
-                menuSearchInput.addEventListener('keydown', event => {
-                    if (event.key === 'Escape') {
-                        setSearchDropdownVisibility(false);
+                menuSearchInput.addEventListener('keydown', function(e) {
+                    if (e.key === 'Escape') {
+                        closeSearch();
                     }
                 });
             }
 
-            document.getElementById('btn-cover-start')?.addEventListener('click', () => navigateTo('#register-master'));
-            document.getElementById('btn-prev')?.addEventListener('click', goPrev);
-            document.getElementById('btn-next')?.addEventListener('click', goNext);
+            const btnCoverStart = document.getElementById('btn-cover-start');
+            if (btnCoverStart) btnCoverStart.addEventListener('click', () => navigateTo('#register-master'));
+            
+            const btnPrev = document.getElementById('btn-prev');
+            if (btnPrev) btnPrev.addEventListener('click', goPrev);
+            
+            const btnNext = document.getElementById('btn-next');
+            if (btnNext) btnNext.addEventListener('click', goNext);
 
-            document.getElementById('search-results')?.addEventListener('click', event => {
-                const button = event.target.closest('.search-result-item');
-                if (!button || button.tagName !== 'BUTTON') return;
-                const targetId = button.dataset.targetId;
-                const detailId = button.dataset.detailId || null;
-                navigateFromSearch(targetId, detailId);
-            });
+            const searchResults = document.getElementById('search-results');
+            if (searchResults) {
+                searchResults.addEventListener('click', event => {
+                    const button = event.target.closest('.search-result-item');
+                    if (!button || button.tagName !== 'BUTTON') return;
+                    const targetId = button.dataset.targetId;
+                    const detailId = button.dataset.detailId || null;
+                    navigateFromSearch(targetId, detailId);
+                });
+            }
         });
 
         function handleHashChange() {
@@ -1898,37 +1917,31 @@
             });
             
             if (pageId !== 'cover') {
+                let mainLink, subLink;
                 if (pageId.startsWith('register')) {
-                    const mainLink = document.querySelector(`nav > ul > li > a[href="#register-master"]`);
-                    if(mainLink) mainLink.classList.add('active');
-                    const subLink = document.querySelector(`nav ul ul li a[href="#${pageId}"]`);
-                    if(subLink) subLink.classList.add('sub-active');
+                    mainLink = document.querySelector(`nav > ul > li > a[href="#register-master"]`);
+                    subLink = document.querySelector(`nav ul ul li a[href="#${pageId}"]`);
                 } else if (['login', 'home', 'my-info', 'corp-manage', 'member-manage'].includes(pageId)) {
-                    const mainLink = document.querySelector(`nav > ul > li > a[href="#login"]`);
-                    if(mainLink) mainLink.classList.add('active');
-                    const subLink = document.querySelector(`nav ul ul li a[href="#${pageId}"]`);
-                    if(subLink) subLink.classList.add('sub-active');
+                    mainLink = document.querySelector(`nav > ul > li > a[href="#login"]`);
+                    subLink = document.querySelector(`nav ul ul li a[href="#${pageId}"]`);
                 } else if (pageId.startsWith('step')) {
-                    const mainLink = document.querySelector(`nav > ul > li > a[href="#step1"]`);
-                    if(mainLink) mainLink.classList.add('active');
-                    const subLink = document.querySelector(`nav ul ul li a[href="#${pageId}"]`);
-                    if(subLink) subLink.classList.add('sub-active');
+                    mainLink = document.querySelector(`nav > ul > li > a[href="#step1"]`);
+                    subLink = document.querySelector(`nav ul ul li a[href="#${pageId}"]`);
                 } else if (pageId.startsWith('result-')) {
-                    const mainLink = document.querySelector(`nav > ul > li > a[href="#result-home-status"]`);
-                    if(mainLink) mainLink.classList.add('active');
-                    const subLink = document.querySelector(`nav ul ul li a[href="#${pageId}"]`);
-                    if(subLink) subLink.classList.add('sub-active');
+                    mainLink = document.querySelector(`nav > ul > li > a[href="#result-home-status"]`);
+                    subLink = document.querySelector(`nav ul ul li a[href="#${pageId}"]`);
                 } else {
-                    const activeMainLink = document.querySelector(`nav > ul > li > a[href="#${pageId}"]`);
-                    if(activeMainLink) activeMainLink.classList.add('active');
+                    mainLink = document.querySelector(`nav > ul > li > a[href="#${pageId}"]`);
                 }
-            }
 
-            const currentSubLink = document.querySelector(`nav ul ul li a[href="#${pageId}"]`);
-            const currentMainLink = document.querySelector(`nav > ul > li > a[href="#${pageId}"]`);
-            const currentLink = currentSubLink || currentMainLink;
-            if (currentLink) {
-                currentLink.setAttribute('aria-current', 'page');
+                if (mainLink) mainLink.classList.add('active');
+                
+                if (subLink) {
+                    subLink.classList.add('sub-active');
+                    subLink.setAttribute('aria-current', 'page');
+                } else if (mainLink) {
+                    mainLink.setAttribute('aria-current', 'page');
+                }
             }
 
             updatePagination(pageId);
@@ -1939,9 +1952,7 @@
             const btnPrev = document.getElementById('btn-prev');
             const btnNext = document.getElementById('btn-next');
 
-            if(!paginationBar || !btnPrev || !btnNext) {
-                return;
-            }
+            if (!paginationBar || !btnPrev || !btnNext) return;
 
             if(pageId === 'cover') {
                 paginationBar.style.display = 'none';
@@ -1965,20 +1976,20 @@
 
         function goPrev(e) {
             e.preventDefault();
-            if(currentIndex > 1) window.location.hash = pages[currentIndex - 1];
+            if(currentIndex > 1) navigateTo('#' + pages[currentIndex - 1]);
         }
 
         function goNext(e) {
             e.preventDefault();
-            if(currentIndex < pages.length - 1) window.location.hash = pages[currentIndex + 1];
+            if(currentIndex < pages.length - 1) navigateTo('#' + pages[currentIndex + 1]);
         }
 
         function navigateTo(selector) {
-            const target = selector.startsWith('#') ? selector.substring(1) : selector;
-            if (window.location.hash.substring(1) === target) {
-                handleHashChange();
+            const newHash = selector.substring(1);
+            if (window.location.hash.substring(1) === newHash) {
+                handleHashChange(); // 강제 스크롤 재실행
             } else {
-                window.location.hash = target;
+                window.location.hash = newHash;
             }
         }
 
@@ -2008,12 +2019,13 @@
             // FAQ는 아코디언 디테일 별로 개별 인덱싱
             const qnaDetails = document.querySelectorAll('#qna details');
             qnaDetails.forEach(detail => {
-                const questionEl = detail.querySelector('summary');
-                const answerEl = detail.querySelector('.qna-content');
-                if (!questionEl || !answerEl) return;
-
-                const question = questionEl.textContent;
-                const answer = answerEl.textContent.replace(/\s+/g, ' ').trim();
+                const summaryEl = detail.querySelector('summary');
+                const contentEl = detail.querySelector('.qna-content');
+                
+                if (!summaryEl || !contentEl) return;
+                
+                const question = summaryEl.textContent;
+                const answer = contentEl.textContent.replace(/\s+/g, ' ').trim();
                 
                 manualIndex.push({
                     id: 'qna',
@@ -2053,26 +2065,20 @@
             return result;
         }
 
-        function setSearchDropdownVisibility(visible) {
+        function closeSearch() {
             const searchResultsDropdown = document.getElementById('search-results');
             const menuSearchInput = document.getElementById('menu-search-input');
-
-            if (searchResultsDropdown) {
-                searchResultsDropdown.style.display = visible ? 'block' : 'none';
-            }
-            if (menuSearchInput) {
-                menuSearchInput.setAttribute('aria-expanded', visible ? 'true' : 'false');
-            }
+            if (searchResultsDropdown) searchResultsDropdown.style.display = 'none';
+            if (menuSearchInput) menuSearchInput.setAttribute('aria-expanded', 'false');
         }
 
         function handleMenuSearch(e) {
             const searchResultsDropdown = document.getElementById('search-results');
-            if (!searchResultsDropdown) return;
-
-            const query = e.currentTarget.value.trim().toLowerCase();
+            const menuSearchInput = document.getElementById('menu-search-input');
+            const query = e.target.value.trim().toLowerCase();
             
             if (query.length < 2) {
-                setSearchDropdownVisibility(false);
+                closeSearch();
                 return;
             }
 
@@ -2116,16 +2122,18 @@
 
             if (matches.length > 0) {
                 searchResultsDropdown.innerHTML = matches.map(m => `
-                    <button type="button" class="search-result-item" role="option" data-target-id="${escapeHtml(m.item.id)}" data-detail-id="${escapeHtml(m.item.detailId || '')}">
+                    <button type="button" class="search-result-item" data-target-id="${escapeHtml(m.item.id)}" data-detail-id="${escapeHtml(m.item.detailId || '')}">
                         <div class="search-result-context">${m.item.id === 'qna' ? 'FAQ (자주 묻는 질문)' : '매뉴얼 본문'}</div>
                         <div class="search-result-title">${m.hlTitle}</div>
                         <div class="search-result-snippet">${m.hlSnippet}</div>
                     </button>
                 `).join('');
-                setSearchDropdownVisibility(true);
+                searchResultsDropdown.style.display = 'block';
+                if (menuSearchInput) menuSearchInput.setAttribute('aria-expanded', 'true');
             } else {
-                searchResultsDropdown.innerHTML = `<div class="search-result-item" role="status" style="color:#94a3b8; text-align:center; padding: 20px 10px; cursor:default;">'${escapeHtml(query)}'에 대한 검색 결과가 없습니다.</div>`;
-                setSearchDropdownVisibility(true);
+                searchResultsDropdown.innerHTML = `<div class="search-result-item" style="color:#94a3b8; text-align:center; padding: 20px 10px; cursor:default;">'${escapeHtml(query)}'에 대한 검색 결과가 없습니다.</div>`;
+                searchResultsDropdown.style.display = 'block';
+                if (menuSearchInput) menuSearchInput.setAttribute('aria-expanded', 'true');
             }
         }
 
@@ -2143,16 +2151,13 @@
                 }, 100);
             }
 
-            setSearchDropdownVisibility(false);
-            
-            const menuSearchInput = document.getElementById('menu-search-input');
-            if(menuSearchInput) menuSearchInput.value = ''; 
+            closeSearch();
         }
 
         document.addEventListener('click', function(event) {
             const searchResultsDropdown = document.getElementById('search-results');
             if (searchResultsDropdown && !event.target.closest('.search-container')) {
-                setSearchDropdownVisibility(false);
+                closeSearch();
             }
         });
     </script>
