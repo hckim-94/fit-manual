@@ -1523,7 +1523,13 @@
             <ul class="desc-list">
                 <li>
                     <strong>현황 체크</strong>
-                    <span>팝업 리스트에서 상태별(대기 중, 응시 중, 검사 종료) 인원을 간략하게 훑어볼 수 있습니다. (※ 시스템 성능 상 팝업은 최대 100명까지만 노출됩니다. 그 이상은 응시자 관리 탭을 이용해 주세요.)</span>
+                    <div class="desc-detail">
+                        <span>팝업 리스트에서 상태별(대기 중, 응시 중, 검사 종료) 인원을 간략하게 훑어볼 수 있습니다. (※ 시스템 성능 상 팝업은 최대 100명까지만 노출됩니다. 그 이상은 응시자 관리 탭을 이용해 주세요.)</span>
+                        <div style="margin-top: 12px; padding: 12px 18px; background-color: #f0f9ff; border-left: 3px solid #3b82f6; border-radius: 4px;">
+                            <strong style="color: #1d4ed8; font-size: 0.95rem; margin-bottom: 4px; display: block;">📌 '응시 중' 상태 변경 시점 안내</strong>
+                            <span style="font-size: 0.9rem; color: #475569;">기존에는 지원자가 접속 페이지에 '로그인'한 직후에 상태가 바뀌었으나, 시스템 업데이트 이후 <strong>지원자가 로그인 후 <span style="color: #e11d48; font-weight: 600;">'개인 정보 수집 및 이용 동의'를 확인(완료)한 시점</span></strong>부터 '응시 중'으로 상태가 변경되도록 로직이 개선되었습니다.</span>
+                        </div>
+                    </div>
                 </li>
                 <li>
                     <strong>안내 재발송</strong>
@@ -1531,19 +1537,38 @@
                 </li>
             </ul>
 
-            <img src="https://www.saraminimage.co.kr/fit/img/05_output_2.png" alt="홈 화면 리스트 팝업" class="manual-img" style="margin-bottom: 10px;" loading="lazy" decoding="async">
+            <img src="https://www.saraminimage.co.kr/fit/img/05_output_02.png" alt="홈 화면 리스트 팝업" class="manual-img" style="margin-bottom: 10px;" loading="lazy" decoding="async">
             <img src="https://www.saraminimage.co.kr/fit/img/05_output_3.png" alt="응시자 정보 수정 팝업" class="manual-img" style="margin-top: 0;" loading="lazy" decoding="async">
 
             <div class="guide-box">
-                <h4 style="margin-top: 0; color: #334155;">✏️ 응시자 정보 일부 수정 및 개별 삭제</h4>
-                <p>팝업 내에서 연락처 등 오류가 있는 응시자의 일부 정보를 빠르게 수정하거나, 잘못 등록된 대기 대상자를 개별적으로 삭제할 수 있습니다.</p>
+                <h4 style="margin-top: 0; margin-bottom: 15px; color: #1e293b; font-size: 1.1rem;">✏️ 응시자 정보 수정 (개별 / 일괄) 및 삭제</h4>
+                <p>팝업 내에서 오류가 있는 응시자의 정보를 개별적으로 수정/삭제할 수 있을 뿐만 아니라, <strong>다수 인원의 부가 정보를 엑셀로 한 번에 변경하는 '일괄 수정' 기능</strong>이 추가되었습니다.</p>
+                
+                <div style="margin-top: 20px; padding: 20px; border: 1px solid #e2e8f0; border-radius: 8px; background-color: #ffffff;">
+                    <strong style="color: #3b82f6; font-size: 1.05rem; display: block; margin-bottom: 12px;">💡 일괄 수정 프로세스 안내 (기존 면접번호 등록 기능 확장)</strong>
+                    <ol style="margin-bottom: 20px; padding-left: 20px; font-size: 0.95rem; line-height: 1.7;">
+                        <li><b class="ui-btn">일괄 수정</b> 버튼 클릭 ➔ <b class="ui-btn ui-btn-outline">일괄 수정 양식 다운로드</b> 클릭</li>
+                        <li>다운받은 엑셀 파일에 수험번호와 일치하는 <strong>면접번호, 지원분야, 비고1, 비고2</strong> 항목의 입력값 작성 후 업로드</li>
+                        <li><span style="background-color: #f1f5f9; padding: 2px 6px; border-radius: 4px;">"수험번호가 있고 개인정보가 파기 기간을 초과하지 않은 응시자의 정보만 일괄 수정합니다. 수정하시겠습니까?"</span> 확인 얼럿 노출 ➔ <strong>[확인]</strong> 클릭</li>
+                        <li>데이터 타당도 자동 검토 진행</li>
+                        <li><span style="background-color: #f1f5f9; padding: 2px 6px; border-radius: 4px;">"일괄 수정 처리 되었습니다. 조건에 일치하는 응시자의 정보만 수정하였습니다."</span> 완료 얼럿 노출 ➔ 적용 완료</li>
+                    </ol>
+
+                    <strong style="color: #e11d48; font-size: 0.95rem; display: block; margin-bottom: 8px;">🚨 데이터 유효성 검토 (일괄 수정 실패/취소 얼럿 케이스)</strong>
+                    <ul style="padding-left: 20px; font-size: 0.9rem; color: #475569; margin-bottom: 0;">
+                        <li style="margin-bottom: 10px;"><strong>수정 대상 없음:</strong> 파일에 유효한 정보가 없으면 <span style="font-weight: 500; color: #1e293b;">"수정 가능 응시자가 없습니다.(확인)"</span> 얼럿이 노출됩니다.</li>
+                        <li style="margin-bottom: 10px;"><strong>수험번호 불일치:</strong> 수험번호가 엑셀에는 존재하나 웹 리스트에 없는 경우, <span style="font-weight: 500; color: #1e293b;">"정보가 불일치하는 수험번호가 있습니다. 파일을 다시 확인해주세요.(확인)"</span> 얼럿이 노출되며 업로드가 전면 취소됩니다.<br>
+                        <span style="color: #d32f2f;">※ 수험번호가 없는 응시자(또는 잘못된 수험번호)는 엑셀 명단에서 뺀 후 다시 업로드해야 합니다.</span></li>
+                        <li style="margin-bottom: 0;"><strong>텍스트 형식 검토:</strong> 비고1, 비고2, 지원분야 항목에 입력 불가 텍스트(<code>@</code>, <code>.</code>)가 포함된 경우, <span style="font-weight: 500; color: #1e293b;">"##는 일부 특수문자(@, .) 사용이 금지된 항목입니다.(확인)"</span> 얼럿이 노출됩니다.</li>
+                    </ul>
+                </div>
             </div>
             
             <div class="warning-box">
                 <strong>🚨 수정 및 삭제 권한 제한 안내</strong>
                 <ul>
-                    <li>명단 등록이 완료된 이후에는 기본적으로 <span class="hl-bg">수험번호와 성명 데이터의 수정이 불가능</span>합니다.</li>
-                    <li>지원자가 검사 링크를 클릭하여 상태가 <strong>'응시 중'</strong>이 되거나 <strong>'응시 완료'</strong>로 넘어간 이후에는 휴대폰 번호 및 이메일 수정까지 락(잠금)이 걸립니다.</li>
+                    <li>명단 등록이 완료된 이후에는 기본적으로 <span class="hl-bg">수험번호와 성명 데이터의 직접 수정이 불가능</span>합니다. (※ 엑셀 일괄 수정을 통한 면접번호 등 부가 항목 업데이트만 가능)</li>
+                    <li>지원자가 <strong>'응시 중'</strong>이 되거나 <strong>'응시 완료'</strong>로 넘어간 이후에는 휴대폰 번호 및 이메일 수정까지 락(잠금)이 걸립니다.</li>
                     <li>마찬가지로, 한 번이라도 검사 화면에 진입한 대상자는 결괏값 보존 및 데이터 정합성을 위해 <strong>임의로 삭제 처리할 수 없습니다.</strong></li>
                 </ul>
             </div>
