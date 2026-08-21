@@ -905,6 +905,7 @@
                 <a href="#result-home-status">결과 확인 및 응시자 관리</a>
                 <ul>
                     <li><a href="#result-home-status">응시 현황 및 재발송(홈)</a></li>
+                    <li><a href="#anti-cheating">부정행위 방지 시스템</a></li>
                     <li><a href="#result-home-download">결과 다운로드(홈)</a></li>
                     <li><a href="#result-manage-filter">응시자 필터링 및 재발송</a></li>
                     <li><a href="#result-manage-download">상세 결과표 다운로드</a></li>
@@ -1575,6 +1576,89 @@
             </div>
         </section>
 
+        <!-- 부정행위 방지 시스템 -->
+        <section id="anti-cheating" class="page-section">
+            <h2>🛡️ 결과 확인 및 응시자 관리</h2>
+            <div class="step-header">부정행위 방지 시스템</div>
+            
+            <div class="guide-box">
+                <p>공정한 검사 환경을 위해 응시 과정 전반에 걸쳐 부정행위 방지 및 모니터링 시스템이 가동됩니다. 감지된 내역은 응시자 관리 페이지에서 확인할 수 있습니다.</p>
+            </div>
+
+            <h4 class="list-title">1. 일회용 시험지 주소 (토큰)</h4>
+            <div class="guide-box">
+                <p>링크 복사를 통한 <strong>대리 응시나 부정행위를 원천 차단</strong>하기 위해, 접속할 때마다 단 한 번만 사용할 수 있는 일회용 시험지 주소가 생성됩니다. (재접속 시 새로운 토큰 자동 발급)</p>
+            </div>
+
+            <h4 class="list-title">2. 화면 이탈 차단 (PC & 모바일)</h4>
+            <div class="guide-box">
+                <p>문항이 노출된 이후부터 브라우저 밖으로 벗어나는 행위를 감지하여 화면을 차단합니다.</p>
+                <ul class="desc-list" style="margin-top: 10px;">
+                    <li>
+                        <strong>PC 환경 감지 기준</strong>
+                        <span>마우스가 웹 화면 밖으로 벗어나거나, 브라우저 창이 비활성화(다른 프로그램 선택)될 때</span>
+                    </li>
+                    <li>
+                        <strong>모바일 환경 감지 기준</strong>
+                        <div class="desc-detail">
+                            <ul style="margin-top: 0; padding-left: 15px;">
+                                <li>상단 제어 센터 또는 알림창을 내릴 때</li>
+                                <li>앱 전환 화면을 열거나 다른 탭으로 전환할 때</li>
+                                <li>화면의 특정 텍스트 등을 길게 누를 때 (주의 이력 2회 누적)</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li>
+                        <strong>차단 시 화면 작동</strong>
+                        <span>화면 전체가 검은색으로 블라인드 처리되며, <em>"공정한 시험 환경을 유지하기 위해, 화면을 이탈할 수 없습니다. 응시 화면을 다시 클릭해 주세요."</em> 라는 경고 문구가 노출됩니다. 다시 클릭하여 복귀하기 전까지 문제는 계속 유지되며, <strong>응시 시간은 멈추지 않고 카운팅됩니다.</strong></span>
+                    </li>
+                    <li>
+                        <strong>데이터 기록</strong>
+                        <span>이탈 횟수는 DB에 기록되며 관리자 페이지에서 <strong>'부정행위_모바일 화면 벗어남'</strong> 등으로 확인 가능합니다.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <h4 class="list-title">3. 금지 키보드 입력 차단</h4>
+            <div class="guide-box">
+                <p>응시 중 2차 인증 시점부터 복사, 붙여넣기, 새로고침 등 비정상적인 단축키 입력을 차단합니다. (개발자 도구를 켜는 <code>F12</code> 키는 원활한 QA를 위해 임시 허용 상태입니다.)</p>
+                <ul class="desc-list" style="margin-top: 10px;">
+                    <li>
+                        <strong>모바일 화면 길게 누름 포함</strong>
+                        <span>모바일 기기에서 화면을 길게 누르는 행위도 비정상 입력으로 간주하여 동일한 차단 정책이 적용됩니다.</span>
+                    </li>
+                    <li>
+                        <strong>경고 팝업 (Alert)</strong>
+                        <span><em>"비정상적인 키 입력이 감지되었습니다. 귀하의 응시 화면은 모니터링되며, 모니터링 결과는 검사 요청사가 확인할 수 있습니다."</em> 얼럿이 뜹니다.</span>
+                    </li>
+                    <li>
+                        <strong>데이터 기록</strong>
+                        <span>해당 내역은 <strong>'부정행위_PC 금지 키 입력'</strong> 카운트로 기록됩니다.</span>
+                    </li>
+                </ul>
+            </div>
+
+            <h4 class="list-title">4. URL 직접 입력 및 중복 접속 차단</h4>
+            <div class="guide-box">
+                <p>응시 중인 화면의 링크를 복사하여 다른 브라우저 탭이나 다른 기기에서 동시에 접속하려는 시도를 감지합니다. (2차 인증 시점부터 작동)</p>
+                <ul class="desc-list" style="margin-top: 10px;">
+                    <li>
+                        <strong>차단 시 화면 작동</strong>
+                        <span>추가로 접속한 화면은 전체가 검게 처리되며, <em>"중복 접속이 감지되었습니다. 해당 행위는 부정행위로 간주될 수 있으니 기존 응시화면에서 계속 응시해 주세요."</em> 문구가 뜹니다. 해당 탭을 종료해야만 원래 탭에서 시험을 이어갈 수 있습니다.</span>
+                    </li>
+                    <li>
+                        <strong>데이터 기록</strong>
+                        <span>해당 내역은 <strong>'부정행위_URL 직접 입력'</strong> 카운트로 기록됩니다.</span>
+                    </li>
+                </ul>
+            </div>
+            
+            <div class="info-box">
+                <strong>📌 변경된 화면 비율 정책</strong>
+                <p>과거에는 창 크기(비율)를 조절하는 것만으로도 차단 정책이 발동되었으나, <strong>현재는 화면 비율 변경에 따른 차단 정책은 해제</strong>되어 응시자 편의성이 개선되었습니다.</p>
+            </div>
+        </section>
+
         <!-- 결과 확인 및 응시자 관리: 2. 결과 다운로드(홈 화면) -->
         <section id="result-home-download" class="page-section">
             <h2>📊 결과 확인 및 응시자 관리</h2>
@@ -1716,7 +1800,7 @@
             <div class="step-header">7. 개인 결과표 확인 (웹 화면)</div>
             
             <div class="guide-box">
-                <p>응시자 리스트 항목의 가장 우측에 위치한 <b class="ui-btn">보기</b> 텍스트 버튼을 클릭하시면, 무거운 엑셀이나 PDF 파일을 로컬로 다운로드할 필요 없이 <strong>웹 브라우저 팝업 내에서 즉각적이고 가볍게 해당 지원자의 개별 상세 리포트 전체를 열람</strong>할 수 있습니다.</p>
+                <p>응시자 리스트 항목의 가장 우측에 위치한 <b class="ui-btn">보기</b> 텍스트 버튼을 클릭하시면, 무거운 엑셀이나 PDF 파일을 로컬로 다운로드할 필요 없이 <strong>웹 브라우저 팝업 내에서 즉각적이고 가볍게 해당 지원자의 개별 상세 리포트 전체 열람</strong>할 수 있습니다.</p>
             </div>
             <img src="https://www.saraminimage.co.kr/fit/img/05_output_15.png" alt="개별 인원의 개인결과표 보기" class="manual-img img-100" loading="lazy" decoding="async">
 
@@ -1753,7 +1837,7 @@
             <details id="faq-2">
                 <summary>Q. 지원자가 2차 인증을 연달아 실패하여 사이트 접속이 막혔다고 합니다. 어떻게 풀어주나요?</summary>
                 <div class="qna-content">
-                    <strong>대리 응시 방지 정책상 관리자가 임의로 풀어줄 수 없습니다.</strong> 2차 인증 번호 입력을 5회 이상 연속으로 틀리면 자동으로 30분간 시험장 접속이 강제 차단됩니다. 30분이 지난 후, 지원자가 본인의 휴대폰 등 정확한 정보로 다시 인증을 시도하도록 안내해 주시기 바랍니다.
+                    <strong>대리 응시 방지 정책상 관리자가 임 임의로 풀어줄 수 없습니다.</strong> 2차 인증 번호 입력을 5회 이상 연속으로 틀리면 자동으로 30분간 시험장 접속이 강제 차단됩니다. 30분이 지난 후, 지원자가 본인의 휴대폰 등 정확한 정보로 다시 인증을 시도하도록 안내해 주시기 바랍니다.
                 </div>
             </details>
 
@@ -1854,7 +1938,7 @@
         }
 
         // 1. Pagination & Navigation Logic (SPA)
-        const pages = ['cover', 'register-master', 'register-member', 'login', 'home', 'my-info', 'corp-manage', 'member-manage', 'step1', 'step2', 'step3', 'step4', 'step5', 'result-home-status', 'result-home-download', 'result-manage-filter', 'result-manage-download', 'result-manage-blind', 'result-manage-criteria', 'result-manage-view', 'qna'];
+        const pages = ['cover', 'register-master', 'register-member', 'login', 'home', 'my-info', 'corp-manage', 'member-manage', 'step1', 'step2', 'step3', 'step4', 'step5', 'result-home-status', 'anti-cheating', 'result-home-download', 'result-manage-filter', 'result-manage-download', 'result-manage-blind', 'result-manage-criteria', 'result-manage-view', 'qna'];
         let currentIndex = 0;
 
         window.addEventListener('DOMContentLoaded', () => {
@@ -1958,7 +2042,7 @@
                 } else if (pageId.startsWith('step')) {
                     mainLink = document.querySelector(`nav > ul > li > a[href="#step1"]`);
                     subLink = document.querySelector(`nav ul ul li a[href="#${pageId}"]`);
-                } else if (pageId.startsWith('result-')) {
+                } else if (pageId.startsWith('result-') || pageId === 'anti-cheating') {
                     mainLink = document.querySelector(`nav > ul > li > a[href="#result-home-status"]`);
                     subLink = document.querySelector(`nav ul ul li a[href="#${pageId}"]`);
                 } else {
@@ -2035,7 +2119,7 @@
                 const titleEl = section.querySelector('h2');
                 if (titleEl) {
                     let title = titleEl.textContent;
-                    if(section.id.startsWith('step') || section.id.startsWith('result-') || ['home', 'my-info', 'corp-manage', 'member-manage'].includes(section.id) || section.id.startsWith('register')) {
+                    if(section.id.startsWith('step') || section.id.startsWith('result-') || section.id === 'anti-cheating' || ['home', 'my-info', 'corp-manage', 'member-manage'].includes(section.id) || section.id.startsWith('register')) {
                         let subHeaderEl = section.querySelector('.step-header') || section.querySelector('h3');
                         if(subHeaderEl) title += " - " + subHeaderEl.textContent;
                     }
