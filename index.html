@@ -864,7 +864,7 @@
 
     <nav aria-label="주요 메뉴">
         <h2><a href="#cover">FIT 관리자 AI매뉴얼</a></h2>
-        <div class="version-tag">Final update 2026-10-01(KST)</div>
+        <div class="version-tag">Final update 2026-10-22(KST)</div>
 
         <!-- 검색 컨테이너 -->
         <div class="search-container">
@@ -1380,7 +1380,7 @@
             <div class="warning-box">
                 <strong>🚨 응시자 목록 관리 유의사항</strong>
                 <ul>
-                    <li><strong>전체 노출 제한:</strong> 보안 정책에 따라 명단을 한 번 저장한 후 페이지에 재진입하시면, 정보 유출을 막기 위해 <strong>'현재 등록 인원: 00명'</strong>으로 요약 표시되며 세부 명단은 노출되지 않습니다. 세부 확인 및 수정은 <span class="menu-txt">응시자 관리</span> 탭에서 별도로 진행하셔야 합니다.</li>
+                    <li><strong>전체 노출 제한:</strong> 보안 정책에 따라 명단을 한 번 저장한 후 페이지에 재진입하시면, 정보 유출을 막기 위해 <strong>'현재 등록 인원: 00명'</strong>으로 요약 표시되며 세부 명단은 노출되지 않습니다. 세부 확인 및 수정은 <span class="menu-txt">응시자 관리</span> 탭에서 별도로 진행하셔야 합니다. (현재 등록 인원 숫자를 누르면 자동으로 응시자 관리 화면으로 이동함)</li>
                     <li><strong>타이틀 항목 수정:</strong> 만약 타이틀 항목(수험번호, 이름, 비고1, 비고2 등) 수정을 희망하는 경우 해당 부분에 직접 타이핑 하여 내용 변경 후 <b class="ui-btn">타이틀 항목 수정</b> 흰색 버튼을 누르면 적용 됩니다. <br><span style="color: #64748b; font-size: 0.9rem;">(예시 : 수험번호 ➔ 응시번호, 비고1 ➔ 지역 ...)</span></li>
                 </ul>
             </div>
@@ -1548,8 +1548,9 @@
             <div class="warning-box">
                 <strong>🚨 수정 및 삭제 권한 제한 안내</strong>
                 <ul>
-                    <li>명단 등록이 완료된 이후에는 기본적으로 <span class="hl-bg">수험번호와 성명 데이터의 수정이 불가능</span>합니다.</li>
-                    <li>지원자가 검사 링크를 클릭하여 상태가 <strong>'응시 중'</strong>이 되거나 <strong>'응시 완료'</strong>로 넘어간 이후에는 휴대폰 번호 및 이메일 수정까지 락(잠금)이 걸립니다.</li>
+                    <li>명단 등록이 완료된 이후 <strong>수험번호는 어떠한 경우에도 수정이 불가능</strong>합니다. (수정이 필요할 경우 해당 응시자를 삭제한 뒤 올바른 수험번호로 다시 등록해야 합니다.)</li>
+                    <li>지원자가 아직 검사를 시작하지 않은 <strong>'대기 중' 상태일 때는 성명 및 기본 정보의 수정이 가능</strong>합니다.</li>
+                    <li>지원자가 검사 링크를 클릭하여 상태가 <strong>'응시 중'</strong>이 되거나 <strong>'응시 완료'</strong>로 넘어간 이후에는 성명, 휴대폰 번호 및 이메일 수정까지 락(잠금)이 걸립니다.</li>
                     <li>마찬가지로, 한 번이라도 검사 화면에 진입한 대상자는 결괏값 보존 및 데이터 정합성을 위해 <strong>임의로 삭제 처리할 수 없습니다.</strong></li>
                 </ul>
             </div>
@@ -1618,6 +1619,8 @@
                     </li>
                 </ul>
             </div>
+            
+            <img src="https://www.saraminimage.co.kr/fit/img/04_test_14.png" alt="화면 이탈 차단 경고 화면" class="manual-img img-65" loading="lazy" decoding="async">
 
             <h4 class="list-title">3. 금지 키보드 입력 차단</h4>
             <div class="guide-box">
@@ -1637,6 +1640,8 @@
                     </li>
                 </ul>
             </div>
+            
+            <img src="https://www.saraminimage.co.kr/fit/img/04_test_15.png" alt="금지 키보드 입력 차단 팝업" class="manual-img img-45" loading="lazy" decoding="async">
 
             <h4 class="list-title">4. URL 직접 입력 및 중복 접속 차단</h4>
             <div class="guide-box">
@@ -1652,6 +1657,13 @@
                     </li>
                 </ul>
             </div>
+            
+            <h4 class="list-title">5. 주의 이력 확인 (부정행위 카운트 기록)</h4>
+            <div class="guide-box">
+                <p>위와 같이 감지된 화면 이탈, 금지 키보드 입력, URL 중복 접속 등의 부정행위 누적 카운트는 <strong>[응시자 관리]</strong> 탭의 리스트에서 각 응시자별 <strong>주의 이력</strong>으로 상세히 확인할 수 있습니다.</p>
+            </div>
+            
+            <img src="https://www.saraminimage.co.kr/fit/img/05_output_18.png" alt="주의 이력 확인(부정행위 카운트 기록 화면)" class="manual-img img-55" loading="lazy" decoding="async">
             
             <div class="info-box">
                 <strong>📌 변경된 화면 비율 정책</strong>
